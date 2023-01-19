@@ -23,5 +23,13 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "HookyQR.beautify",
+   "[python]": {
+      "editor.defaultFormatter": "ms-python.python"
+   },
+   "python.analysis.typeCheckingMode": "basic",
+   "[jsonc]": {
+      "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+   },
+   "python.formatting.provider": "black"
 }
