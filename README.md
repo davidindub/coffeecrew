@@ -1,108 +1,314 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome USER_NAME,
+# Coffee Crew
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## Table of Contents
 
-## Gitpod Reminders
+## Introduction
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+The project is an E-commerce site for a shop selling specialty coffee equipment.
 
-`python3 -m http.server`
+Users can register to submit resources to the directory, and upvote and bookmark resources they find useful.
 
-A blue button should appear to click: _Make Public_,
+The project was built keeping the Agile management principles in mind, and I utilised many of GitHub's features such as Issue and Projects to implement Scrum methodology.
 
-Another blue button should appear to click: _Open Browser_.
+[Kanban Board for project](https://github.com/users/davidindub/projects/8/)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+[Closed Issues on GitHub for the project](https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed)
 
-A blue button should appear to click: _Make Public_,
+I used [GitHub issues](https://github.com/davidindub/coffeecrew/issues) for the product backlog containing the user stories. Issues were also used for bug reports so I could keep track of tricky bugs over time.
 
-Another blue button should appear to click: _Open Browser_.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+I used the tags feature in GitHub Issues for assigning story points, prioritising features based on [the MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method), and categorising the user stories.
 
-To log into the Heroku toolbelt CLI:
+I used the [Milestones feature](https://github.com/davidindub/coffeecrew/milestones) to plan sprints and set deadlines.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+## User Stories
 
-------
+User stories were prepared using GitHub Issues and assigned story points based on estimated completion time.
 
-## Release History
+User Stories can been seen below under [User Story Testing](#user-story-testing), and in the [GitHub Issues](https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed) for full details including screenshots, story points and associated sprints.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+## UX  
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Typography
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+### Wireframes
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+## Accessibility
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+I ensured that every element met AAA level in the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AAA-Conformance) (WCAG).
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+Buttons featuring icons have appropriate `aria-labels`, and notification messages have `aria-live` tags and are read by screen readers.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+I tested navigating the project with VoiceOver on macOS.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+I used inline SVGs for icons in the project.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+I recently watched [Seren Davies](https://github.com/ninjanails)' talk [Death to Icon Fonts](https://www.youtube.com/watch?v=9xXBYcWgCHA) where I learned of the issues that icon fonts can cause for accessibility. I researched the best way to use inline SVG icons, including descriptions where appropriate for screen readers. By using SVGs the icons don't break if a user chooses to use a custom font such as [Dyslexie](https://www.dyslexiefont.com/).
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+See also:
+- [Inline SVG vs Icon Fonts - CSS Tricks](https://css-tricks.com/icon-fonts-vs-svg/)
+- [SVG, Icon Fonts, and Accessibility: A Case Study - 24 Accessibility](https://www.24a11y.com/2017/svg-icon-fonts-accessibility-case-study/)
 
-------
+## Database Design
 
-## FAQ about the uptime script
+I used [Miro](https://miro.com/) to design the models. I created a Profile model to associate extra information with users not included in the default Django user model. 
 
-**Why have you added this script?**
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+## Features 
 
-**How will this affect me?**
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+## Existing Features
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+### Landing Page
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
 
-**So….?**
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### Navbar
 
-**Can I opt out?**
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+### Register / Login
+
+Users can either sign up using their Google or directly on the site.
+
+Users signing up with Google just need to pick a username, and don't need to create a password.
+
+Users who have previously registered with Google can easily sign in again with one click.
+
+
+### Wishlist
+
+Users can save products to a wishlist for future reference.
+
+
+### Footer
+
+The Footer includes:
+- A link back to the homepage
+- Copyright information
+- A link to the Privacy Policy
+- A link to the [GitHub repository for the project](https://github.com/davidindub/coffeecrew).
+
+### Privacy Policy
+
+As the project can collect data from users, I included a Privacy Policy link in the Footer which explains how data may be used. I used [GDPR.eu](https://gdpr.eu/) for help writing the policy.
+
+See:
+[Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
+
+### Notifications
+
+Django Messages and Bootstrap's Toast elements were combined to make elegant notification messages when the user performs actions.
+
+
+### Staff Only Features
+
+
+### Custom Error Pages
+
+Custom error pages were added for 403, 404, and 500 errors.
+
+
+### Favicon
+
+
+### Features Left to Implement
+
+
+## Technologies Used
+
+- [Python](https://www.python.org/)
+- [pip](https://pip.pypa.io/en/stable/) for installing Python packages.
+- [Git](https://git-scm.com/) for version control.
+- [Sourcetree](https://www.sourcetreeapp.com/) for managing the remote repository.
+- [GitHub](https://github.com/) for storing the repository online during development.
+- GitHub Projects was invaluable throughout the project and helped me keep track of things to do and bugs to fix - you can see [the project's board here](https://github.com/users/davidindub/projects/8).
+- [GitPod](https://gitpod.io/) as a cloud based IDE.
+- [Balsamiq](https://balsamiq.com/wireframes/) for wireframing.
+- [Bootstrap 5](https://getbootstrap.com/) as a front end framework.
+- [Google Chrome](https://www.google.com/intl/en_ie/chrome/), [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Safari](https://www.apple.com/safari/) for testing on macOS Monterey.
+- [Microsoft Edge](https://www.microsoft.com/en-us/edge) for testing on Windows 11.
+- [Safari](https://www.apple.com/safari/) on iOS and iPadOS 15.
+- [Google Chrome](https://www.google.com/intl/en_ie/chrome/) on Android 12.
+- [Miro](https://www.miro.com/) for drawing database diagrams.
+- [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
+- [Device Frames](https://deviceframes.com/) for the device mockups in this README.
+- [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
+
+## External Python Packages Used
+
+
+## Testing 
+
+I performed manual testing continuously as the project was being developed, and filed [bug reports on GitHub](https://github.com/davidindub/designland/issues?q=is%3Aissue+is%3Aclosed+label%3Abug) as issues were discovered to keep track of bugs. I kept track of how to recreate bugs, expected behaviour, screenshots of the issue and how it was resolved to help myself in future.
+
+
+### Browser Compatibility
+
+
+### Responsiveness 
+
+
+### Performance Testing
+
+
+### Accessibility Testing
+
+
+### User Story Testing
+
+
+### Challenges Faced
+
+### Code Validation
+
+#### HTML Validation
+
+
+#### CSS Validation
+
+
+#### Python Validation
+
+
+#### JavaScript
+
+
+***
+
+
+## Deployment
+
+### Local Deployment
+
+
+In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
+
+- `git clone https://github.com/davidindub/coffeecrew.git`
+
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/davidindub/coffeecrew)
+
+***
+
+After cloning or opening the repository in Gitpod, you will need to:
+
+1. Create your own `env.py` files in the root level of the project:
 
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+os.environ["DATABASE_URL"] = "postgres://"
+os.environ["SECRET_KEY"] = "YOUR_DJANGO_SECRET_KEY"
+os.environ["CLOUDINARY_URL"] = "cloudinary://YOUR_CLOUDINARY_URL"
+os.environ["HEROKU_HOSTNAME"] = "URL_OF_PROJECT_DEPLOYED_ON_HEROKU"
+os.environ["DEVELOPMENT"] = "True"
+```
+**Ensure the `env.py` file is added to your `.gitignore` file so it doesn't get pushed to a public repository.
+
+If you don't have a Cloudinary account already, you will need to [Sign Up for Free](https://cloudinary.com/users/register/free) to host the static files in the project.
+
+2. Run `pip3 install -r requirements.txt` to install required Python packages.
+
+3. Migrate the database models using:
+`python3 manage.py migrate`
+
+4. Create a superuser with your own credentials:
+`python3 manage.py migrate`
+
+5. Run the Django sever:
+`python manage.py runserver`
+The address of the server will appear in the terminal window.
+Add /admin to the address to access the Django admin panel using your superuser credentials.
+
+### Heroku Deployment
+<details>
+
+<summary>
+Full Instructions on deploying to Heroku
+</summary>
+
+Sign up to [Heroku](https://heroku.com/) for free if you don't already have an account.
+
+1. Create a new app in Heroku.
+
+2. In the Resources tab of your app in the Heroku dashboard, click Add-Ons and select Heroku Postgres. Select Hobby Dev - Free as your plan.
+
+3. When Heroku Postgres is installed, click the Settings tab in the Heroku Dashboard.
+Click Reveal Config Vars, and add the same variables from your `env.py` file here, except for `DEBUG`, as you don't want debug mode on the deployed project.
+
+4. Copy the value of `DATABASE_URL` from the Config Vars. In your `settings.py` file, comment out the default database configuration, and add a new one with the Postgres url.
+
+```
+DATABASES = {
+    'default': dj_database_url.parse('your DATABASE_URL here'))
+}
 ```
 
-**Anything more?**
+5. Migrate the database models using:
+`python3 manage.py migrate`
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+6. Create a superuser with your own credentials:
+`python3 manage.py migrate`
 
----
+7. Create a file called `Procfile` (no extension) containing the following:
+```
+web: gunicorn designland.wsgi
+```
 
-Happy coding!
+8. Run `pip3 install -r requirements.txt` to install required Python packages.
+
+9. Add the url of your Heroku app (for example 'designland.herokuapp.com') to your `env.py` file in the local deployment, and to the Config Vars in your Heroku deployment.
+
+10. Disable collect static so that Heroku doesn't try to collect static files when you deploy by typing the following command in the terminal
+
+```
+heroku config:set DISABLE_COLLECTSTATIC=1
+```
+
+11. Stage and commit your files to GitHub
+```
+git add . 
+git commit -m "Commit message"
+git push
+```
+
+12. In the Heroku dashboard for your App, select Deploy.
+Under Deployment Method, choose GitHub and search for your repository and click Connect.
+
+13. Select Enable Automatic Deployments, and then Deploy Branch. Heroku will build the App from the branch you selected.
+
+14. Now whenever you push your commits to GitHub, Heroku will rebuild the application.
+
+</details>
+
+
+### django-aullauth Setup
+
+You need to use your own [Google Cloud](https://cloud.google.com/) credentials to set up `django-allauth`.
+
+The [django-allauth documentation](https://django-allauth.readthedocs.io/en/latest/providers.html) provides instructions for how to complete setup in your Google Cloud Console settings.
+
+*** 
+
+## Credits 
+
+### Content 
+- [Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
+- [OrdinaryCoders - Django custom user profile](https://ordinarycoders.com/django-custom-user-profile) was really helpful for the script to create profiles for existing users.
+
+
+### Media
+
+- [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
+
+
+### Acknowledgements
+
