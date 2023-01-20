@@ -1,0 +1,140 @@
+:root {
+    --main-bg-color: rgb(223, 228, 227);
+    --color-primary: rgba(15, 74, 59, 1);
+    --color-secondary: rgba(255, 194, 101, 1);
+    --color-white: rgba(255, 255, 255, 1);
+    --color-black: rgba(0, 0, 0, 1);
+    --color-off-white: rgb(237, 237, 237);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    min-height: 100vh;
+}
+
+
+main {
+    background-color: var(--color-white);
+    max-width: 992px;
+    margin: auto;
+    padding-bottom: 1rem;
+}
+
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.navbar {
+    background-color: var(--color-primary);
+    color: var(--color-off-white)
+}
+
+.navbar-brand {
+    color: var(--color-off-white);
+    text-transform: uppercase;
+    font-size: 1.8rem;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: var(--color-off-white);
+}
+
+.dropdown-toggle:hover,
+.nav-link:hover,
+footer a:hover,
+.dropdown-toggle:focus,
+.nav-link:focus,
+footer a:focus
+{
+    color: var(--color-secondary);
+}
+
+.dropdown-toggle, .btn-search, footer a, .nav-link {
+    color: var(--color-off-white)
+}
+
+footer a {
+    text-decoration: none;
+}
+
+.carousel {
+    width: 100%;
+}
+
+
+/* Footer Styles */
+
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-off-white);
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 0.9rem;
+    gap: 2rem;
+    padding: 2rem 0;
+    align-items: center;
+    width: 100%;
+}
+
+footer ul {
+    list-style: none;
+}
+
+#footer-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+footer li {
+    display: inline;
+    padding: 0 1rem;
+}
+
+.footer-socials li i {
+    color: inherit;
+}
+
+#page-title {
+    padding: 1rem 0;
+    font-size: 2.5rem;
+    background-color: var(--color-white);
+    grid-area: page-title;
+}
+
+/* Hero Container */
+
+.hero-container {
+    height: 500px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("media/placeholder-hero.jpg");
+}
+
+/* Media Queries */
+
+@media screen and (min-width: 768px) {
+    footer {
+        font-size: 1rem;
+    }
+}
+
+/* Media Query for Large Screens */
+
+@media screen and (min-width: 1200px) {
+    footer {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #footer-nav {
+        flex-direction: column;
+    }
+}
