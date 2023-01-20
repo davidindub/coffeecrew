@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% endblock %}
     
-    {% block extra_meta %} {% endblock %}
+    {% block extra_meta %}
+    {% endblock %}
 
-    <title>Coffee Crew</title>
+    <title>Coffee Crew {% block extra_title %}{% endblock %}</title>
 
     {% block core_css %}
     <link
@@ -21,7 +22,8 @@
     />
     {% endblock %}
     
-    {% block extra_css %} {% endblock %}
+    {% block extra_css %}
+    {% endblock %}
     
     {% block core_js %}
     <script
@@ -36,22 +38,95 @@
     ></script>
     {% endblock %}
     
-    {% block extra_js %} {% endblock %}
+    {% block extra_js %}
+    {% endblock %}
+
   </head>
 
   <body>
-    <h1>Coffee Crew {% block extra_title %}{% endblock %}</h1>
+    <header class="container-fluid">
+      {% block navbar %}
+      <nav class="navbar navbar-expand-lg bg-body-secondary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Coffee Crew</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Coffee
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">All Coffee</a></li>
+                  <li><a class="dropdown-item" href="#">Filter</a></li>
+                  <li><a class="dropdown-item" href="#">Espresso</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Equipment
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Pour Over</a></li>
+                  <li><a class="dropdown-item" href="#">Filter Machines</a></li>
+                  <li><a class="dropdown-item" href="#">Espresso Machines</a></li>
+                  <li><a class="dropdown-item" href="#">Weighing &amp Measuring</a></li>
+                  <li><a class="dropdown-item" href="#">Travel</a></li>
+                </ul>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      {{ user.username }}
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="">My Account</a></li>
+                      <li><a class="dropdown-item" href="">Wishlist (0)</a></li>
+                      <li>
+                          <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                  </ul>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="#">Cart (0)</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" method="GET" action="">
+              <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      {% endblock  %}
 
-    <header class="container-fluid fixed-top"></header>
+      {% block page_header %}{% endblock %}
+
+    </header>
 
     {% if message %}
     <div class="message-container"></div>
     {% endif %}
     
-    {% block page_header %}{% endblock %}
-    
+    <main>
     {% block content %}{% endblock %}
-    
+    </main>
+
     {% block post_load_js %}{% endblock post_load_js %}
   </body>
 </html>
