@@ -308,6 +308,8 @@ The [django-allauth documentation](https://django-allauth.readthedocs.io/en/late
 ### Media
 
 - [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
+- Hero Image by [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/sn87TQ_o7zs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+  
 
 
 ### Acknowledgements
