@@ -8,6 +8,9 @@ class Category(models.Model):
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
+    class Meta(object):
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return f"{self.name}"
 
@@ -45,7 +48,7 @@ class Product(models.Model):
     brand = models.ForeignKey("Brand", null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ManyToManyField(Image)
+    image = models.ManyToManyField(Image, blank=True)
     stock = models.PositiveSmallIntegerField()
     wish_lists = models.ManyToManyField(User, related_name="wish_list", blank=True)
 
@@ -53,11 +56,10 @@ class Product(models.Model):
         return f"{self.name}"
 
 
-class Coffee(models.Model):
-    COFFEE_BAG_WEIGHTS = (
-        ("250g", "250g"),
-        ("1kg", "1kg"),
-    )
+class Coffee(Product):
+    class Meta(object):
+        verbose_name_plural = "Coffee"
+
     GRIND_OPTIONS = (
         ("Wholebean", "Wholebean"),
         ("Aeropress", "Aeropress"),
@@ -66,7 +68,6 @@ class Coffee(models.Model):
         ("Moka Pot", "Moka Pot"),
         ("Espresso", "Espresso"),
     )
-    weight = models.CharField(max_length=24, choices=COFFEE_BAG_WEIGHTS)
     grind = models.CharField(max_length=24, choices=GRIND_OPTIONS)
     country = models.CharField(max_length=24)
     process = models.CharField(max_length=24)

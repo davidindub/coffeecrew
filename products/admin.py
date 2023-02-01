@@ -1,3 +1,19 @@
 from django.contrib import admin
+from .models import Product, Brand, Category, Image, Coffee
 
-# Register your models here.
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ("name", "sku", "brand", "category", "stock")
+
+    ordering = ("sku",)
+
+
+class CoffeeAdmin(admin.ModelAdmin):
+    list_display = ("name", "sku", "country", "harvest_year")
+
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Brand)
+admin.site.register(Category)
+admin.site.register(Image)
+admin.site.register(Coffee, CoffeeAdmin)

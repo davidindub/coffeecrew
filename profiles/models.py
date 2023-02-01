@@ -4,9 +4,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-# Create your models here.
-
-
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
