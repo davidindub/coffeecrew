@@ -27,6 +27,7 @@ body {
 a {
     color: inherit;
     transition: all 0.2s ease-in-out;
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,9 +36,13 @@ h1, h2, h3, h4, h5, h6 {
 
 main {
     background-color: var(--color-white);
-    /* max-width: 992px; */
     margin: auto;
     padding-bottom: 1rem;
+}
+
+.product-card {
+    width: 100%;
+    margin-bottom: 1.2rem;
 }
 
 .icon {

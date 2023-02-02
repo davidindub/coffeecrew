@@ -38,11 +38,11 @@
   </head>
   <body>
     <header>
-      {% comment %} {% if special_offer %} {% endcomment %}
-      <div class="container-fluid special-offer-banner">
-        <span class="special-offer-text">Special Offer Banner!</span>
-      </div>
-      {% comment %} {% endif %} {% endcomment %}
+      {% if special_offer %}
+        <div class="container-fluid special-offer-banner">
+          <span class="special-offer-text">Special Offer Banner!</span>
+        </div>
+      {% endif %}
       {% block navbar %}
         {% include "includes/nav-bar.html" %}
       {% endblock navbar %}
