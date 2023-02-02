@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_header %}
-  <div class="container">
-    <div class="row">
-      <div class="col"></div>
-    </div>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
   </div>
+</div>
 {% endblock page_header %}
 {% block content %}
-  <div class="hero-container">
-    <div class="hero-image">
-      <div class="hero-inner">
-        <h2 class="hero-headline">We Got Your Coffee.</h2>
-        <a href="" class="custom-button">Let's Brew!</a>
-      </div>
+<div class="hero-container">
+  <div class="hero-image">
+    <div class="hero-inner">
+      <h2 class="hero-headline">We Got Your Coffee.</h2>
+      <a href="{% url 'products' %}" class="custom-button">Let's Brew!</a>
     </div>
   </div>
+</div>
 {% endblock content %}
