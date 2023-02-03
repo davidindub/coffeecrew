@@ -60,15 +60,20 @@ class Coffee(Product):
     class Meta(object):
         verbose_name_plural = "Coffee"
 
-    GRIND_OPTIONS = (
-        ("Wholebean", "Wholebean"),
-        ("Aeropress", "Aeropress"),
-        ("French Press", "French Press"),
-        ("Filter / Drip", "Filter / Drip"),
-        ("Moka Pot", "Moka Pot"),
-        ("Espresso", "Espresso"),
+    # GRIND_OPTIONS = (
+    #     ("Wholebean", "Wholebean"),
+    #     ("Aeropress", "Aeropress"),
+    #     ("French Press", "French Press"),
+    #     ("Filter / Drip", "Filter / Drip"),
+    #     ("Moka Pot", "Moka Pot"),
+    #     ("Espresso", "Espresso"),
+    # )
+    # grind = models.CharField(max_length=24, choices=GRIND_OPTIONS)
+    COFFEE_BAG_WEIGHTS = (
+        ("250g", "250g"),
+        ("1kg", "1kg"),
     )
-    grind = models.CharField(max_length=24, choices=GRIND_OPTIONS)
+    weight = models.CharField(max_length=24, choices=COFFEE_BAG_WEIGHTS)
     country = models.CharField(max_length=24)
     process = models.CharField(max_length=24)
     harvest_year = models.CharField(max_length=24)

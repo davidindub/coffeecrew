@@ -31,5 +31,14 @@
    "[jsonc]": {
       "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
    },
-   "python.formatting.provider": "black"
+   "python.formatting.provider": "black",
+   "[html]": {
+      "editor.defaultFormatter": "HookyQR.beautify"
+   },
+   "emmet.includeLanguages": {
+      "django-html": "html",
+},
+"[django-html]": {
+   "editor.defaultFormatter": "monosans.djlint"
+}
 }
