@@ -61,6 +61,8 @@ See also:
 
 I used [Miro](https://miro.com/) to design the models. I created a Profile model to associate extra information with users not included in the default Django user model. 
 
+![Database Diagram](/docs/images/database-diagram.jpg)
+
 
 ## Features 
 
@@ -138,6 +140,7 @@ Custom error pages were added for 403, 404, and 500 errors.
 - [Safari](https://www.apple.com/safari/) on iOS and iPadOS 15.
 - [Google Chrome](https://www.google.com/intl/en_ie/chrome/) on Android 12.
 - [Miro](https://www.miro.com/) for drawing database diagrams.
+- [Copy.ai](https://www.copy.ai/) for inspiration for some of the slogans and headlines.
 - [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
 - [Device Frames](https://deviceframes.com/) for the device mockups in this README.
 - [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
@@ -188,6 +191,8 @@ I performed manual testing continuously as the project was being developed, and 
 
 ### Local Deployment
 
+<!-- TODO: Add AWS deployment instructions -->
+
 
 In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
 
@@ -207,13 +212,12 @@ After cloning or opening the repository in Gitpod, you will need to:
 ```
 os.environ["DATABASE_URL"] = "postgres://"
 os.environ["SECRET_KEY"] = "YOUR_DJANGO_SECRET_KEY"
-os.environ["CLOUDINARY_URL"] = "cloudinary://YOUR_CLOUDINARY_URL"
 os.environ["HEROKU_HOSTNAME"] = "URL_OF_PROJECT_DEPLOYED_ON_HEROKU"
 os.environ["DEVELOPMENT"] = "True"
 ```
 **Ensure the `env.py` file is added to your `.gitignore` file so it doesn't get pushed to a public repository.
 
-If you don't have a Cloudinary account already, you will need to [Sign Up for Free](https://cloudinary.com/users/register/free) to host the static files in the project.
+If you don't have an AWS account already, you will need to [Sign Up for Free](https://aws.amazon.com/) to host the static files in the project.
 
 2. Run `pip3 install -r requirements.txt` to install required Python packages.
 
@@ -289,6 +293,8 @@ Under Deployment Method, choose GitHub and search for your repository and click 
 
 </details>
 
+<!-- TODO: Add a table with the config vars needed for Heroku deployment -->
+
 
 ### django-aullauth Setup
 
@@ -302,7 +308,6 @@ The [django-allauth documentation](https://django-allauth.readthedocs.io/en/late
 
 ### Content 
 - [Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
-- [OrdinaryCoders - Django custom user profile](https://ordinarycoders.com/django-custom-user-profile) was really helpful for the script to create profiles for existing users.
 
 
 ### Media
