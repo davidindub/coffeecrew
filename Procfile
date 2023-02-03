@@ -1,1 +1,1 @@
-web: guinicorn coffeecrew.wsgi:application
+web: gunicorn coffeecrew.wsgi:application
