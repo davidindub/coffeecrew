@@ -43,8 +43,10 @@ if development:
         "localhost",
         "127.0.0.1",
     ]  # noqa
+    CSRF_TRUSTED_ORIGINS = [os.environ.get("GITPOD_WORKSPACE")]
 else:
     ALLOWED_HOSTS = [os.environ.get("HEROKU_HOSTNAME")]
+    CSRF_TRUSTED_ORIGINS = [os.environ.get("HEROKU_FULL_URL")]
 
 # Application definition
 
