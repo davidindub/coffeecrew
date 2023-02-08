@@ -13,7 +13,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex mx-auto" role="search" method="get" action="">
+            <form class="d-flex mx-auto" role="search" method="get" action="{% url 'products' %}">
                 <div class="input-group">
                     <input class="form-control form-control-sm search-box" type="search" placeholder="Search"
                         name="search" aria-label="Search" />
@@ -32,13 +32,13 @@
                         aria-expanded="false">Coffee</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{% url 'products' %}">All Coffee</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=coffee">All Coffee</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Filter</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=filter">Filter</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Espresso</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=espresso">Espresso</a>
                         </li>
                     </ul>
                 </li>
@@ -52,19 +52,19 @@
                             <a class="dropdown-item" href="{% url 'products' %}">All Equipment</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Pour Over</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=pourover">Pour Over</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Filter Machines</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=filtermachines">Filter Machines</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Espresso Machines</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=espressomachines">Espresso Machines</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Weighing &amp Measuring</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=measuring">Weighing &amp Measuring</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Travel</a>
+                            <a class="dropdown-item" href="{% url 'products' %}?category=travel">Travel</a>
                         </li>
                     </ul>
                 </li>
