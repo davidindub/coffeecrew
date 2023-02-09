@@ -29,26 +29,19 @@ class Brand(models.Model):
         return self.friendly_name
 
 
-class Image(models.Model):
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.image_url}"
-
-
 class Product(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
     visible_to_customers = models.BooleanField(default=False)
     name = models.CharField(max_length=254)
     description = models.TextField()
     category = models.ManyToManyField(Category)
-    brand = models.ForeignKey("Brand", null=True, blank=True, on_delete=models.SET_NULL)
+    brand = models.ForeignKey(
+        "Brand", null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ManyToManyField(Image, null=True, blank=True)
     stock = models.PositiveSmallIntegerField()
-    wish_lists = models.ManyToManyField(User, related_name="wish_list", blank=True)
+    wish_lists = models.ManyToManyField(
+        User, related_name="wish_list", blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -75,3 +68,9 @@ class Coffee(Product):
     country = models.CharField(max_length=24)
     process = models.CharField(max_length=24)
     harvest_year = models.CharField(max_length=24)
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product_images/')

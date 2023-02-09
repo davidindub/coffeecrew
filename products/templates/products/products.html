@@ -11,7 +11,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h2>Products</h2>
+                {% if current_categories %}
+                    <h2>
+                        {% for category in current_categories %}
+                            {{ category.friendly_name }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </h2>
+                {% else %}
+                    <h2>Products</h2>
+                {% endif %}
             </div>
         </div>
         <div class="row">

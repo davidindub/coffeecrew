@@ -23,24 +23,37 @@ class ProductsList(generic.ListView):
             categories = category.split(",")
             queryset = queryset.filter(category__name__in=categories)
 
-            return queryset
-
         if query:
             print(f"searching for {query}")
 
             queryset = queryset.filter(name__icontains=query
                                        ) | queryset.filter(
                 description__icontains=query)
-            return queryset
 
         elif query == "":
             messages.error(self.request,
                            "You didn't enter any search criteria.")
             print("You didn't enter any search criteria.")
 
-            return queryset.none()
+            queryset = queryset.none()
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        category = self.request.GET.get('category', None)
+        categories = []
+
+        if category:
+            categories = category.split(",")
+
+        categories = Category.objects.filter(
+            name__in=categories).values('friendly_name')
+
+        context["current_categories"] = categories
+
+        return context
 
 
 def product_detail(request, product_id):
