@@ -42,6 +42,8 @@ class Product(models.Model):
     stock = models.PositiveSmallIntegerField()
     wish_lists = models.ManyToManyField(
         User, related_name="wish_list", blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.name}"

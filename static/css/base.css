@@ -180,6 +180,10 @@ footer a:focus
     text-decoration: none;
 }
 
+.product-list-top {
+    padding-bottom: 1rem;
+}
+
 /* Footer Styles */
 
 footer {

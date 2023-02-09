@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import Product, Brand, Category, Coffee, ProductImage
 
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
+
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("name", "sku", "brand", "stock")

@@ -11,11 +11,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                {% if current_categories %}
+                {% if category %}
                     <h2>
-                        {% for category in current_categories %}
-                            {{ category.friendly_name }}{% if not forloop.last %},{% endif %}
-                        {% endfor %}
+                        {{ category.friendly_name }}
                     </h2>
                 {% else %}
                     <h2>Products</h2>
@@ -24,6 +22,23 @@
         </div>
         <div class="row">
             <div class="col">
+                <div class="row">
+                    <div class="col d-flex justify-content-end product-list-top">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle custom-button" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Sort by
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownSort">
+                              <a class="dropdown-item" href="?sort=date_added">Newest First</a>
+                              <a class="dropdown-item" href="?sort=name&order=asc">Name (A-Z)</a>
+                              <a class="dropdown-item" href="?sort=name&order=desc">Name (Z-A)</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="?sort=price&order=asc">Price (low to high)</a>
+                              <a class="dropdown-item" href="?sort=price&order=desc">Price (high to low)</a>
+                            </div>
+                          </div>
+                    </div>
+                </div>
                 <div class="row">
                     {% for product in products %}
                         <div class="col-md-6 col-lg-4 col-xl-3">
