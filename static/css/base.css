@@ -30,7 +30,12 @@ a {
     text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-display-font);
 }
 
@@ -104,16 +109,27 @@ main {
 footer a:hover,
 .dropdown-toggle:focus,
 .nav-link:focus,
-footer a:focus
-{
+footer a:focus {
     color: var(--color-secondary);
 }
 
-.dropdown-toggle, .btn-search, footer a, .nav-link {
+.custom-dropdown-button,
+.custom-dropdown-button:hover,
+.custom-dropdown-button:focus,
+.custom-dropdown-button:active
+{
+    background-color: var(--color-primary);
+}
+
+.dropdown-toggle,
+.btn-search,
+footer a,
+.nav-link {
     color: var(--color-off-white)
 }
 
-.dropdown-item:focus, .dropdown-item:hover {
+.dropdown-item:focus,
+.dropdown-item:hover {
     background-color: var(--color-tertiary);
 }
 
@@ -129,7 +145,7 @@ footer a:focus
 }
 
 .hero-container {
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .hero-image {
@@ -155,7 +171,7 @@ footer a:focus
     color: var(--color-off-white);
     font-size: 1.5rem;
     padding: 1.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     border: 2px #fff solid;
 }
 
@@ -200,10 +216,10 @@ footer {
 
 footer .footer-container {
     display: grid;
-    grid-template-areas: 
-    "footer-socials"
-    "footer-nav"
-    "footer-contact" ;
+    grid-template-areas:
+        "footer-socials"
+        "footer-nav"
+        "footer-contact";
     font-size: 0.9rem;
     gap: 2rem;
     align-items: center;
@@ -263,22 +279,22 @@ footer li {
         font-size: 2.5rem;
     }
 
-    footer .footer-container  {
+    footer .footer-container {
         font-size: 1rem;
     }
-    
+
 }
 
 /* Media Query for Large Screens */
 
 @media screen and (min-width: 1200px) {
     .navbar-brand {
-    font-size: 3rem;
+        font-size: 3rem;
     }
 
     footer .footer-container {
-        grid-template-areas: 
-        "footer-contact footer-nav footer-socials";
+        grid-template-areas:
+            "footer-contact footer-nav footer-socials";
     }
 
     #footer-nav {

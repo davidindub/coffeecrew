@@ -16,8 +16,6 @@ class ProductsList(generic.ListView):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
 
-        # print(f"✅✅✅ {kwargs.category}")
-
         category = self.kwargs.get('category')
         query = self.request.GET.get('search', None)
         sort = self.request.GET.get('sort')
@@ -61,6 +59,23 @@ class ProductsList(generic.ListView):
         context = super().get_context_data(**kwargs)
 
         category = self.kwargs.get('category')
+        query = self.request.GET.get('search', None)
+
+        sort = self.request.GET.get('sort')
+        order = self.request.GET.get('order')
+
+        if sort == 'name':
+            if order == 'asc':
+                context["sort_selected"] = "Name (A-Z)"
+            else:
+                context["sort_selected"] = "Name (Z-A)"
+        elif sort == 'price':
+            if order == 'asc':
+                context["sort_selected"] = "Price (Low to High)"
+            else:
+                context["sort_selected"] = "Price (High to Low)"
+        elif sort == 'date_added':
+            context["sort_selected"] = "Newest First"
 
         context["category"] = get_object_or_404(
             Category, name=category) if category else None
