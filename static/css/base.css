@@ -206,7 +206,7 @@ footer {
     background-color: var(--color-primary);
     color: var(--color-off-white);
     text-align: center;
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;

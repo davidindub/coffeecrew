@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "home",
     "products",
     "profiles",
+    "cart",
     "storages",
 ]
 
@@ -118,6 +119,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # `allauth` needs this from django
                 "django.template.context_processors.request",
+                "cart.context_processors.cart_count"
             ],
         },
     },
