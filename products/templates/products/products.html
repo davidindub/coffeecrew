@@ -11,7 +11,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                {% if category %}
+                {% if department %}
+                <h2>{{ department }}</h2>
+                {% elif category %}
                     <h2>{{ category.friendly_name }}</h2>
                 {% else %}
                     <h2>Products</h2>

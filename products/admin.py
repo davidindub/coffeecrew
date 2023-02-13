@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Brand, Category, Coffee, ProductImage
+from .models import Product, Brand, Category, Coffee, ProductImage, Department
 
 
 class ProductImageInline(admin.TabularInline):
@@ -14,7 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("friendly_name", "name")
+    list_display = ("friendly_name", "department")
 
     ordering = ("friendly_name",)
 
@@ -24,8 +24,9 @@ class CoffeeAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
 
 
-admin.site.register(Product, ProductAdmin)
+admin.site.register(Department)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand)
-admin.site.register(ProductImage)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Coffee, CoffeeAdmin)
+admin.site.register(ProductImage)

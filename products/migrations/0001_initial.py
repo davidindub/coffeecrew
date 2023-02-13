@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=254)),
                 (
-                    "friendly_name",
+                    "display_name",
                     models.CharField(blank=True, max_length=254, null=True),
                 ),
             ],
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=254)),
                 (
-                    "friendly_name",
+                    "display_name",
                     models.CharField(blank=True, max_length=254, null=True),
                 ),
             ],

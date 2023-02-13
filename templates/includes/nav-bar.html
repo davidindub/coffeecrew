@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-dark navbar-expand-lg">
     <div class="container custom-container">
         <a class="navbar-brand" href="{% url 'home' %}">Coffee Crew</a>
@@ -49,67 +51,29 @@
                 </div>
             </form>
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">Coffee</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='coffee' %}">All Coffee</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='filter' %}">Filter</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='espresso' %}">Espresso</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Equipment
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='equipment' %}">All Equipment</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='pourover' %}">Pour Over</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='filter_machines' %}">Filter Machines</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='espresso_machines' %}">Espresso Machines</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='measuring' %}">Weighing &amp Measuring</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                               href="{% url 'products_by_category' category='travel' %}">Travel</a>
-                        </li>
-                    </ul>
-                </li>
-                {% if sale_running %}
-                    <li class=" nav-item">
-                        <a class="nav-link nav-link-sale" href="#">SALE</a>
+                {% for department in departments_with_categories %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">{{ department.name }}</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item"
+                                   href="{% url 'products_by_department' department.name %}">All {{ department.name }}</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            {% for category in department.categories %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'products_by_category' category=category.name %}">{{ category.friendly_name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </li>
-                {% endif %}
+                {% endfor %}
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"

@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.views import generic, View
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Coffee, Category
+from .models import Product, Coffee, Category, Department
 
 
 class ProductsList(generic.ListView):
@@ -16,10 +16,15 @@ class ProductsList(generic.ListView):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
 
+        department = self.kwargs.get('department')
         category = self.kwargs.get('category')
         query = self.request.GET.get('search', None)
         sort = self.request.GET.get('sort')
         order = self.request.GET.get('order')
+
+        if department:
+            queryset = queryset.filter(
+                category__department__name=department).distinct()
 
         if category:
             queryset = queryset.filter(
@@ -58,6 +63,7 @@ class ProductsList(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        department = self.kwargs.get('department')
         category = self.kwargs.get('category')
         query = self.request.GET.get('search', None)
 
@@ -79,6 +85,9 @@ class ProductsList(generic.ListView):
 
         context["category"] = get_object_or_404(
             Category, name=category) if category else None
+
+        context["department"] = get_object_or_404(
+            Department, name=department) if department else None
 
         return context
 
