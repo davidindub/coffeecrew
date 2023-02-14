@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col">
                 <h2>{{ product.name }}</h2>
-                <p>{{ product.brand.display_name }}</p>
+                <p>{{ product.brand.friendly_name }}</p>
                 <p>{{ product.description }}</p>
                 <p>Categories:</p>
                 <ul>
-                    {% for category in product.category.all %}<li>{{ category.display_name }}</li>{% endfor %}
+                    {% for category in product.category.all %}<li>{{ category.friendly_name }}</li>{% endfor %}
                 </ul>
                 <p>Price: €{{ product.price }}</p>
 
