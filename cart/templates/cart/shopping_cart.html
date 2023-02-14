@@ -42,7 +42,7 @@
             {% else %}
             <td>N/A</td>
             {% endif %}
-            <td>${{ item.total }}</td>
+            <td>€{{ item.total }}</td>
             <td>
               <form action="{% url 'cart_remove' item.product.id %}" method="post">
                 {% csrf_token %}
@@ -56,7 +56,12 @@
         </tbody>
       </table>
       <div class="text-right my-3">
-        <h3>Total: €{{ total }}</h3>
+        {% if not cart.free_delivery %}
+        <p>Spent €{{ cart.spend_for_free_delivery }} more for free delivery!</p>
+        {% endif %}
+        <h5 class="text-muted">Delivery: {% if cart.free_delivery %}FREE{% else %}€{{ cart.delivery_total }}{% endif %}</h5>
+
+        <h3>Total: €{{ cart.total_with_delivery }}</h3>
       </div>
       <div class="text-center">
         <a href="#" class="btn btn-primary">Checkout</a>

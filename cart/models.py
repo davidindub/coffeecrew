@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from products.models import Product
+from coffeecrew import settings
 
 
 class Cart(models.Model):
@@ -18,6 +19,24 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Cart"
+
+    @property
+    def delivery_total(self):
+        return (settings.DELIVERY_COST
+                if self.total() < settings.FREE_DELIVERY_THRESHOLD else 0.00)
+
+    @property
+    def free_delivery(self):
+        return (True if self.total()
+                > settings.FREE_DELIVERY_THRESHOLD else False)
+
+    @property
+    def spend_for_free_delivery(self):
+        return settings.FREE_DELIVERY_THRESHOLD - float(self.total())
+
+    @property
+    def total_with_delivery(self):
+        return (float(self.total()) + self.delivery_total)
 
 
 class CartItem(models.Model):

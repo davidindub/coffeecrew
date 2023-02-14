@@ -215,3 +215,6 @@ if "USE_AWS" in os.environ:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+FREE_DELIVERY_THRESHOLD = float(35.00)
+DELIVERY_COST = float(4.95)
