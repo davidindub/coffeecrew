@@ -1,7 +1,6 @@
 from django.conf import settings
 from decimal import Decimal
 
-
 def calculate_delivery_cost(cart_total):
     if cart_total < settings.FREE_DELIVERY_THRESHOLD:
         return (settings.DELIVERY_COST).quantize(Decimal("0.01"))

@@ -26,7 +26,19 @@
             <td>
               <a href="{% url 'product_detail' item.product.id %}">{{ item.product.name }}</a>
             </td>
-            <td>{{ item.quantity }}</td>
+            <td>
+              <form action="{% url 'cart_adjust_quantity' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="new_quantity" value="{{ item.quantity|add:1 }}"/>
+                  <button class="btn btn-sm btn-primary" type="submit">+</button>
+              </form>
+              {{ item.quantity }}
+              <form action="{% url 'cart_adjust_quantity' item.product.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="new_quantity" value="{{ item.quantity|add:-1 }}"/>
+                  <button class="btn btn-sm btn-primary" type="submit">-</button>
+              </form>
+          </td>
             <td class="d-none d-md-block">€{{ item.product.price }}</td>
             {% if item.product.coffee %}
             <td>

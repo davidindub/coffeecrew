@@ -22,11 +22,10 @@ class CartAddView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         cart = Cart.objects.get(user=request.user)
         product = Product.objects.get(id=product_id)
-        cart_item, created = CartItem.objects.get_or_create(
+        cart_item = CartItem.objects.get_or_create(
             cart=cart, product=product)
-        if not created:
-            cart_item.quantity += 1
-            cart_item.save()
+        if not cart_item:
+            cart_item.adjust_quantity(cart_item.quantity + 1)
         return redirect('shopping_cart')
 
 
@@ -34,10 +33,18 @@ class CartRemoveView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         cart = Cart.objects.get(user=request.user)
         product = Product.objects.get(id=product_id)
-        cart_item = CartItem.objects.get(cart=cart, product=product)
-        if cart_item.quantity > 1:
-            cart_item.quantity -= 1
-            cart_item.save()
+        cart_item = get_object_or_404(CartItem, cart=cart, product=product)
+        cart_item.adjust_quantity(0)
+        return redirect('shopping_cart')
+
+
+class CartAdjustQuantityView(LoginRequiredMixin, View):
+    def post(self, request, product_id):
+        cart = Cart.objects.get(user=request.user)
+        cart_item = CartItem.objects.get(cart=cart, product__id=product_id)
+        new_quantity = request.POST.get('new_quantity')
+        if new_quantity:
+            cart_item.adjust_quantity(int(new_quantity))
         else:
-            cart_item.delete()
+            cart_item.adjust_quantity(1)
         return redirect('shopping_cart')
