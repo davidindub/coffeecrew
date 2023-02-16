@@ -68,7 +68,7 @@
                             </li>
                             {% for category in department.categories %}
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'products_by_category' category=category.name %}">{{ category.friendly_name }}</a>
+                                    <a class="dropdown-item" href="{% url 'products_by_category' category=category.name %}">{{ category.display_name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -91,7 +91,7 @@
                                 <a class="dropdown-item" href="{% url 'home' %}">My Account</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{% url 'home' %}">Wishlist (0)</a>
+                                <a class="dropdown-item" href="{% url 'wish_list' %}">Wishlist ({{ wishlist.products.count }})</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider" />

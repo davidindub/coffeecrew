@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Coffee, Category, Department
+from profiles.models import WishList
 
 
 class ProductsList(generic.ListView):
@@ -16,11 +17,17 @@ class ProductsList(generic.ListView):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
 
+        wishlist = self.kwargs.get('wishlist')
         department = self.kwargs.get('department')
         category = self.kwargs.get('category')
         query = self.request.GET.get('search', None)
+
         sort = self.request.GET.get('sort')
         order = self.request.GET.get('order')
+
+        if wishlist:
+            wishlist = get_object_or_404(WishList, user=self.request.user)
+            queryset = wishlist.products.all()
 
         if department:
             queryset = queryset.filter(
@@ -63,6 +70,7 @@ class ProductsList(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        wishlist = self.kwargs.get('wishlist')
         department = self.kwargs.get('department')
         category = self.kwargs.get('category')
         query = self.request.GET.get('search', None)
@@ -88,6 +96,9 @@ class ProductsList(generic.ListView):
 
         context["department"] = get_object_or_404(
             Department, name=department) if department else None
+
+        if wishlist:
+            context["wishlist_page"] = True
 
         return context
 

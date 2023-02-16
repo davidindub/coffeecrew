@@ -12,7 +12,7 @@ class Department(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=254)
-    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+    display_name = models.CharField(max_length=254, null=True, blank=True)
     department = models.ForeignKey(
         "Department", null=True, blank=True, on_delete=models.CASCADE)
 
@@ -22,19 +22,19 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-    def get_friendly_name(self):
-        return f"{self.friendly_name}"
+    def get_display_name(self):
+        return f"{self.display_name}"
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=254)
-    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+    display_name = models.CharField(max_length=254, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
 
-    def get_friendly_name(self):
-        return self.friendly_name
+    def get_display_name(self):
+        return self.display_name
 
 
 class Product(models.Model):
@@ -48,8 +48,6 @@ class Product(models.Model):
     sku = models.CharField(max_length=254, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     stock = models.PositiveSmallIntegerField()
-    wish_lists = models.ManyToManyField(
-        User, related_name="wish_list", blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 

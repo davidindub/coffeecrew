@@ -14,9 +14,9 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("friendly_name", "department")
+    list_display = ("display_name", "department")
 
-    ordering = ("friendly_name",)
+    ordering = ("display_name",)
 
 
 class CoffeeAdmin(admin.ModelAdmin):
