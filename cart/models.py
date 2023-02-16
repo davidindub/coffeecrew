@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from products.models import Product
 from coffeecrew import settings
+from cart import cart_logic
+from decimal import Decimal
 
 
 class Cart(models.Model):
@@ -15,28 +17,26 @@ class Cart(models.Model):
         return sum(item.quantity for item in self.cartitem_set.all())
 
     def total(self):
-        return sum(item.total() for item in self.cartitem_set.all())
+        return Decimal(sum(item.total() for item in self.cartitem_set.all()))
 
     def __str__(self):
         return f"{self.user.username}'s Cart"
 
     @property
     def delivery_total(self):
-        return (settings.DELIVERY_COST
-                if self.total() < settings.FREE_DELIVERY_THRESHOLD else 0.00)
+        return cart_logic.calculate_delivery_cost(self.total())
 
     @property
     def free_delivery(self):
-        return (True if self.total()
-                > settings.FREE_DELIVERY_THRESHOLD else False)
+        return cart_logic.is_free_delivery(self.total())
 
     @property
     def spend_for_free_delivery(self):
-        return settings.FREE_DELIVERY_THRESHOLD - float(self.total())
+        return cart_logic.get_spend_for_free_delivery(self.total())
 
     @property
     def total_with_delivery(self):
-        return (float(self.total()) + self.delivery_total)
+        return cart_logic.calculate_total_with_delivery(self.total())
 
 
 class CartItem(models.Model):

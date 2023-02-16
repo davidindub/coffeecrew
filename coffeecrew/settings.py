@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from decimal import Decimal
 
 # If the env.py file exists, import it (won't be used on Heroku)
 if os.path.isfile("env.py"):
@@ -216,5 +217,5 @@ if "USE_AWS" in os.environ:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-FREE_DELIVERY_THRESHOLD = float(35.00)
-DELIVERY_COST = float(4.95)
+FREE_DELIVERY_THRESHOLD = Decimal(35.00)
+DELIVERY_COST = Decimal(4.95)

@@ -10,6 +10,7 @@ class CartView(LoginRequiredMixin, View):
         cart = Cart.objects.get(user=request.user)
         items = cart.cartitem_set.all()
         total = sum(item.product.price * item.quantity for item in items)
+
         return render(request,
                       "cart/shopping_cart.html",
                       {"cart_items": items,
