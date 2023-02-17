@@ -5,17 +5,19 @@ from .models import Cart, CartItem
 from django.views import generic, View
 
 
-class CartView(LoginRequiredMixin, View):
-    def get(self, request):
-        cart = Cart.objects.get(user=request.user)
-        items = cart.cartitem_set.all()
-        total = sum(item.product.price * item.quantity for item in items)
+class CartView(LoginRequiredMixin, generic.ListView):
+    model = CartItem
+    template_name = 'cart/shopping_cart.html'
+    context_object_name = 'cart_items'
 
-        return render(request,
-                      "cart/shopping_cart.html",
-                      {"cart_items": items,
-                       "cart": cart,
-                       "total": total})
+    def get_queryset(self):
+        return self.model.objects.filter(cart__user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart'] = Cart.objects.get(user=self.request.user)
+        context['total'] = sum(item.product.price * item.quantity for item in context['cart_items'])
+        return context
 
 
 class CartAddView(LoginRequiredMixin, View):
