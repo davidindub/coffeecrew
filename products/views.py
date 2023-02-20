@@ -45,7 +45,6 @@ class ProductsList(generic.ListView):
         elif query == "":
             messages.error(self.request,
                            "You didn't enter any search criteria.")
-            # print("You didn't enter any search criteria.")
 
             queryset = queryset.none()
 

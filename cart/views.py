@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import Product
 from .models import Cart, CartItem
 from django.views import generic, View
+from django.contrib import messages
 
 
 class CartView(LoginRequiredMixin, generic.ListView):
@@ -28,10 +29,16 @@ class CartAddView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         cart = Cart.objects.get(user=request.user)
         product = Product.objects.get(id=product_id)
-        cart_item = CartItem.objects.get_or_create(
+        cart_item, created = CartItem.objects.get_or_create(
             cart=cart, product=product)
-        if not cart_item:
-            cart_item.adjust_quantity(cart_item.quantity + 1)
+
+        if not created:
+            success = cart_item.adjust_quantity(cart_item.quantity + 1)
+
+            if not success:
+                messages.error(self.request,
+                               "Sorry, we don't have any more in stock!")
+
         return redirect('shopping_cart')
 
 
@@ -48,11 +55,15 @@ class CartAdjustQuantityView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         cart = Cart.objects.get(user=request.user)
         cart_item = CartItem.objects.get(cart=cart, product__id=product_id)
-        new_quantity = request.POST.get('new_quantity')
-        if new_quantity:
-            cart_item.adjust_quantity(int(new_quantity))
-        else:
-            cart_item.adjust_quantity(1)
+        new_quantity = int(request.POST.get('new_quantity'))
+
+        if new_quantity or new_quantity == 0:
+            success = cart_item.adjust_quantity(int(new_quantity))
+
+            if not success:
+                messages.error(self.request,
+                               "Sorry, we don't have any more in stock!")
+
         return redirect('shopping_cart')
 
 
@@ -64,11 +75,7 @@ class UpdateCartItemGrindSize(View):
 
         grind_size = request.POST.get('grind_size')
 
-        print(cart_item.grind_size)
-        print(cart_item.quantity)
-
         if cart_item.product.coffee:
-            print("its a coffee")
             cart_item.grind_size = grind_size
             cart_item.save()
             data = {'success': True}

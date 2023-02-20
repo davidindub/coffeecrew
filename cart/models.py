@@ -62,9 +62,6 @@ class CartItem(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        print(self.product)
-        print(f"Product type: {type(self.product)}")
-
         try:
             coffee = self.product.coffee
         except Coffee.DoesNotExist:
@@ -75,15 +72,18 @@ class CartItem(models.Model):
         else:
             self.grind_size = None
 
-        print(f"Grind size saved as {self.grind_size}")
         super().save(*args, **kwargs)
 
     def adjust_quantity(self, quantity):
         self.quantity = quantity
         if self.quantity == 0:
             self.delete()
-        else:
+            return True
+        if self.quantity <= self.product.stock:
             self.save()
+            return True
+        else:
+            return False
 
     def total(self):
         return self.product.price * self.quantity
