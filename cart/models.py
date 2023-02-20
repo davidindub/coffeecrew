@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from products.models import Product
+from products.models import Product, Coffee
 from coffeecrew import settings
 from decimal import Decimal
 from cart import cart_logic
@@ -15,10 +15,10 @@ class Cart(models.Model):
 
     @property
     def item_count(self):
-        return sum(item.quantity for item in self.cartitem_set.all())
+        return sum(item.quantity for item in self.cart_item.all())
 
     def total(self):
-        return Decimal(sum(item.total() for item in self.cartitem_set.all()))
+        return Decimal(sum(item.total() for item in self.cart_item.all()))
 
     def __str__(self):
         return f"{self.user.username}'s Cart"
@@ -42,11 +42,41 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, related_name='cartitem_set')
+        Cart, on_delete=models.CASCADE, related_name='cart_item')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    grind_size = models.CharField(
+        max_length=50,
+        choices=[
+            ('Wholebean', 'Wholebean'),
+            ('Moka Pot', 'Moka Pot'),
+            ('French Press', 'French Press'),
+            ('Pour Over', 'Pour Over'),
+            ('Filter/Drip', 'Filter/Drip'),
+            ('Espresso', 'Espresso')
+        ],
+        blank=True,
+        null=True
+    )
+
+    def save(self, *args, **kwargs):
+        print(self.product)
+        print(f"Product type: {type(self.product)}")
+
+        try:
+            coffee = self.product.coffee
+        except Coffee.DoesNotExist:
+            coffee = None
+
+        if coffee:
+            self.grind_size = self.grind_size or 'Wholebean'
+        else:
+            self.grind_size = None
+
+        print(f"Grind size saved as {self.grind_size}")
+        super().save(*args, **kwargs)
 
     def adjust_quantity(self, quantity):
         self.quantity = quantity
@@ -57,7 +87,6 @@ class CartItem(models.Model):
 
     def total(self):
         return self.product.price * self.quantity
-
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"

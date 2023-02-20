@@ -14,11 +14,17 @@
                 <h2>{{ product.name }}</h2>
                 <p>{{ product.brand.display_name }}</p>
                 <p>{{ product.description }}</p>
+                {% if product.coffee %}
+                    <p>Country: {{ product.coffee.country }}</p>
+                    <p>Process: {{ product.coffee.process }}</p>
+                    <p>Harvest Year: {{ product.coffee.harvest_year }}</p>
+                    <p>Weight: {{ product.coffee.weights }}</p>
+                {% endif %}
                 <p>Categories:</p>
                 <ul>
                     {% for category in product.category.all %}<li>{{ category.display_name }}</li>{% endfor %}
                 </ul>
-                <p>Price: €{{ product.price }}</p>
+                <h4>Price: €{{ product.price }}</h4>
                 <form action="{% url 'cart_add' product.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="custom-button">

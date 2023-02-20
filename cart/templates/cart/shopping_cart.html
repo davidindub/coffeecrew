@@ -30,45 +30,56 @@
                     <a href="{% url 'product_detail' object.product.id %}">{{ object.product.name }}</a>
                   </td>
                   <td>
-                    <form action="{% url 'cart_adjust_quantity' object.product.id %}"
+                    <form class="cart-form" action="{% url 'cart_adjust_quantity' object.product.id %}"
                           method="post">
                       {% csrf_token %}
                       <input type="hidden" name="new_quantity" value="{{ object.quantity|add:1 }}"/>
-                      <button class="btn btn-sm btn-primary" type="submit">+</button>
+                      <button class="btn btn-sm btn-primary custom-button" type="submit">+</button>
                     </form>
                     {{ object.quantity }}
-                    <form action="{% url 'cart_adjust_quantity' object.product.id %}"
+                    <form class="cart-form" action="{% url 'cart_adjust_quantity' object.product.id %}"
                           method="post">
                       {% csrf_token %}
                       <input type="hidden"
                              name="new_quantity"
                              value="{{ object.quantity|add:-1 }}"/>
-                      <button class="btn btn-sm btn-primary" type="submit">-</button>
+                      <button class="btn btn-sm btn-primary custom-button" type="submit">-</button>
                     </form>
                   </td>
                   <td class="d-none d-md-block">€{{ object.product.price }}</td>
                   {% if object.product.coffee %}
                     <td>
-                      <select class="form-control">
-                        <option selected value="Wholebean">
-                          Wholebean
+                      <form class="cart-form" action="{% url 'cart_adjust_grind' object.product.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    <select name="grind_size" class="form-control"
+                            onchange="this.form.submit()">
+                        <option value="Wholebean"
+                                {% if object.grind_size == 'Wholebean' %}selected{% endif %}>
+                            Wholebean
                         </option>
-                        <option value="Moka Pot">
-                          Moka Pot
+                        <option value="Moka Pot"
+                                {% if object.grind_size == 'Moka Pot' %}selected{% endif %}>
+                            Moka Pot
                         </option>
-                        <option value="French Press">
-                          French Press
+                        <option value="French Press"
+                                {% if object.grind_size == 'French Press' %}selected{% endif %}>
+                            French Press
                         </option>
-                        <option value="Pour Over">
-                          Pour Over
+                        <option value="Pour Over"
+                                {% if object.grind_size == 'Pour Over' %}selected{% endif %}>
+                            Pour Over
                         </option>
-                        <option value="Filter/Drip">
-                          Filter/Drip
+                        <option value="Filter/Drip"
+                                {% if object.grind_size == 'Filter/Drip' %}selected{% endif %}>
+                            Filter/Drip
                         </option>
-                        <option value="Espresso">
-                          Espresso
+                        <option value="Espresso"
+                                {% if object.grind_size == 'Espresso' %}selected{% endif %}>
+                            Espresso
                         </option>
-                      </select>
+                    </select>
+                </form>
                     </td>
                   {% else %}
                     <td>N/A</td>
