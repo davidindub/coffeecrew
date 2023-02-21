@@ -68,6 +68,8 @@ INSTALLED_APPS = [
     "profiles",
     "cart",
     "storages",
+    "checkout",
+    "django_countries"
 ]
 
 MIDDLEWARE = [
