@@ -69,7 +69,9 @@ INSTALLED_APPS = [
     "cart",
     "storages",
     "checkout",
-    "django_countries"
+    "django_countries",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -209,3 +211,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FREE_DELIVERY_THRESHOLD = Decimal(35.00)
 DELIVERY_COST = Decimal(4.95)
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
