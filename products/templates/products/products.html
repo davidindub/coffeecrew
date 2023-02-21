@@ -75,7 +75,7 @@
                             <div class="card product-card">
                                 <a href="{% url 'product_detail' product.id %}">
                                     {% if product.image %}
-                                        <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                                        <img src="{{ product.imageURL }}"
                                              class="card-img-top"
                                              alt="{{ product.name }}"/>
                                     {% else %}
@@ -90,11 +90,13 @@
                                             <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
                                         </h5>
                                     </a>
-                                    <p class="card-text">{{ product.description }}</p>
+                                    <p class="card-text">{{ product.description|truncatewords:20 }}</p>
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">€{{ product.price }}</li>
+                                        <li class="list-group-item">
+                                            <h5>€{{ product.price }}</h5>
+                                        </li>
                                         {% if user.is_authenticated %}
                                             <li class="list-group-item">
                                                 {% if product in user.wishlist.products.all %}

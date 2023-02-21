@@ -50,6 +50,16 @@ class Product(models.Model):
     stock = models.PositiveSmallIntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    image = models.ImageField(
+        upload_to='product_images/', blank=True, null=True)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except AttributeError:
+            url = ""
+        return url
 
     def __str__(self):
         return f"{self.name}"
@@ -67,9 +77,3 @@ class Coffee(Product):
     country = models.CharField(max_length=24)
     process = models.CharField(max_length=24)
     harvest_year = models.CharField(max_length=24)
-
-
-class ProductImage(models.Model):
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='product_images/')

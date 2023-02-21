@@ -12,13 +12,30 @@
         <div class="row">
             <div class="col">
                 <h2>{{ product.name }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                {% if product.image %}
+                    <img src="{{ product.imageURL }}"
+                         class="card-img-top"
+                         alt="{{ product.name }}"/>
+                {% else %}
+                    <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                         class="card-img-top"
+                         alt="{{ product.name }}"/>
+                {% endif %}
+            </div>
+            <div class="col">
                 <p>{{ product.brand.display_name }}</p>
                 <p>{{ product.description }}</p>
                 {% if product.coffee %}
                     <p>Country: {{ product.coffee.country }}</p>
                     <p>Process: {{ product.coffee.process }}</p>
                     <p>Harvest Year: {{ product.coffee.harvest_year }}</p>
-                    <p>Weight: {{ product.coffee.weights }}</p>
+                    <p>Weight: {{ product.coffee.weight }}</p>
+                    <hr/>
+                    <small>You can select if you would like your coffee ground after adding it to your cart.</small>
                 {% endif %}
                 <p>Categories:</p>
                 <ul>
