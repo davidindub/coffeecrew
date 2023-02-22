@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
-{% block content %}
-  <h1>Edit Product</h1>
-  <form method="post">
-    {% csrf_token %}
-    {% crispy form %}
-  </form>
-{% endblock content %}

@@ -7,6 +7,16 @@ class Department(models.Model):
     name = models.CharField(max_length=254)
     visible_to_customers = models.BooleanField(default=False)
 
+    @property
+    def num_products(self):
+        categories = self.category_set.all()
+        num_products = sum([category.num_products for category in categories])
+        return num_products
+
+    @property
+    def num_categories(self):
+        return self.category_set.count()
+
     def __str__(self):
         return self.name
 
@@ -23,8 +33,9 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-    def get_display_name(self):
-        return f"{self.display_name}"
+    @property
+    def num_products(self):
+        return self.product_set.count()
 
 
 class Brand(models.Model):
@@ -66,7 +77,7 @@ class Product(models.Model):
             self.slug = slugify(self.name)
 
         super(Product, self).save(*args, **kwargs)
-        
+
     @property
     def imageURL(self):
         try:

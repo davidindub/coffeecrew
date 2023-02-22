@@ -2,10 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.views import generic, View
 from django.contrib import messages
-from django.db.models import Q
 from .models import Product, Coffee, Category, Department
 from profiles.models import WishList
-from .forms import ProductForm, CoffeeForm
+from .forms import ProductForm, CoffeeForm, DepartmentForm
 from django.urls import reverse_lazy
 
 
@@ -107,7 +106,7 @@ class ProductsList(generic.ListView):
 
 def product_detail(request, slug):
     """
-    renders view for an single products full details
+    View for an single products full details
     """
     product = get_object_or_404(Product, slug=slug)
 
@@ -116,14 +115,20 @@ def product_detail(request, slug):
 
 
 class StaffMemberRequiredMixin(UserPassesTestMixin):
+    """
+    Check is the user a staff member to restrict access
+    """
     def test_func(self):
         return self.request.user.is_staff
 
 
 class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+    """
+    View for updating existing Products
+    """
     model = Product
     form_class = ProductForm
-    template_name = "products/product_update.html"
+    template_name = "products/forms/product_form.html"
     slug_url_kwarg = "slug"
 
     def form_valid(self, form):
@@ -147,9 +152,12 @@ class CoffeeUpdate(ProductUpdate):
 
 
 class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+    """
+    View for creating new Products
+    """
     model = Product
     form_class = ProductForm
-    template_name = "products/product_update.html"
+    template_name = "products/forms/product_form.html"
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -159,3 +167,74 @@ class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
     def get_success_url(self):
         return reverse_lazy("product_detail",
                             kwargs={"product_id": self.object.id})
+
+
+class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+    """
+    View for creating new Departments
+    """
+    model = Department
+    form_class = DepartmentForm
+    template_name = "products/forms/department_form.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Department added successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("category_list_staff")
+
+
+class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+    """
+    View for updating existing Departments
+    """
+    model = Department
+    form_class = DepartmentForm
+    template_name = "products/forms/department_form.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"Updated successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("category_list_staff")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["department"] = self.object
+        return context
+
+
+class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
+    """
+    View for confirmation page to delete a department.
+    """
+    model = Department
+    template_name = "products/forms/department_delete_form.html"
+    success_url = reverse_lazy("category_list_staff")
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        messages.success(
+            request, f"{self.object.name} has been deleted successfully!")
+        return response
+
+
+class ManageCategories(generic.ListView):
+    """
+    View for management dash
+    """
+    template_name = 'products/staff/manage_categories.html'
+    queryset = Department.objects.all()
+    context_object_name = 'departments'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        departments = context['departments']
+        for department in departments:
+            department.categories = Category.objects.filter(
+                department=department).order_by('name')
+        return context

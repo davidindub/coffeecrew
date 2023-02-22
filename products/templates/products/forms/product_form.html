@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  {% if product %}
+    - Edit {{ product.name }}
+  {% else %}
+    - Add New Product
+  {% endif %}
+{% endblock extra_title %}
+{% block content %}
+  {% if product %}
+    <h1>Edit {{ product.name }}</h1>
+  {% else %}
+    <h1>New Product</h1>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {% crispy form %}
+  </form>
+{% endblock content %}
