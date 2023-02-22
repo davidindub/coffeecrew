@@ -14,3 +14,22 @@ class ProductForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(Submit("submit", "Save"))
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "description", "brand", "category", "stock", "image"]
+
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.add_input(Submit("submit", "Save"))
+
+
+class CoffeeForm(ProductForm):
+    class Meta:
+        model = Coffee
+        fields = ["name", "description", "brand", "category", "stock", "image",
+                  "country", "process", "harvest_year", "weight"]

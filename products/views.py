@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Coffee, Category, Department
 from profiles.models import WishList
-from .forms import ProductForm
+from .forms import ProductForm, CoffeeForm
 from django.urls import reverse_lazy
 
 
@@ -123,7 +123,6 @@ class StaffMemberRequiredMixin(UserPassesTestMixin):
 class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
     model = Product
     form_class = ProductForm
-    print(f"✅ {model.id}")
     template_name = "products/product_update.html"
     slug_url_kwarg = "slug"
 
@@ -140,3 +139,8 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         context = super().get_context_data(**kwargs)
         context["product_id"] = self.object.id
         return context
+
+
+class CoffeeUpdate(ProductUpdate):
+    model = Coffee
+    form_class = CoffeeForm

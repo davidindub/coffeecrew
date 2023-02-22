@@ -26,7 +26,7 @@
                          alt="{{ product.name }}"/>
                 {% endif %}
                 {% if user.is_staff %}
-                    <a href="{% url 'product_update' product.slug %}" class="custom-button">
+                    <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}" class="custom-button">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="16"
                              height="16"
