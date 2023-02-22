@@ -7,7 +7,8 @@ from crispy_forms.layout import Submit
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "description", "brand", "category", "stock", "image"]
+        fields = ["name", "description", "brand",
+                  "category", "price", "stock", "image"]
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -19,7 +20,8 @@ class ProductForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "description", "brand", "category", "stock", "image"]
+        fields = ["name", "description", "brand",
+                  "category", "price", "stock", "image"]
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)

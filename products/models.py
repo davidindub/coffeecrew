@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -38,9 +39,9 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
-    slug = models.SlugField(max_length=50, unique=True)
     visible_to_customers = models.BooleanField(default=False)
     name = models.CharField(max_length=254)
+    slug = models.SlugField(unique=True)
     description = models.TextField()
     category = models.ManyToManyField(Category)
     brand = models.ForeignKey(
@@ -53,6 +54,19 @@ class Product(models.Model):
     image = models.ImageField(
         upload_to='product_images/', blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        # update the slug if the name is changed
+        if self.pk:
+            original_name = Product.objects.get(pk=self.pk).name
+            if original_name != self.name:
+                self.slug = slugify(self.name)
+
+        # generate a new slug if none exists
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super(Product, self).save(*args, **kwargs)
+        
     @property
     def imageURL(self):
         try:

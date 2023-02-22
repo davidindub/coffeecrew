@@ -105,11 +105,11 @@ class ProductsList(generic.ListView):
         return context
 
 
-def product_detail(request, product_id):
+def product_detail(request, slug):
     """
     renders view for an single products full details
     """
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, slug=slug)
 
     context = {"product": product}
     return render(request, "products/product_detail.html", context)
@@ -128,7 +128,7 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, "Product updated successfully! 👍")
+        messages.success(self.request, f"Updated successfully! 👍")
         return response
 
     def get_success_url(self):
@@ -137,10 +137,25 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product_id"] = self.object.id
+        context["product"] = self.object
         return context
 
 
 class CoffeeUpdate(ProductUpdate):
     model = Coffee
     form_class = CoffeeForm
+
+
+class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = "products/product_update.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Product added successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("product_detail",
+                            kwargs={"product_id": self.object.id})

@@ -73,7 +73,7 @@
                     {% for product in products %}
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="card product-card">
-                                <a href="{% url 'product_detail' product.id %}">
+                                <a href="{% url 'product_detail' product.slug %}">
                                     {% if product.image %}
                                         <img src="{{ product.imageURL }}"
                                              class="card-img-top"
@@ -87,7 +87,7 @@
                                 <div class="card-body">
                                     <a href="#">
                                         <h5 class="card-title">
-                                            <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                                            <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
                                         </h5>
                                     </a>
                                     <p class="card-text">{{ product.description|truncatewords:20 }}</p>
