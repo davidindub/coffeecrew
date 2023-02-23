@@ -9,7 +9,6 @@ from cart import cart_logic
 
 
 class Cart(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
 
@@ -42,7 +41,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, related_name='cart_item')
+        Cart, on_delete=models.CASCADE, related_name="cart_item")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -50,12 +49,12 @@ class CartItem(models.Model):
     grind_size = models.CharField(
         max_length=50,
         choices=[
-            ('Wholebean', 'Wholebean'),
-            ('Moka Pot', 'Moka Pot'),
-            ('French Press', 'French Press'),
-            ('Pour Over', 'Pour Over'),
-            ('Filter/Drip', 'Filter/Drip'),
-            ('Espresso', 'Espresso')
+            ("Wholebean", "Wholebean"),
+            ("Moka Pot", "Moka Pot"),
+            ("French Press", "French Press"),
+            ("Pour Over", "Pour Over"),
+            ("Filter/Drip", "Filter/Drip"),
+            ("Espresso", "Espresso")
         ],
         blank=True,
         null=True
@@ -68,7 +67,7 @@ class CartItem(models.Model):
             coffee = None
 
         if coffee:
-            self.grind_size = self.grind_size or 'Wholebean'
+            self.grind_size = self.grind_size or "Wholebean"
         else:
             self.grind_size = None
 
@@ -84,6 +83,7 @@ class CartItem(models.Model):
             return True
         else:
             return False
+        
 
     def total(self):
         return self.product.price * self.quantity

@@ -11,4 +11,4 @@ def get_user_wishlist(request):
     else:
         wishlist = None
 
-    return {'wishlist': wishlist}
+    return {"wishlist": wishlist}

@@ -21,13 +21,13 @@ class ProductsList(generic.ListView):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
 
-        wishlist = self.kwargs.get('wishlist')
-        department = self.kwargs.get('department')
-        category = self.kwargs.get('category')
-        query = self.request.GET.get('search', None)
+        wishlist = self.kwargs.get("wishlist")
+        department = self.kwargs.get("department")
+        category = self.kwargs.get("category")
+        query = self.request.GET.get("search", None)
 
-        sort = self.request.GET.get('sort')
-        order = self.request.GET.get('order')
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
 
         if wishlist:
             wishlist = get_object_or_404(WishList, user=self.request.user)
@@ -52,47 +52,47 @@ class ProductsList(generic.ListView):
 
             queryset = queryset.none()
 
-        if sort == 'name':
-            if order == 'asc':
-                queryset = queryset.order_by('name')
+        if sort == "name":
+            if order == "asc":
+                queryset = queryset.order_by("name")
             else:
-                queryset = queryset.order_by('-name')
-        elif sort == 'price':
-            if order == 'asc':
-                queryset = queryset.order_by('price')
+                queryset = queryset.order_by("-name")
+        elif sort == "price":
+            if order == "asc":
+                queryset = queryset.order_by("price")
             else:
-                queryset = queryset.order_by('-price')
-        elif sort == 'date_added':
-            if order == 'asc':
-                queryset = queryset.order_by('date_added')
+                queryset = queryset.order_by("-price")
+        elif sort == "date_added":
+            if order == "asc":
+                queryset = queryset.order_by("date_added")
             else:
-                queryset = queryset.order_by('-date_added')
+                queryset = queryset.order_by("-date_added")
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        wishlist = self.kwargs.get('wishlist')
-        department = self.kwargs.get('department')
-        category = self.kwargs.get('category')
-        query = self.request.GET.get('search', None)
+        wishlist = self.kwargs.get("wishlist")
+        department = self.kwargs.get("department")
+        category = self.kwargs.get("category")
+        query = self.request.GET.get("search", None)
 
-        sort = self.request.GET.get('sort')
-        order = self.request.GET.get('order')
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
 
-        if sort == 'name':
-            if order == 'asc':
+        if sort == "name":
+            if order == "asc":
                 context["sort_selected"] = "Name (A-Z)"
             else:
                 context["sort_selected"] = "Name (Z-A)"
-        elif sort == 'price':
-            if order == 'asc':
+        elif sort == "price":
+            if order == "asc":
                 context["sort_selected"] = "Price (Low to High)"
             else:
                 context["sort_selected"] = "Price (High to Low)"
-        elif sort == 'date_added':
-            if order == 'asc':
+        elif sort == "date_added":
+            if order == "asc":
                 context["sort_selected"] = "Newest First"
             else:
                 context["sort_selected"] = "Oldest First"
@@ -105,6 +105,8 @@ class ProductsList(generic.ListView):
 
         if wishlist:
             context["wishlist_page"] = True
+
+        context["search_results"] = query
 
         return context
 
@@ -144,7 +146,7 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("product_detail",
-                            kwargs={"product_id": self.object.id})
+                            kwargs={"slug": self.object.slug})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -273,16 +275,16 @@ class ManageCategories(generic.ListView):
     """
     View for management dash
     """
-    template_name = 'products/staff/manage_shop.html'
+    template_name = "products/staff/manage_shop.html"
     queryset = Department.objects.all()
-    context_object_name = 'departments'
+    context_object_name = "departments"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        departments = context['departments']
+        departments = context["departments"]
         for department in departments:
             department.categories = Category.objects.filter(
-                department=department).order_by('name')
+                department=department).order_by("name")
         return context
 
 
@@ -351,13 +353,13 @@ class ManageProducts(ProductsList):
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
 
-        wishlist = self.kwargs.get('wishlist')
-        department = self.kwargs.get('department')
-        category = self.kwargs.get('category')
-        query = self.request.GET.get('search', None)
+        wishlist = self.kwargs.get("wishlist")
+        department = self.kwargs.get("department")
+        category = self.kwargs.get("category")
+        query = self.request.GET.get("search", None)
 
-        sort = self.request.GET.get('sort')
-        order = self.request.GET.get('order')
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
 
         if wishlist:
             wishlist = get_object_or_404(WishList, user=self.request.user)
@@ -382,57 +384,57 @@ class ManageProducts(ProductsList):
 
             queryset = queryset.none()
 
-        if sort == 'name':
-            if order == 'asc':
-                queryset = queryset.order_by('name')
+        if sort == "name":
+            if order == "asc":
+                queryset = queryset.order_by("name")
             else:
-                queryset = queryset.order_by('-name')
-        elif sort == 'price':
-            if order == 'asc':
-                queryset = queryset.order_by('price')
+                queryset = queryset.order_by("-name")
+        elif sort == "price":
+            if order == "asc":
+                queryset = queryset.order_by("price")
             else:
-                queryset = queryset.order_by('-price')
-        elif sort == 'date_added':
-            if order == 'asc':
-                queryset = queryset.order_by('date_added')
+                queryset = queryset.order_by("-price")
+        elif sort == "date_added":
+            if order == "asc":
+                queryset = queryset.order_by("date_added")
             else:
-                queryset = queryset.order_by('-date_added')
-        elif sort == 'stock':
-            if order == 'asc':
-                queryset = queryset.order_by('stock')
+                queryset = queryset.order_by("-date_added")
+        elif sort == "stock":
+            if order == "asc":
+                queryset = queryset.order_by("stock")
             else:
-                queryset = queryset.order_by('-stock')
-        elif sort == 'lifetime_sales':
-            if order == 'asc':
-                queryset = queryset.order_by('lifetime_sales')
+                queryset = queryset.order_by("-stock")
+        elif sort == "lifetime_sales":
+            if order == "asc":
+                queryset = queryset.order_by("lifetime_sales")
             else:
-                queryset = queryset.order_by('-lifetime_sales')
+                queryset = queryset.order_by("-lifetime_sales")
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        wishlist = self.kwargs.get('wishlist')
-        department = self.kwargs.get('department')
-        category = self.kwargs.get('category')
-        query = self.request.GET.get('search', None)
+        wishlist = self.kwargs.get("wishlist")
+        department = self.kwargs.get("department")
+        category = self.kwargs.get("category")
+        query = self.request.GET.get("search", None)
 
-        sort = self.request.GET.get('sort')
-        order = self.request.GET.get('order')
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
 
-        if sort == 'name':
-            if order == 'asc':
+        if sort == "name":
+            if order == "asc":
                 context["sort_selected"] = "Name (A-Z)"
             else:
                 context["sort_selected"] = "Name (Z-A)"
-        elif sort == 'price':
-            if order == 'asc':
+        elif sort == "price":
+            if order == "asc":
                 context["sort_selected"] = "Price (Low to High)"
             else:
                 context["sort_selected"] = "Price (High to Low)"
-        elif sort == 'date_added':
-            if order == 'asc':
+        elif sort == "date_added":
+            if order == "asc":
                 context["sort_selected"] = "Oldest First"
             else:
                 context["sort_selected"] = "Newest First"

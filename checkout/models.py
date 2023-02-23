@@ -29,7 +29,7 @@ class Order(models.Model):
     address_line_2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
     postcode = models.CharField(max_length=200, null=False)
-    country = CountryField(blank_label='Country *', null=False, blank=False)
+    country = CountryField(null=False, blank=False)
 
     def generate_order_number(self):
         """
@@ -40,7 +40,7 @@ class Order(models.Model):
         now = datetime.datetime.now()
         month = now.strftime("%b").upper()
         day = now.strftime("%d")
-        random_digits = ''.join(random.choice('0123456789') for _ in range(8))
+        random_digits = "".join(random.choice("0123456789") for _ in range(8))
         return f"{month}{day}{random_digits}"
 
     def update_totals(self):
@@ -81,7 +81,7 @@ class OrderItem(models.Model):
     """
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
-                              related_name='order_items')
+                              related_name="order_items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     grind_size = models.CharField(
