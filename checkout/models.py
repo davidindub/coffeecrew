@@ -91,20 +91,25 @@ class OrderItem(models.Model):
     )
     price = models.DecimalField(
         max_digits=6, decimal_places=2, null=True, blank=True)
+    product_name = models.CharField(max_length=254, null=True, blank=True)
 
     @property
     def total(self):
         return self.product.price * self.quantity
 
-    def set_price(self):
+    def set_details(self):
         if not self.price:
             self.price = self.product.price
+        if not self.product_name:
+            self.product_name = self.product.name
 
     def save(self, *args, **kwargs):
         """
-        Set the price if it hasn't been already set
+        Set the price if it hasn't been already set.
+        Save the product's name in case it becomes unavailable on the site,
+        so not to break users order history.
         """
-        self.set_price()
+        self.set_details()
         super().save(*args, **kwargs)
 
     def __str__(self):

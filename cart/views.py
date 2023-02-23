@@ -19,9 +19,23 @@ class CartView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart'] = Cart.objects.get(user=self.request.user)
-        context['total'] = sum(item.product.price *
-                               item.quantity for item in context['cart_items'])
+        cart = Cart.objects.get(user=self.request.user)
+        context["cart"] = Cart.objects.get(user=self.request.user)
+
+        for item in cart.cart_item.all():
+            if item.product.stock == 0:
+                # If the item's quantity is zero, remove it from the cart
+                messages.error(self.request,
+                               f"{ item.product.name } is out of stock, so we've removed it from your cart.")
+                item.delete()
+            elif item.quantity > item.product.stock:
+                # If the item's quantity is greater than the available stock,
+                # set the quantity to the available stock
+                messages.error(self.request,
+                               f"We don't have enough of {item.product.name} to fulfill your order at the moment, so we've reduced the quantity.")
+                item.quantity = item.product.stock
+                item.save()
+
         return context
 
 
