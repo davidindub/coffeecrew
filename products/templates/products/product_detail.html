@@ -13,9 +13,9 @@
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">Products</li>
-      <li class="breadcrumb-item">{{ product.category.first.department.name }}</li>
-      <li class="breadcrumb-item">{{ product.category.first.display_name }}</li>
+      <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'products_by_department' department=product.category.first.department %}">{{ product.category.first.department }}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'products_by_category' category=product.category.first.name %}">{{ product.category.first.display_name }}</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
     </ol>
   </nav>
@@ -68,6 +68,7 @@
                     {% for category in product.category.all %}<li>{{ category.display_name }}</li>{% endfor %}
                 </ul>
                 <h4>Price: €{{ product.price }}</h4>
+                {% if product.stock %}
                 <form action="{% url 'cart_add' product.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn custom-button">
@@ -85,6 +86,11 @@
                         Add to Cart
                     </button>
                 </form>
+                {% else %}
+                <span class="btn btn-secondary">
+                Out of Stock
+                </span>
+                {% endif %}
                 {% if user.is_authenticated %}
                     {% if product in user.wishlist.products.all %}
                         <form method="post"

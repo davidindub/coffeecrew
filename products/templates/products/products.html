@@ -12,6 +12,8 @@
         <ol class="breadcrumb">
             {% if wishlist_page %}
                 <li class="breadcrumb-item active" aria-current="page">Your Wishlist</li>
+            {% elif search_results %}
+                <li class="breadcrumb-item active" aria-current="page">Search Results for {{ search_results }}</li>
             {% elif not department and not category and not wishlist_page %}
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
             {% elif department or category %}
@@ -59,7 +61,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-                {% if not department and not category and not wishlist_page %}
+                {% if not department and not category and not wishlist_page and not search_results %}
                     {% for dept in departments_with_categories %}
                         <a href="{% url 'products_by_department' department=dept.name %}"
                            class="btn custom-button">{{ dept.name }}</a>
