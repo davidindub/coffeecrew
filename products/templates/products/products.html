@@ -18,7 +18,7 @@
                 <li class="breadcrumb-item">
                     <a href="{% url "products" %}">Products</a>
                 </li>
-                {% endif %}
+            {% endif %}
             {% if department or category %}
                 {% if department %}
                     <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
@@ -71,33 +71,14 @@
             <div class="col">
                 <div class="row">
                     <div class="col d-flex justify-content-end product-list-top">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle custom-dropdown-button"
-                               type="button"
-                               id="dropdownSort"
-                               data-bs-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                {% if sort_selected %}
-                                    {{ sort_selected }}
-                                {% else %}
-                                    Sort
-                                {% endif %}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownSort">
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=date_added">Newest First</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=asc">Name (A-Z)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=desc">Name (Z-A)</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=asc">Price (low to high)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=desc">Price (high to low)</a>
-                            </div>
-                        </div>
+                        {% if products %}
+                            {% comment %}
+                            Only show sort options if there are products to show.
+                            {% endcomment %}
+                            {% block product_sort %}
+                                {% include "includes/products_sort.html" %}
+                            {% endblock product_sort %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row">

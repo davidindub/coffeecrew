@@ -76,43 +76,14 @@
             <div class="col">
                 <div class="row">
                     <div class="col d-flex justify-content-end product-list-top">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle custom-dropdown-button"
-                               type="button"
-                               id="dropdownSort"
-                               data-bs-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                {% if sort_selected %}
-                                    {{ sort_selected }}
-                                {% else %}
-                                    Sort
-                                {% endif %}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownSort">
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=stock&order=asc">Stock (low to high)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=stock&order=desc">Stock (high to low)</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=lifetime_sales&order=asc">Sales (low to high)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=lifetime_sales&order=desc">Sales (high to low)</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=date_added">Newest First</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=asc">Name (A-Z)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=desc">Name (Z-A)</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=asc">Price (low to high)</a>
-                                <a class="dropdown-item"
-                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=desc">Price (high to low)</a>
-                            </div>
-                        </div>
+                        {% if products %}
+                            {% comment %}
+                        Only show sort options if there are products to show.
+                            {% endcomment %}
+                            {% block product_sort %}
+                                {% include "includes/manage_products_sort.html" %}
+                            {% endblock product_sort %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row">
@@ -124,12 +95,8 @@
                                         <th scope="col">Product Name</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">
-                                            Stock
-                                        </th>
-                                        <th scope="col">
-                                            Lifetime Sales
-                                        </th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col">Lifetime Sales</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -161,16 +128,12 @@
                                                     {% endif %}
                                                 </a>
                                             </td>
-                                            <td>
-                                                €{{ product.price }}
-                                            </td>
+                                            <td>€{{ product.price }}</td>
                                             <td {% if product.stock < 5 %}class="product-low-stock"{% endif %}>
                                                 {% if product.stock < 5 %}{% endif %}
                                                 {{ product.stock }}
                                             </td>
-                                            <td>
-                                                {{ product.lifetime_sales }}
-                                            </td>
+                                            <td>{{ product.lifetime_sales }}</td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
