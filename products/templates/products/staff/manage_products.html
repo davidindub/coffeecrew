@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_header %}
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock page_header %}
+{% block extra_title %}
+    {% if department %}
+        - Manage {{ department }} Products
+    {% elif category %}
+        - Manage {{ category.display_name }} Products
+    {% else %}
+        - Manage Products
+    {% endif %}
+{% endblock extra_title %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% if department %}
+                    <h2>Manage {{ department }} Products</h2>
+                {% elif category %}
+                    <h2>Manage {{ category.display_name }} Products</h2>
+                {% else %}
+                    <h2>Manage Products</h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if department %}
+                    {% for dept in departments_with_categories %}
+                        {% if dept.name == department.name %}
+                            {% for category in dept.categories %}
+                                <a href="{% url 'products_by_category' category=category.name %}"
+                                   class="custom-button">{{ category.display_name }}</a>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col d-flex justify-content-end product-list-top">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle custom-dropdown-button"
+                               type="button"
+                               id="dropdownSort"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                {% if sort_selected %}
+                                    {{ sort_selected }}
+                                {% else %}
+                                    Sort
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownSort">
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=stock&order=asc">Stock (low to high)</a>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=stock&order=desc">Stock (high to low)</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=lifetime_sales&order=asc">Sales (low to high)</a>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=lifetime_sales&order=desc">Sales (high to low)</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=date_added">Newest First</a>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=asc">Name (A-Z)</a>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=name&order=desc">Name (Z-A)</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=asc">Price (low to high)</a>
+                                <a class="dropdown-item"
+                                   href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=price&order=desc">Price (high to low)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Lifetime Sales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}">
+                                                {{ product.name }}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                  </svg>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'product_detail' product.slug %}">
+                                            {% if product.image %}
+                                                <img src="{{ product.imageURL }}"
+                                                     alt="{{ product.name }}"
+                                                     class="staff-product-list-image"/>
+                                                     {% else %}
+                                                     <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                                                     alt="{{ product.name }}"
+                                                     class="staff-product-list-image"/>
+                                                     {% endif %}
+                                                    </a>
+                                        </td>
+                                        <td>{{ product.price }}</td>
+                                        <td {% if product.stock < 5 %}class="product-low-stock"{% endif %}>{{ product.stock }}</td>
+                                        <td>{{ product.lifetime_sales }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

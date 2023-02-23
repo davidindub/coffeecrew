@@ -207,6 +207,15 @@ footer a,
     padding-bottom: 1rem;
 }
 
+.staff-product-list-image {
+    max-width: 15rem;
+}
+
+.product-low-stock {
+    color: rgb(173, 0, 52);
+    font-weight: bolder;
+}
+
 /* Footer Styles */
 
 footer {

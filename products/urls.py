@@ -3,7 +3,8 @@ from .views import (ProductsList, ProductUpdate,
                     CoffeeUpdate, DepartmentCreate, DepartmentDelete,
                     DepartmentUpdate, ManageCategories, product_detail,
                     ProductCreate, CategoryDelete, CategoryUpdate,
-                    CategoryCreate, ProductDelete)
+                    CategoryCreate, CoffeeCreate, ProductDelete,
+                    ManageProducts)
 
 urlpatterns = [
     path("", ProductsList.as_view(), name="products"),
@@ -20,6 +21,8 @@ urlpatterns = [
          name="department_update"),
     path("staff/", ManageCategories.as_view(),
          name="manage_categories"),
+    path("staff/products/", ManageProducts.as_view(),
+         name="manage_products"),
     path("staff/category/new/", CategoryCreate.as_view(),
          name="category_create"),
     path("staff/category/<int:pk>/delete/",
@@ -31,6 +34,7 @@ urlpatterns = [
     path("staff/coffee/<slug:slug>/update/",
          CoffeeUpdate.as_view(), name="coffee_update"),
     path("staff/new/product", ProductCreate.as_view(), name="product_create"),
+    path("staff/new/coffee", CoffeeCreate.as_view(), name="coffee_create"),
     path("staff/product/<int:pk>/delete/",
          ProductDelete.as_view(), name="product_delete"),
 ]
