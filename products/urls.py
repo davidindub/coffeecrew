@@ -20,7 +20,7 @@ urlpatterns = [
     path("staff/department/<int:pk>/update/", DepartmentUpdate.as_view(),
          name="department_update"),
     path("staff/", ManageCategories.as_view(),
-         name="manage_categories"),
+         name="manage_shop"),
     path("staff/products/", ManageProducts.as_view(),
          name="manage_products"),
     path("staff/c/<category>/",

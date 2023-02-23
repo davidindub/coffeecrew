@@ -19,16 +19,16 @@
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                {% if not department and not category %}
-                    Manage Products
-                {% elif department or category %}
+            {% if not department and not category %}
+                <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
+            {% elif department or category %}
+                <li class="breadcrumb-item">
                     <a href="{% url "manage_products" %}">Manage Products</a>
-                {% endif %}
-            </li>
+                </li>
+            {% endif %}
             {% if department or category %}
                 {% if department %}
-                    <li class="breadcrumb-item">{{ department.name }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
                 {% elif category %}
                     <li class="breadcrumb-item">
                         <a href="{% url "manage_products_by_department" category.department.name %}">{{ category.department }}</a>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    {% if product %}
+                    {% if products %}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -124,7 +124,9 @@
                                         <th scope="col">Product Name</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Stock</th>
+                                        <th scope="col">
+                                            Stock
+                                        </th>
                                         <th scope="col">
                                             Lifetime Sales
                                         </th>

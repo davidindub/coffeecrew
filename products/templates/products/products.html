@@ -10,16 +10,18 @@
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                {% if not department and not category %}
-                    Products
-                {% elif department or category %}
+            {% if wishlist_page %}
+                <li class="breadcrumb-item active" aria-current="page">Your Wishlist</li>
+            {% elif not department and not category and not wishlist_page %}
+                <li class="breadcrumb-item active" aria-current="page">Products</li>
+            {% elif department or category %}
+                <li class="breadcrumb-item">
                     <a href="{% url "products" %}">Products</a>
+                </li>
                 {% endif %}
-            </li>
             {% if department or category %}
                 {% if department %}
-                    <li class="breadcrumb-item">{{ department.name }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
                 {% elif category %}
                     <li class="breadcrumb-item">
                         <a href="{% url "products_by_department" category.department.name %}">{{ category.department }}</a>
@@ -40,7 +42,6 @@
                     <h2>{{ category.display_name }}</h2>
                 {% elif wishlist_page %}
                     <h2>Your Wishlist</h2>
-                    {{ wishlist_page }}
                 {% else %}
                     <h2>Products</h2>
                 {% endif %}

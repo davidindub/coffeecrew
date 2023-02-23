@@ -38,7 +38,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.breadcrumb-item {
     font-family: var(--font-display-font);
 }
 

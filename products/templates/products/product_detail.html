@@ -10,6 +10,16 @@
         </div>
     </div>
 {% endblock page_header %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Products</li>
+      <li class="breadcrumb-item">{{ product.category.first.department.name }}</li>
+      <li class="breadcrumb-item">{{ product.category.first.display_name }}</li>
+      <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">

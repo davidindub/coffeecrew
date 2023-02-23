@@ -13,6 +13,10 @@ class WishList(models.Model):
     products = models.ManyToManyField(
         Product, blank=True, related_name='wishlists')
 
+    @property
+    def num_products(self):
+        return self.products.count()
+
     def __str__(self):
         return f"{self.user.username}'s Wishlist"
 
@@ -53,7 +57,7 @@ class Address(models.Model):
     address_line_2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
     postcode = models.CharField(max_length=200, null=False)
-    country = CountryField(blank_label='Country *', null=False, blank=False)
+    country = CountryField(null=False, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
