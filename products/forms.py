@@ -37,7 +37,23 @@ class DepartmentForm(forms.ModelForm):
     """
     class Meta:
         model = Department
-        fields = ['name', 'visible_to_customers']
+        fields = ["name", "visible_to_customers"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.add_input(
+            Submit("submit", "Save", css_class="custom-button"))
+
+
+class CategoryForm(forms.ModelForm):
+    """
+    Form for adding or editing Categories
+    """
+    class Meta:
+        model = Category
+        fields = ["name", "display_name", "department"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

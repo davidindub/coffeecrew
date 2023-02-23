@@ -4,9 +4,11 @@ from django.views import generic, View
 from django.contrib import messages
 from .models import Product, Coffee, Category, Department
 from profiles.models import WishList
-from .forms import ProductForm, CoffeeForm, DepartmentForm
+from .forms import ProductForm, CoffeeForm, DepartmentForm, CategoryForm
 from django.urls import reverse_lazy
 
+
+# Views related to Products:
 
 class ProductsList(generic.ListView):
     """
@@ -169,6 +171,8 @@ class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
                             kwargs={"product_id": self.object.id})
 
 
+# Views related to Deparments:
+
 class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
     View for creating new Departments
@@ -183,7 +187,7 @@ class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy("category_list_staff")
+        return reverse_lazy("manage_categories")
 
 
 class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
@@ -200,7 +204,7 @@ class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy("category_list_staff")
+        return reverse_lazy("manage_categories")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -214,13 +218,16 @@ class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
     """
     model = Department
     template_name = "products/forms/department_delete_form.html"
-    success_url = reverse_lazy("category_list_staff")
+    success_url = reverse_lazy("manage_categories")
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         messages.success(
             request, f"{self.object.name} has been deleted successfully!")
         return response
+
+
+# Views related to Categories:
 
 
 class ManageCategories(generic.ListView):
@@ -238,3 +245,57 @@ class ManageCategories(generic.ListView):
             department.categories = Category.objects.filter(
                 department=department).order_by('name')
         return context
+
+
+class CategoryCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+    """
+    View for creating new Categories
+    """
+    model = Category
+    form_class = CategoryForm
+    template_name = "products/forms/category_form.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Category added successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("category_list_staff")
+
+
+class CategoryUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+    """
+    View for updating existing Categories
+    """
+    model = Category
+    form_class = CategoryForm
+    template_name = "products/forms/category_form.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"Updated successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("manage_categories")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["category"] = self.object
+        return context
+
+
+class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
+    """
+    View for confirmation page to delete a category.
+    """
+    model = Category
+    template_name = "products/forms/category_delete_form.html"
+    success_url = reverse_lazy("manage_categories")
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        messages.success(
+            request, f"{self.object.name} has been deleted successfully!")
+        return response

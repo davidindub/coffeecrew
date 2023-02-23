@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}
+    - Delete {{ category.name }}
+{% endblock extra_title %}
+{% block content %}
+    <h1>Delete {{ category.name }}?</h1>
+    <p>This is irreversible.</p>
+
+    {% if category.num_products > 0 %}
+    <p class="text-danger">
+   {{ category.name }} contains {% with total=category.num_products %}{{ total }} product{{ total|pluralize }}{% endwith %}!
+        <br/><br/>
+        Deleting this category will also delete those categories products and is not reccomended.
+        <br/><br/>
+        You should move these products to different categorys before deleting.
+    </p>
+    {% endif %}
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="confirm-check"/>
+        <label class="form-check-label" for="confirm-check">
+          I understand the consequences of deleting.
+        </label>
+      </div>
+      <hr/>
+    <form method="post" action="{% url 'category_delete' category.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}"/>
+        <button type="submit" class="btn btn-danger" id="delete-button">Delete Category</button>
+    </form>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'js/confirm_delete.js' %}"></script>
+{% endblock extra_js %}
