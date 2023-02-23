@@ -4,6 +4,20 @@
 {% block extra_title %}
     - Delete {{ product.name }}
 {% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url "manage_shop" %}">Manage Shop</a>
+      </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'manage_products_by_department' product.category.first.department.name %}">{{ product.category.first.department.name }}</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'manage_products_by_category' product.category.first.name %}">{{ product.category.first.display_name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete {{ product.name }}?</li>
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
 {% block content %}
     <h1>Delete {{ product.name }}?</h1>
     <strong>This is irreversible.</strong>
