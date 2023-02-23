@@ -57,6 +57,8 @@
     </div>
     {% endif %}
     <main class="custom-container">
+      {% block breadcrumbs %}
+      {% endblock breadcrumbs %}
       {% block content %}
       {% endblock content %}
     </main>

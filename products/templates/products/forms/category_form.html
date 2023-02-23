@@ -2,14 +2,14 @@
 {% load crispy_forms_tags %}
 {% block extra_title %}
     {% if category %}
-        - Edit {{ category.name }}
+        - Edit {{ category.display_name }}
     {% else %}
         - Add New Category
     {% endif %}
 {% endblock extra_title %}
 {% block content %}
     {% if category %}
-        <h1>Edit {{ category.name }}</h1>
+        <h1>Edit {{ category.display_name }}</h1>
     {% else %}
         <h1>New Category</h1>
     {% endif %}

@@ -20,7 +20,6 @@ body {
 
 .custom-container {
     width: clamp(320px, 100%, 1200px);
-    padding: 0;
     margin: 0 auto;
 }
 
@@ -28,6 +27,10 @@ a {
     color: inherit;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 h1,
@@ -42,11 +45,16 @@ h6 {
 main {
     background-color: var(--color-white);
     margin: auto;
-    padding-bottom: 1rem;
+    padding: 0.5rem;
 }
 
 .cart-form {
     display: inline;
+}
+
+.breadcrumb-icon {
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .product-card {
@@ -106,6 +114,7 @@ main {
 .navbar-brand:hover,
 .navbar-brand:focus {
     color: var(--color-off-white);
+    text-decoration: none;
 }
 
 .dropdown-toggle:hover,
@@ -115,13 +124,13 @@ footer a:hover,
 .nav-link:focus,
 footer a:focus {
     color: var(--color-secondary);
+    text-decoration: none;
 }
 
 .custom-dropdown-button,
 .custom-dropdown-button:hover,
 .custom-dropdown-button:focus,
-.custom-dropdown-button:active
-{
+.custom-dropdown-button:active {
     background-color: var(--color-primary);
 }
 
@@ -297,6 +306,10 @@ footer li {
 
     footer .footer-container {
         font-size: 1rem;
+    }
+
+    .main {
+        padding: 1.5rem;
     }
 
 }
