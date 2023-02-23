@@ -2,21 +2,19 @@
 {% load static %}
 
 {% block extra_title %}
-    - Delete {{ category.name }}
+    - Delete {{ product.name }}
 {% endblock extra_title %}
 {% block content %}
-    <h1>Delete {{ category.name }}?</h1>
-    <p>This is irreversible.</p>
-
-    {% if category.num_products > 0 %}
+    <h1>Delete {{ product.name }}?</h1>
+    <strong>This is irreversible.</strong>
     <p class="text-danger">
-   {{ category.name }} contains {% with total=category.num_products %}{{ total }} product{{ total|pluralize }}{% endwith %}!
+        {% if product.lifetime_sales > 0 %}
+        <br/>
+   {{ product.name }} has sold {% with total=product.lifetime_sales %}{{ total }} {{ total|pluralize:"unit,units" }}{% endwith %} since listed.
+   {% endif %}
         <br/><br/>
-        Deleting this category will also delete those categories products and is not recommended.
-        <br/><br/>
-        You should move these products to different categories before deleting.
+        Deleting this product will remove it from all customers' carts and wishlists.
     </p>
-    {% endif %}
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="confirm-check"/>
         <label class="form-check-label" for="confirm-check">
@@ -24,10 +22,10 @@
         </label>
       </div>
       <hr/>
-    <form method="post" action="{% url 'category_delete' category.id %}">
+    <form method="post" action="{% url 'product_delete' product.id %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}"/>
-        <button type="submit" class="btn btn-danger" id="delete-button">Delete Category</button>
+        <button type="submit" class="btn btn-danger" id="delete-button">Delete Product</button>
     </form>
 {% endblock content %}
 

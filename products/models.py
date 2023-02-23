@@ -64,6 +64,7 @@ class Product(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(
         upload_to='product_images/', blank=True, null=True)
+    lifetime_sales = models.PositiveSmallIntegerField(default=0)
 
     def save(self, *args, **kwargs):
         # update the slug if the name is changed

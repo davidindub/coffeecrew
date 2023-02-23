@@ -63,9 +63,11 @@
                                 <a class="dropdown-item"
                                    href="{% url 'products_by_department' department.name %}">All {{ department.name }}</a>
                             </li>
+                            {% if department.categories %}
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
+                            {% endif %}
                             {% for category in department.categories %}
                                 <li>
                                     <a class="dropdown-item" href="{% url 'products_by_category' category=category.name %}">{{ category.display_name }}</a>

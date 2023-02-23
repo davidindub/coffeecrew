@@ -171,7 +171,23 @@ class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
                             kwargs={"product_id": self.object.id})
 
 
-# Views related to Deparments:
+class ProductDelete(StaffMemberRequiredMixin, generic.DeleteView):
+    """
+    View for confirmation page to delete a product (or coffee)
+    """
+    model = Product
+    template_name = "products/forms/product_delete_form.html"
+    success_url = reverse_lazy("products")
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        messages.success(
+            request, f"{self.object.name} has been deleted successfully!")
+        return response
+
+
+# Views related to Departments:
+
 
 class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
