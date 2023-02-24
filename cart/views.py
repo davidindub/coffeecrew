@@ -50,6 +50,8 @@ class CartAddView(LoginRequiredMixin, View):
             cart=cart, product=product)
 
         if not created:
+            messages.info(self.request,
+                           f"{cart_item.name} added")
             success = cart_item.adjust_quantity(cart_item.quantity + 1)
 
             if not success:

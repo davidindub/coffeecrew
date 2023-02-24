@@ -20,7 +20,7 @@
               {% for object in object_list %}
                 <tr>
                   <td>
-                    <a href="{% url 'product_detail' object.product.id %}">{{ object.product.name }}</a>
+                    <a href="{% url 'product_detail' object.product.slug %}">{{ object.product.name }}</a>
                   </td>
                   <td>
                     <form class="cart-form"
