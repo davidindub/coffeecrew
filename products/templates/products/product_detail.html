@@ -39,7 +39,7 @@
                          alt="{{ product.name }}"/>
                 {% endif %}
                 {% if user.is_staff %}
-                    <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}" class="btn custom-button">
+                    <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}" class="btn btn-cc">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="16"
                              height="16"
@@ -71,7 +71,7 @@
                 {% if product.stock %}
                 <form action="{% url 'cart_add' product.id %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn custom-button">
+                    <button type="submit" class="btn btn-cc">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="16"
                              height="16"
@@ -87,7 +87,7 @@
                     </button>
                 </form>
                 {% else %}
-                <span class="btn btn-secondary">
+                <span class="btn btn-cc-greyed">
                 Out of Stock
                 </span>
                 {% endif %}
@@ -96,7 +96,7 @@
                         <form method="post"
                               action="{% url 'remove_from_wishlist' product_id=product.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn custom-button">
+                            <button type="submit" class="btn btn-cc">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="16"
                                      height="16"
@@ -112,7 +112,7 @@
                         <form method="post"
                               action="{% url 'add_to_wishlist' product_id=product.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn custom-button">
+                            <button type="submit" class="btn btn-cc">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="16"
                                      height="16"

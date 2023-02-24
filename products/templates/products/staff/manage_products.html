@@ -59,7 +59,7 @@
                         {% if dept.name == department.name %}
                             {% for category in dept.categories %}
                                 <a href="{% url 'manage_products_by_category' category=category.name %}"
-                                   class="btn custom-button">{{ category.display_name }}</a>
+                                   class="btn btn-cc">{{ category.display_name }}</a>
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
@@ -67,7 +67,7 @@
                 {% if not department and not category %}
                     {% for dept in departments_with_categories %}
                         <a href="{% url 'manage_products_by_department' department=dept.name %}"
-                           class="btn custom-button">{{ dept.name }}</a>
+                           class="btn btn-cc">{{ dept.name }}</a>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -143,7 +143,7 @@
                         No Products to show.
                     {% endif %}
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{% url 'product_create' %}" class="btn custom-button">
+                    <a href="{% url 'product_create' %}" class="btn btn-cc">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="16"
                              height="16"
@@ -153,7 +153,7 @@
                           <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
                         </svg>
                       Add Product</a>
-                      <a href="{% url 'coffee_create' %}" class="btn custom-button">
+                      <a href="{% url 'coffee_create' %}" class="btn btn-cc">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="16"
                              height="16"

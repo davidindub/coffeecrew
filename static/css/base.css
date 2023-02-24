@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: rgb(223, 228, 227);
     --color-primary: rgb(15, 74, 59);
+    --color-primary-lighter: rgb(25, 114, 92);
     --color-secondary: rgb(255, 208, 138);
     --color-tertiary: rgb(218, 217, 205);
     --color-white: rgb(255, 255, 255);
@@ -33,6 +34,10 @@ a:hover {
     text-decoration: underline;
 }
 
+a.btn:hover {
+    text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -40,6 +45,7 @@ h4,
 h5,
 h6,
 .breadcrumb-item {
+    color: var(--color-primary);
     font-family: var(--font-display-font);
 }
 
@@ -189,28 +195,48 @@ footer a,
     border: 2px #fff solid;
 }
 
-.custom-button {
-    background-color: var(--color-primary);
-    color: var(--color-off-white);
-    border: var(--color-off-white) 2px solid;
+.btn {
+    font-family: var(--font-display-font);
+}
+
+.btn-cc {
+    --bs-btn-color: var(--color-off-white);
+    --bs-btn-hover-color: var(--color-off-white);
+    --bs-btn-bg: var(--color-primary);
+    --bs-btn-hover-bg: var(--color-primary-lighter);
+    --bs-btn-active-border-color: var(--color-primary);
+    --bs-btn-hover-border-color: var(--color-primary);
     display: inline-block;
     text-decoration: none;
 }
 
-.custom-button-lg {
-    padding: 1rem 2rem;
-    margin-top: 2rem;
+.btn-outline-cc {
+    --bs-btn-color: var(--color-primary);
+    --bs-btn-hover-color: var(--color-off-white);
+    --bs-btn-bg: var(--color-off-white);
+    --bs-btn-hover-bg: var(--color-primary-lighter);
+    --bs-btn-border-color: var(--color-primary);
+    --bs-btn-hover-border-color: var(--color-primary);
+    --bs-btn-active-border-color: var(--color-primary);
 }
 
-.custom-button:hover,
-.custom-button:focus {
-    border: var(--color-primary) 2px solid;
-    /* background-color: var(--color-secondary);
-    color: var(--color-black); */
-    background-color: var(--color-off-white);
-    opacity: 70%;
-    color: var(--color-primary);
-    text-decoration: none;
+.btn-cc-greyed {
+    --bs-btn-color: var(--color-primary);
+    --bs-btn-hover-color: var(--color-primary);
+    --bs-btn-bg: var(--color-off-white);
+    --bs-btn-hover-bg: var(--color-off-white);
+    --bs-btn-border-color: var(--color-primary);
+    --bs-btn-hover-border-color: var(--color-primary);
+    --bs-btn-active-border-color: var(--color-primary);
+}
+
+.hero-button {
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    border: var(--color-off-white) 2px solid;
+    color: var(--color-off-white);
+    background-color: var(--color-primary);
+    display: inline-block;
 }
 
 .product-list-top {

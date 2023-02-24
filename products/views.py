@@ -175,7 +175,7 @@ class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
 
     def get_success_url(self):
         return reverse_lazy("product_detail",
-                            kwargs={"product_id": self.object.id})
+                            kwargs={"slug": self.object.slug})
 
 
 class CoffeeCreate(ProductCreate):

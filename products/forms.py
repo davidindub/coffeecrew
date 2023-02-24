@@ -18,7 +18,7 @@ class ProductForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="custom-button"))
+            Submit("submit", "Save", css_class="btn-cc"))
 
 
 class CoffeeForm(ProductForm):
@@ -44,7 +44,7 @@ class DepartmentForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="custom-button"))
+            Submit("submit", "Save", css_class="btn-cc"))
 
 
 class CategoryForm(forms.ModelForm):
@@ -60,4 +60,4 @@ class CategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="custom-button"))
+            Submit("submit", "Save", css_class="btn-cc"))
