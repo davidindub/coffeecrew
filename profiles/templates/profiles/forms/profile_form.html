@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+    - Update Account
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'account_dashboard' %}">Your Account</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Update Your Details
+            </li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+  <h1>Update Profile</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {% crispy form %}
+</form>
+{% endblock content %}

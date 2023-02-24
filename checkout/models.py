@@ -12,7 +12,7 @@ class Order(models.Model):
     """
     Represents Customer Orders
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
     order_number = models.CharField(max_length=10, unique=True)
@@ -64,7 +64,7 @@ class Order(models.Model):
 
         while True:
             try:
-                self.update_order_total()
+                # self.update_totals()
                 super().save(*args, **kwargs)
                 break
             except IntegrityError:

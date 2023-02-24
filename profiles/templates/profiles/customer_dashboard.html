@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block extra_title %}
+    - Your Account
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                Your Account
+            </li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+  <h1>Welcome, {{ request.user.first_name }}!</h1>
+
+  <h2>Your Profile</h2>
+  <p>{{ profile }}</p>
+  <a href="{% url 'update_account' %}" class="btn btn-cc">Update Details</a>
+<hr class="product-hr"/>
+  <h2>Your Orders</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Order #</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in recent_orders %}
+          <tr>
+            <td>{{ order.updated|date:"d M Y" }}</td>
+            <td>{{ order.order_number }}</td>
+            <td>€{{ order.grand_total }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p>See all your orders</p>
+  </div>
+
+  <hr class="product-hr"/>
+  <h2>Your Addresses</h2>
+  {% if shipping_address %}
+    <h3>Shipping Address</h3>
+    <p>{{ shipping_address }}</p>
+  {% endif %}
+
+  {% if billing_address %}
+    <h3>Billing Address</h3>
+    <p>{{ billing_address }}</p>
+  {% endif %}
+{% endblock content %}
