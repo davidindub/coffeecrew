@@ -52,7 +52,6 @@ def save_user_profile(sender, instance, **kwargs):
 class Address(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address_line_1 = models.CharField(max_length=200, null=False)
     address_line_2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)

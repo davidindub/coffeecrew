@@ -5,51 +5,77 @@
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">
-                Your Account
-            </li>
+            <li class="breadcrumb-item active" aria-current="page">Your Account</li>
         </ol>
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-  <h1>Welcome, {{ request.user.first_name }}!</h1>
-
-  <h2>Your Profile</h2>
-  <p>{{ profile }}</p>
-  <a href="{% url 'update_account' %}" class="btn btn-cc">Update Details</a>
-<hr class="product-hr"/>
-  <h2>Your Orders</h2>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Order #</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in recent_orders %}
-          <tr>
-            <td>{{ order.updated|date:"d M Y" }}</td>
-            <td>{{ order.order_number }}</td>
-            <td>€{{ order.grand_total }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <p>See all your orders</p>
-  </div>
-
-  <hr class="product-hr"/>
-  <h2>Your Addresses</h2>
-  {% if shipping_address %}
-    <h3>Shipping Address</h3>
-    <p>{{ shipping_address }}</p>
-  {% endif %}
-
-  {% if billing_address %}
-    <h3>Billing Address</h3>
-    <p>{{ billing_address }}</p>
-  {% endif %}
+    <h1>Welcome, {{ request.user.first_name }}!</h1>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h2>Your Profile</h2>
+            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+            <p>Phone Number: {{ profile.default_phone_number }}</p>
+            <a href="{% url 'update_account' %}" class="btn btn-cc">Update Details</a>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h2>Your Addresses</h2>
+            {% if shipping_address %}
+                <h4>Shipping Address</h4>
+                <a href="{% url 'update_address' billing_address.id %}">{{ shipping_address }}
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil"
+                    viewBox="0 0 16 16">
+                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+               </svg>
+                </a>
+            {% endif %}
+            {% if billing_address %}
+                <h4>Billing Address</h4>
+                <a href="{% url 'update_address' billing_address.id %}">{{ billing_address }}
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil"
+                    viewBox="0 0 16 16">
+                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+               </svg>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="product-hr"/>
+    <h2>Your Orders</h2>
+    {% if orders %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Order #</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in recent_orders %}
+                        <tr>
+                            <td>{{ order.updated|date:"d M Y" }}</td>
+                            <td>{{ order.order_number }}</td>
+                            <td>€{{ order.grand_total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <a href="{% url 'orders' %}" class="btn btn-cc">See all your orders</a>
+        </p>
+    {% else %}
+        No Orders Yet
+    {% endif %}
+    <hr class="product-hr"/>
 {% endblock content %}

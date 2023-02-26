@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block extra_title %}
+    - Orders
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'account_dashboard' %}">Your Account</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Your Orders
+            </li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+    <h1>Orders</h1>
+    {% if orders %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Order #</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.updated|date:"d M Y" }}</td>
+                            <td>{{ order.order_number }}</td>
+                            <td>€{{ order.grand_total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+{% endblock content %}

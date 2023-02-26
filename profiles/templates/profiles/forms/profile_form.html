@@ -20,6 +20,9 @@
 
   <form method="post">
     {% csrf_token %}
-    {% crispy form %}
+    {{ user_form|crispy }}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-cc">Save</button>
+
 </form>
 {% endblock content %}
