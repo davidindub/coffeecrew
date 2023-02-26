@@ -50,27 +50,31 @@
                         {% csrf_token %}
                         <select name="grind_size" class="form-control" onchange="this.form.submit()">
                           <option value="Wholebean"
-                                  {% if object.grind_size == 'Wholebean' %}selected{% endif %}>
+                                  {% if object.grind_size == "Wholebean" %}selected{% endif %}>
                             Wholebean
                           </option>
                           <option value="Moka Pot"
-                                  {% if object.grind_size == 'Moka Pot' %}selected{% endif %}>
+                                  {% if object.grind_size == "Moka Pot" %}selected{% endif %}>
                             Moka Pot
                           </option>
                           <option value="French Press"
-                                  {% if object.grind_size == 'French Press' %}selected{% endif %}>
+                                  {% if object.grind_size == "French Press" %}selected{% endif %}>
                             French Press
                           </option>
                           <option value="Pour Over"
-                                  {% if object.grind_size == 'Pour Over' %}selected{% endif %}>
+                                  {% if object.grind_size == "Pour Over" %}selected{% endif %}>
                             Pour Over
                           </option>
                           <option value="Filter/Drip"
-                                  {% if object.grind_size == 'Filter/Drip' %}selected{% endif %}>
+                                  {% if object.grind_size == "Filter/Drip" %}selected{% endif %}>
                             Filter/Drip
                           </option>
+                          <option value="Aeropress"
+                          {% if object.grind_size == "Aeropress" %}selected{% endif %}>
+                    Aeropress
+                  </option>
                           <option value="Espresso"
-                                  {% if object.grind_size == 'Espresso' %}selected{% endif %}>
+                                  {% if object.grind_size == "Espresso" %}selected{% endif %}>
                             Espresso
                           </option>
                         </select>
@@ -83,7 +87,7 @@
                   <td>
                     <form action="{% url 'cart_remove' object.product.id %}" method="post">
                       {% csrf_token %}
-                      <button class="btn btn-danger" type="submit">Remove</button>
+                      <button class="btn btn-sm btn-outline-cc" type="submit">Remove</button>
                     </form>
                   </td>
                 </tr>
@@ -103,7 +107,7 @@
             <h3>Total: €{{ cart.total_with_delivery }}</h3>
           </div>
           <div class="text-center">
-            <a href="#" class="btn btn-primary">Checkout</a>
+            <a href="#" class="btn btn-cc">Checkout</a>
           </div>
         {% else %}
           <p>Your cart is empty</p>

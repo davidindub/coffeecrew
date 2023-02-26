@@ -2,7 +2,7 @@
 {% load static %}
 {% block extra_title %}
     {% if wishlist_page %}
-        - Your Wishlist
+        - My Wishlist
     {% elif category %}
         - {{ category.display_name }}
     {% elif department %}
@@ -17,7 +17,7 @@
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
         <ol class="breadcrumb">
             {% if wishlist_page %}
-                <li class="breadcrumb-item active" aria-current="page">Your Wishlist</li>
+                <li class="breadcrumb-item active" aria-current="page">My Wishlist</li>
             {% elif search_results %}
                 <li class="breadcrumb-item active" aria-current="page">Search Results for {{ search_results }}</li>
             {% elif not department and not category and not wishlist_page and not brand %}
@@ -53,7 +53,7 @@
                 {% elif category %}
                     <h2>{{ category.display_name }}</h2>
                 {% elif wishlist_page %}
-                    <h2>Your Wishlist</h2>
+                    <h2>My Wishlist</h2>
                 {% elif brand %}
                     <h2>{{ brand.display_name }}</h2>
                 {% else %}

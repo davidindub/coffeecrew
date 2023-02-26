@@ -279,7 +279,7 @@ class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
 # Views related to Categories:
 
 
-class ManageCategories(generic.ListView):
+class ManageCategories(StaffMemberRequiredMixin, generic.ListView):
     """
     View for management dash
     """
@@ -350,7 +350,7 @@ class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
         return response
 
 
-class ManageProducts(generic.ListView):
+class ManageProducts(StaffMemberRequiredMixin, generic.ListView):
     """
     renders view for all products, including sorting and searching
     """
