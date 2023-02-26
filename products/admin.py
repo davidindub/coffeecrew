@@ -3,7 +3,7 @@ from .models import Product, Brand, Category, Coffee, Department
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "sku", "brand", "stock")
+    list_display = ("name", "sku", "brand", "stock", "visible_to_customers")
     ordering = ("sku",)
 
 

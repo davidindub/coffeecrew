@@ -68,7 +68,7 @@ class ProductsList(generic.ListView):
             else:
                 queryset = queryset.order_by("-date_added")
 
-        return queryset
+        return queryset.filter(visible_to_customers=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -342,7 +342,7 @@ class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
         return response
 
 
-class ManageProducts(ProductsList):
+class ManageProducts(generic.ListView):
     """
     renders view for all products, including sorting and searching
     """

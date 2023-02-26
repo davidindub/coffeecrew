@@ -10,7 +10,7 @@ class ProductForm(forms.ModelForm):
     """
     class Meta:
         model = Product
-        fields = ["name", "description", "brand",
+        fields = ["name", "visible_to_customers", "description", "brand",
                   "category", "price", "stock", "image"]
 
     def __init__(self, *args, **kwargs):
@@ -27,7 +27,8 @@ class CoffeeForm(ProductForm):
     """
     class Meta:
         model = Coffee
-        fields = ["name", "description", "brand", "category", "stock", "image",
+        fields = ["name", "visible_to_customers", "description", "brand",
+                  "category", "stock", "image",
                   "country", "process", "harvest_year", "weight"]
 
 

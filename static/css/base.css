@@ -71,11 +71,21 @@ main {
     border: none;
 }
 
+.product-greyed-img {
+    filter: grayscale(1);
+}
+
 
 .product-hr {
     border: 0.1rem dashed var(--color-primary);
     border-radius: 5px;
     margin-bottom: 1.5rem;
+}
+
+.product-brand {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-family: var(--font-display-font);
 }
 
 .icon {
