@@ -409,6 +409,11 @@ class ManageProducts(generic.ListView):
                 queryset = queryset.order_by("lifetime_sales")
             else:
                 queryset = queryset.order_by("-lifetime_sales")
+        elif sort == "visible_to_customers":
+            if order == "asc":
+                queryset = queryset.order_by("visible_to_customers")
+            else:
+                queryset = queryset.order_by("-visible_to_customers")
 
         return queryset
 
@@ -438,6 +443,11 @@ class ManageProducts(generic.ListView):
                 context["sort_selected"] = "Oldest First"
             else:
                 context["sort_selected"] = "Newest First"
+        elif sort == "visible_to_customers":
+            if order == "asc":
+                context["sort_selected"] = "Hidden First"
+            else:
+                context["sort_selected"] = "On Display First"
 
         context["category"] = get_object_or_404(
             Category, name=category) if category else None

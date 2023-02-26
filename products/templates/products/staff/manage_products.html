@@ -92,12 +92,12 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Stock</th>
-                                        <th scope="col">Lifetime Sales</th>
-                                        <th scope="col">On Display</th>
+                                        <th>Product Name</th>
+                                        <th class="d-none d-md-table-cell">Image</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Lifetime Sales</th>
+                                        <th>On Display</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -116,7 +116,7 @@
                                                     </svg>
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-md-table-cell">
                                                 <a href="{% url 'product_detail' product.slug %}">
                                                     {% if product.image %}
                                                         <img src="{{ product.imageURL }}"
