@@ -127,9 +127,14 @@ Custom error pages were added for 403, 404, and 500 errors.
 ## Technologies Used
 
 - [Python](https://www.python.org/)
+- [Django](https://www.djangoproject.com) used as the Python framework for the site.
 - [pip](https://pip.pypa.io/en/stable/) for installing Python packages.
 - [Git](https://git-scm.com/) for version control.
 - [Sourcetree](https://www.sourcetreeapp.com/) for managing the remote repository.
+- [AWS S3](https://aws.amazon.com/s3) used for online static file storage.
+- [PostgreSQL](https://www.postgresql.org) used as the relational database management.
+- [ElephantSQL](https://www.elephantsql.com) used as the Postgres database.
+- [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
 - [GitHub](https://github.com/) for storing the repository online during development.
 - GitHub Projects was invaluable throughout the project and helped me keep track of things to do and bugs to fix - you can see [the project's board here](https://github.com/users/davidindub/projects/8).
 - [GitPod](https://gitpod.io/) as a cloud based IDE.
@@ -144,6 +149,7 @@ Custom error pages were added for 403, 404, and 500 errors.
 - [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
 - [Device Frames](https://deviceframes.com/) for the device mockups in this README.
 - [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
+- [Markdown Builder by Tim Nelson](https://traveltimn.github.io/markdown-builder) used to help generate documentation.
 
 ## External Python Packages Used
 
@@ -189,111 +195,152 @@ I performed manual testing continuously as the project was being developed, and 
 
 ## Deployment
 
-### Local Deployment
 
-<!-- TODO: Add AWS deployment instructions -->
+The live deployed application can be found deployed on [Heroku](https://coffee-crew-shop.herokuapp.com).
 
+### ElephantSQL Database
 
-In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
+This project uses [ElephantSQL](https://www.elephantsql.com) for the PostgreSQL Database.
 
-- `git clone https://github.com/davidindub/coffeecrew.git`
+To obtain your own Postgres Database, sign-up with your GitHub account, then follow these steps:
+- Click **Create New Instance** to start a new database.
+- Provide a name (this is commonly the name of the project: coffeecrew).
+- Select the **Tiny Turtle (Free)** plan.
+- You can leave the **Tags** blank.
+- Select the **Region** and **Data Center** closest to you.
+- Once created, click on the new database name, where you can view the database URL and Password.
 
+### Amazon AWS
 
-Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+This project uses [AWS](https://aws.amazon.com) to store media and static files online, due to the fact that Heroku doesn't persist this type of data.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/davidindub/coffeecrew)
+Once you've created an AWS account and logged-in, follow these series of steps to get your project connected.
+Make sure you're on the **AWS Management Console** page.
 
-***
-
-After cloning or opening the repository in Gitpod, you will need to:
-
-1. Create your own `env.py` files in the root level of the project:
-
-```
-os.environ["DATABASE_URL"] = "postgres://"
-os.environ["SECRET_KEY"] = "YOUR_DJANGO_SECRET_KEY"
-os.environ["HEROKU_HOSTNAME"] = "URL_OF_PROJECT_DEPLOYED_ON_HEROKU"
-os.environ["DEVELOPMENT"] = "True"
-```
-**Ensure the `env.py` file is added to your `.gitignore` file so it doesn't get pushed to a public repository.
-
-If you don't have an AWS account already, you will need to [Sign Up for Free](https://aws.amazon.com/) to host the static files in the project.
-
-2. Run `pip3 install -r requirements.txt` to install required Python packages.
-
-3. Migrate the database models using:
-`python3 manage.py migrate`
-
-4. Create a superuser with your own credentials:
-`python3 manage.py migrate`
-
-5. Run the Django sever:
-`python manage.py runserver`
-The address of the server will appear in the terminal window.
-Add /admin to the address to access the Django admin panel using your superuser credentials.
-
-### Heroku Deployment
 <details>
+<summary>Full details of setting up AWS for deployment</summary>
 
-<summary>
-Full Instructions on deploying to Heroku
-</summary>
 
-Sign up to [Heroku](https://heroku.com/) for free if you don't already have an account.
+#### S3 Bucket
 
-1. Create a new app in Heroku.
+- Search for **S3**.
+- Create a new bucket, give it a name (matching your Heroku app name), and choose the region closest to you.
+- Uncheck **Block all public access**, and acknowledge that the bucket will be public (required for it to work on Heroku).
+- From **Object Ownership**, make sure to have **ACLs enabled**, and **Bucket owner preferred** selected.
+- From the **Properties** tab, turn on static website hosting, and type `index.html` and `error.html` in their respective fields, then click **Save**.
+- From the **Permissions** tab, paste in the following CORS configuration:
 
-2. In the Resources tab of your app in the Heroku dashboard, click Add-Ons and select Heroku Postgres. Select Hobby Dev - Free as your plan.
+	```shell
+	[
+		{
+			"AllowedHeaders": [
+				"Authorization"
+			],
+			"AllowedMethods": [
+				"GET"
+			],
+			"AllowedOrigins": [
+				"*"
+			],
+			"ExposeHeaders": []
+		}
+	]
+	```
 
-3. When Heroku Postgres is installed, click the Settings tab in the Heroku Dashboard.
-Click Reveal Config Vars, and add the same variables from your `env.py` file here, except for `DEBUG`, as you don't want debug mode on the deployed project.
+- Copy your **ARN** string.
+- From the **Bucket Policy** tab, select the **Policy Generator** link, and use the following steps:
+	- Policy Type: **S3 Bucket Policy**
+	- Effect: **Allow**
+	- Principal: `*`
+	- Actions: **GetObject**
+	- Amazon Resource Name (ARN): **paste-your-ARN-here**
+	- Click **Add Statement**
+	- Click **Generate Policy**
+	- Copy the entire Policy, and paste it into the **Bucket Policy Editor**
 
-4. Copy the value of `DATABASE_URL` from the Config Vars. In your `settings.py` file, comment out the default database configuration, and add a new one with the Postgres url.
+		```shell
+		{
+			"Id": "Policy1234567890",
+			"Version": "2012-10-17",
+			"Statement": [
+				{
+					"Sid": "Stmt1234567890",
+					"Action": [
+						"s3:GetObject"
+					],
+					"Effect": "Allow",
+					"Resource": "arn:aws:s3:::your-bucket-name/*"
+					"Principal": "*",
+				}
+			]
+		}
+		```
 
-```
-DATABASES = {
-    'default': dj_database_url.parse('your DATABASE_URL here'))
-}
-```
+	- Before you click "Save", add `/*` to the end of the Resource key in the Bucket Policy Editor (like above).
+	- Click **Save**.
+- From the **Access Control List (ACL)** section, click "Edit" and enable **List** for **Everyone (public access)**, and accept the warning box.
+	- If the edit button is disabled, you need to change the **Object Ownership** section above to **ACLs enabled** (mentioned above).
 
-5. Migrate the database models using:
-`python3 manage.py migrate`
+#### IAM
 
-6. Create a superuser with your own credentials:
-`python3 manage.py migrate`
+Back on the AWS Services Menu, search for and open **IAM** (Identity and Access Management).
+Once on the IAM page, follow these steps:
 
-7. Create a file called `Procfile` (no extension) containing the following:
-```
-web: gunicorn designland.wsgi
-```
+- From **User Groups**, click **Create New Group**.
+	- Suggested Name: `group-coffeecrew` (group + the project name)
+- Tags are optional, but you must click it to get to the **review policy** page.
+- From **User Groups**, select your newly created group, and go to the **Permissions** tab.
+- Open the **Add Permissions** dropdown, and click **Attach Policies**.
+- Select the policy, then click **Add Permissions** at the bottom when finished.
+- From the **JSON** tab, select the **Import Managed Policy** link.
+	- Search for **S3**, select the `AmazonS3FullAccess` policy, and then **Import**.
+	- You'll need your ARN from the S3 Bucket copied again, which is pasted into "Resources" key on the Policy.
 
-8. Run `pip3 install -r requirements.txt` to install required Python packages.
+		```shell
+		{
+			"Version": "2012-10-17",
+			"Statement": [
+				{
+					"Effect": "Allow",
+					"Action": "s3:*",
+					"Resource": [
+						"arn:aws:s3:::your-bucket-name",
+						"arn:aws:s3:::your-bucket-name/*"
+					]
+				}
+			]
+		}
+		```
+	
+	- Click **Review Policy**.
+	- Suggested Name: `policy-coffeecrew` (policy + the project name)
+	- Provide a description:
+		- "Access to S3 Bucket for coffeecrew static files."
+	- Click **Create Policy**.
+- From **User Groups**, click your "group-coffeecrew".
+- Click **Attach Policy**.
+- Search for the policy you've just created ("policy-coffeecrew") and select it, then **Attach Policy**.
+- From **User Groups**, click **Add User**.
+	- Suggested Name: `user-coffeecrew` (user + the project name)
+- For "Select AWS Access Type", select **Programmatic Access**.
+- Select the group to add your new user to: `group-coffeecrew`
+- Tags are optional, but you must click it to get to the **review user** page.
+- Click **Create User** once done.
+- You should see a button to **Download .csv**, so click it to save a copy on your system.
+	- **IMPORTANT**: once you pass this page, you cannot come back to download it again, so do it immediately!
+	- This contains the user's **Access key ID** and **Secret access key**.
+	- `AWS_ACCESS_KEY_ID` = **Access key ID**
+	- `AWS_SECRET_ACCESS_KEY` = **Secret access key**
 
-9. Add the url of your Heroku app (for example 'designland.herokuapp.com') to your `env.py` file in the local deployment, and to the Config Vars in your Heroku deployment.
+#### Final AWS Setup
 
-10. Disable collect static so that Heroku doesn't try to collect static files when you deploy by typing the following command in the terminal
-
-```
-heroku config:set DISABLE_COLLECTSTATIC=1
-```
-
-11. Stage and commit your files to GitHub
-```
-git add . 
-git commit -m "Commit message"
-git push
-```
-
-12. In the Heroku dashboard for your App, select Deploy.
-Under Deployment Method, choose GitHub and search for your repository and click Connect.
-
-13. Select Enable Automatic Deployments, and then Deploy Branch. Heroku will build the App from the branch you selected.
-
-14. Now whenever you push your commits to GitHub, Heroku will rebuild the application.
+- If Heroku Config Vars has `DISABLE_COLLECTSTATIC` still, this can be removed now, so that AWS will handle the static files.
+- Back within **S3**, create a new folder called: `media`.
+- Select any existing media images for your project to prepare them for being uploaded into the new folder.
+- Under **Manage Public Permissions**, select **Grant public read access to this object(s)**.
+- No further settings are required, so click **Upload**.
 
 </details>
-
-<!-- TODO: Add a table with the config vars needed for Heroku deployment -->
 
 
 ### django-aullauth Setup
@@ -301,6 +348,133 @@ Under Deployment Method, choose GitHub and search for your repository and click 
 You need to use your own [Google Cloud](https://cloud.google.com/) credentials to set up `django-allauth`.
 
 The [django-allauth documentation](https://django-allauth.readthedocs.io/en/latest/providers.html) provides instructions for how to complete setup in your Google Cloud Console settings.
+
+
+### Heroku Deployment
+
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+
+Deployment steps are as follows, after account setup:
+
+- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
+- From the new app **Settings**, click **Reveal Config Vars**, and set your environment variables.
+
+| Key | Value |
+| --- | --- |
+| `AWS_ACCESS_KEY_ID` | insert your own AWS Access Key ID key here |
+| `AWS_SECRET_ACCESS_KEY` | insert your own AWS Secret Access key here |
+| `DATABASE_URL` | insert your own ElephantSQL database URL here |
+| `DISABLE_COLLECTSTATIC` | 1 (*this is temporary, and can be removed for the final deployment*) |
+| `SECRET_KEY` | insert your Django secret key
+| `EMAIL_HOST_PASS` | insert your own Gmail API key here |
+| `EMAIL_HOST_USER` | insert your own Gmail email address here |
+| `SECRET_KEY` | this can be any random secret key |
+| `STRIPE_PUBLIC_KEY` | insert your own Stripe Public API key here |
+| `STRIPE_SECRET_KEY` | insert your own Stripe Secret API key here |
+| `STRIPE_WH_SECRET` | insert your own Stripe Webhook API key here |
+| `USE_AWS` | True |
+| `HEROKU_HOSTNAME` | insert url of deployed project on Heroku
+
+Heroku needs two additional files in order to deploy properly.
+- requirements.txt
+- Procfile
+
+You can install this project's **requirements** (where applicable) using:
+- `pip3 install -r requirements.txt`
+
+If you have your own packages that have been installed, then the requirements file needs updated using:
+- `pip3 freeze --local > requirements.txt`
+
+The **Procfile** can be created with the following command:
+- `echo web: gunicorn app_name.wsgi > Procfile`
+- *replace **app_name** with the name of your primary Django app name; the folder where settings.py is located*
+
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
+
+Either:
+- Select **Automatic Deployment** from the Heroku app.
+
+Or:
+- In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
+- Set the remote for Heroku: `heroku git:remote -a app_name` (replace *app_name* with your app name)
+- After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
+	- `git push heroku main`
+
+The project should now be connected and deployed to Heroku!
+
+### Local Deployment
+
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the *requirements.txt* file.
+- `pip3 install -r requirements.txt`.
+
+You will need to create a new file called `env.py` at the root-level,
+and include the same environment variables listed above from the Heroku deployment steps.
+
+Sample `env.py` file:
+
+```python
+import os
+
+os.environ.setdefault["AWS_ACCESS_KEY_ID"] = insert your own AWS Access Key ID key here
+os.environ.setdefault["AWS_SECRET_ACCESS_KEY"] = insert your own AWS Secret Access key here
+os.environ.setdefault["DATABASE_URL"] = insert your own ElephantSQL database URL here
+os.environ.setdefault["EMAIL_HOST_PASS"] = insert your own Gmail API key here
+os.environ.setdefault["EMAIL_HOST_USER"] = insert your own Gmail email address here
+os.environ.setdefault["SECRET_KEY"] = this can be any random secret key
+os.environ.setdefault["STRIPE_PUBLIC_KEY"] = insert your own Stripe Public API key here
+os.environ.setdefault["STRIPE_SECRET_KEY"] = insert your own Stripe Secret API key here
+os.environ.setdefault["STRIPE_WH_SECRET"] = insert your own Stripe Webhook API key here
+os.environ.setdefault["HEROKU_HOSTNAME"] = insert url of deployed project on Heroku
+
+# local environment only (do not include these in production/deployment!)
+os.environ.setdefault("DEBUG", "True")
+```
+
+Once the project is cloned or forked, in order to run it locally, you'll need to follow these steps:
+- Start the Django app: `python3 manage.py runserver`
+- Stop the app once it's loaded: `CTRL+C` or `⌘+C` (Mac)
+- Make any necessary migrations: `python3 manage.py makemigrations`
+- Migrate the data to the database: `python3 manage.py migrate`
+- Create a superuser: `python3 manage.py createsuperuser`
+- Load fixtures (if applicable): `python3 manage.py loaddata file-name.json` (repeat for each file)
+- Everything should be ready now, so run the Django app again: `python3 manage.py runserver`
+
+If you'd like to backup your database models, use the following command for each model you'd like to create a fixture for:
+- `python3 manage.py dumpdata your-model > your-model.json`
+- *repeat this action for each model you wish to backup*
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/davidindub/coffeecrew) 
+2. Locate the Code button above the list of files and click it 
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/davidindub/coffeecrew.git`
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/davidindub/coffeecrew)
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
+A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/davidindub/coffeecrew)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
 
 *** 
 
@@ -314,6 +488,14 @@ The [django-allauth documentation](https://django-allauth.readthedocs.io/en/late
 
 - [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
 - Hero Image by [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/sn87TQ_o7zs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+
+Photo by <a href="https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Dumlao</a> on <a href="https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+Photo by <a href="https://unsplash.com/@gtk1x?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Gerson Cifuentes</a> on <a href="https://unsplash.com/photos/HmZCtvtS6ds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Photo by <a href="https://unsplash.com/@fideletty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Etty Fidele</a> on <a href="https://unsplash.com/photos/oJpkjWcScyg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Photo by <a href="https://unsplash.com/ko/@andrewwelch3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">andrew welch</a> on <a href="https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 
 
