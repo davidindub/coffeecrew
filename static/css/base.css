@@ -10,6 +10,17 @@
     --font-display-font: 'Rubik', sans-serif;
 }
 
+.page-item a, .page-item a:hover {
+    color: rgb(15, 74, 59);
+}
+
+.page-item.active a,
+.page-item.active a:hover {
+    color: var(--color-off-white);
+    background-color: var(--color-primary);
+    border: var(--color-secondary);
+}
+
 html {
     height: 100%;
 }
@@ -159,7 +170,9 @@ footer a,
 }
 
 .dropdown-item:focus,
-.dropdown-item:hover {
+.dropdown-item:hover,
+.page-item a:hover
+ {
     background-color: var(--color-tertiary);
 }
 
@@ -370,11 +383,15 @@ footer li {
 }
 
 @media print {
-    nav, a.nav-link, ol.breadcrumb, footer {
+
+    nav,
+    a.nav-link,
+    ol.breadcrumb,
+    footer {
         display: none;
     }
 
     .navbar-brand {
         font-size: 5rem;
     }
- }
+}
