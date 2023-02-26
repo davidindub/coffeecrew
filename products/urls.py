@@ -12,6 +12,8 @@ urlpatterns = [
          ProductsList.as_view(), name="products_by_category"),
     path("d/<department>/",
          ProductsList.as_view(), name="products_by_department"),
+    path("b/<brand>/",
+         ProductsList.as_view(), name="products_by_brand"),
     path("item/<slug:slug>", product_detail, name="product_detail"),
     path("staff/department/new/", DepartmentCreate.as_view(),
          name="department_create"),

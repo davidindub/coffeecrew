@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.views import generic, View
 from django.contrib import messages
-from .models import Product, Coffee, Category, Department
+from .models import Product, Coffee, Category, Department, Brand
 from profiles.models import WishList
 from .forms import ProductForm, CoffeeForm, DepartmentForm, CategoryForm
 from django.urls import reverse_lazy
@@ -24,6 +24,7 @@ class ProductsList(generic.ListView):
         wishlist = self.kwargs.get("wishlist")
         department = self.kwargs.get("department")
         category = self.kwargs.get("category")
+        brand = self.kwargs.get("brand")
         query = self.request.GET.get("search", None)
 
         sort = self.request.GET.get("sort")
@@ -40,6 +41,9 @@ class ProductsList(generic.ListView):
         if category:
             queryset = queryset.filter(
                 category__name=category).distinct()
+
+        if brand:
+            queryset = queryset.filter(brand__name=brand)
 
         if query:
             queryset = queryset.filter(name__icontains=query
@@ -76,6 +80,7 @@ class ProductsList(generic.ListView):
         wishlist = self.kwargs.get("wishlist")
         department = self.kwargs.get("department")
         category = self.kwargs.get("category")
+        brand = self.kwargs.get("brand")
         query = self.request.GET.get("search", None)
 
         sort = self.request.GET.get("sort")
@@ -102,6 +107,9 @@ class ProductsList(generic.ListView):
 
         context["department"] = get_object_or_404(
             Department, name=department) if department else None
+
+        context["brand"] = get_object_or_404(
+            Brand, name=brand) if brand else None
 
         if wishlist:
             context["wishlist_page"] = True

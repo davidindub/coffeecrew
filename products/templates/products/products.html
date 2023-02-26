@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_header %}
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
-{% endblock page_header %}
+{% block extra_title %}
+    {% if wishlist_page %}
+        - Your Wishlist
+    {% elif category %}
+        - {{ category.display_name }}
+    {% elif department %}
+        - {{ department }}
+    {% elif brand %}
+        - {{ brand.display_name }}
+    {% else %}
+        - Products
+    {% endif %}
+{% endblock extra_title %}
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
         <ol class="breadcrumb">
@@ -14,9 +20,9 @@
                 <li class="breadcrumb-item active" aria-current="page">Your Wishlist</li>
             {% elif search_results %}
                 <li class="breadcrumb-item active" aria-current="page">Search Results for {{ search_results }}</li>
-            {% elif not department and not category and not wishlist_page %}
+            {% elif not department and not category and not wishlist_page and not brand %}
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
-            {% elif department or category %}
+            {% elif department or category or brand %}
                 <li class="breadcrumb-item">
                     <a href="{% url "products" %}">Products</a>
                 </li>
@@ -31,6 +37,10 @@
                 {% endif %}
             {% endif %}
             {% if category %}<li class="breadcrumb-item active" aria-current="page">{{ category.display_name }}</li>{% endif %}
+            {% if brand %}
+                <li class="breadcrumb-item">Brands</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ brand.display_name }}</li>
+            {% endif %}
         </ol>
     </nav>
 {% endblock breadcrumbs %}
@@ -44,6 +54,8 @@
                     <h2>{{ category.display_name }}</h2>
                 {% elif wishlist_page %}
                     <h2>Your Wishlist</h2>
+                {% elif brand %}
+                    <h2>{{ brand.display_name }}</h2>
                 {% else %}
                     <h2>Products</h2>
                 {% endif %}
@@ -61,7 +73,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-                {% if not department and not category and not wishlist_page and not search_results %}
+                {% if not department and not category and not wishlist_page and not search_results and not brand %}
                     {% for dept in departments_with_categories %}
                         <a href="{% url 'products_by_department' department=dept.name %}"
                            class="btn btn-cc">{{ dept.name }}</a>
@@ -73,9 +85,9 @@
             <div class="col">
                 <div class="row">
                     <div class="col d-flex justify-content-end product-list-top">
-                        {% if products %}
+                        {% if products|length > 1 %}
                             {% comment %}
-                            Only show sort options if there are products to show.
+                            Only show sort options if there is more than one product to show.
                             {% endcomment %}
                             {% block product_sort %}
                                 {% include "includes/products_sort.html" %}
