@@ -214,6 +214,7 @@ footer a,
     --bs-btn-hover-color: var(--color-off-white);
     --bs-btn-bg: var(--color-primary);
     --bs-btn-hover-bg: var(--color-primary-lighter);
+    --bs-btn-border-color: var(--color-primary);
     --bs-btn-active-border-color: var(--color-primary);
     --bs-btn-hover-border-color: var(--color-primary);
     display: inline-block;
@@ -367,3 +368,13 @@ footer li {
         flex-direction: column;
     }
 }
+
+@media print {
+    nav, a.nav-link, ol.breadcrumb, footer {
+        display: none;
+    }
+
+    .navbar-brand {
+        font-size: 5rem;
+    }
+ }

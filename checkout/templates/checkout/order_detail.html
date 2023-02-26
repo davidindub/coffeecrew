@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% load countries %}
+{% block extra_title %}
+  - Orders
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'account_dashboard' %}">Your Account</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url "account_orders" %}">Your Orders</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Order {{ order.order_number }}</li>
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+  <div class="container-fluid">
+    <h1>Order {{ order.order_number }}</h1>
+    <p>Ordered on {{ order.updated|date:"d M Y" }}</p>
+
+    <address class="text-end">
+      {{ order.address_line_1 }} <br/>
+      {{ order.address_line_2 }} <br/>
+      {{ order.city }} <br/>
+      {{ order.postcode }} <br/>
+      {{ order.country.name }}
+    </address>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order.order_items.all %}
+            <tr>
+              <td>
+                {% if item.product %}
+                  <a href="{% url 'product_detail' item.product.slug %}">{{ item.product_name }}</a>
+                {% else %}
+                  {{ item.product_name }}
+                </td>
+              {% endif %}
+              <td>{{ item.quantity }}</td>
+              <td>€ {{ item.price }}</td>
+              <td>€ {{ item.total }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="3">
+              <strong>Delivery Cost</strong>
+            </td>
+            <td>€ {{ order.delivery_cost }}</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>Order Total</strong>
+            </td>
+            <td>€ {{ order.order_total }}</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>Grand Total</strong>
+            </td>
+            <td class="fw-bolder">€ {{ order.grand_total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% if order.shipped_date %}
+    <p class="text-end">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+        <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+        <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+      </svg>
+      Dispatched via <strong>{{ order.delivery_method }}</strong> on {{ order.shipped_date|date:"d M Y" }}.
+    </p>
+    {% else %}
+    <p>Dispatch date coming soon.</p>
+    {% endif %}
+  </div>
+{% endblock content %}

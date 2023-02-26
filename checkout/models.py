@@ -30,6 +30,7 @@ class Order(models.Model):
     city = models.CharField(max_length=200, null=False)
     postcode = models.CharField(max_length=200, null=False)
     country = CountryField(null=False, blank=False)
+    shipped_date = models.DateTimeField(null=True, blank=True)
 
     def generate_order_number(self):
         """
@@ -51,6 +52,15 @@ class Order(models.Model):
         total = sum([item.price for item in order_items])
         self.order_total = total
         self.grand_total = self.order_total + self.delivery_cost
+
+    def set_as_shipped(self):
+        """
+        Set the Shipped Date and set order as complete
+        """
+        self.shipped_date = datetime.datetime.now()
+        self.completed = True
+        self.save()
+
 
     def save(self, *args, **kwargs):
         """
@@ -119,5 +129,5 @@ class OrderItem(models.Model):
 @receiver(post_save, sender=OrderItem)
 def lock_price(sender, instance, created, **kwargs):
     if created:
-        instance.set_price()
+        instance.set_details()
         instance.save()
