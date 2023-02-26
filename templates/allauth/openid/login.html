@@ -1,7 +1,18 @@
-{% extends "openid/base.html" %}
-
-{% load i18n %}
-
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  - OpenID Sign In
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url "home" %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">OpenID Sign In</li>
+      </ol>
+  </nav>
+{% endblock breadcrumbs %}
 {% block head_title %}OpenID Sign In{% endblock %}
 
 {% block content %}
@@ -11,8 +22,8 @@
 
 <form id="openid_login_form" class="openid_login" method="post" action="{% url 'openid_login' %}">
 {% csrf_token %}
-{{form.as_p}}
-<button type="submit">Sign In</button>
+{{ form|crispy }}
+<button type="submit" class="btn btn-cc">Sign In</button>
 </form>
 
 {% endblock %}

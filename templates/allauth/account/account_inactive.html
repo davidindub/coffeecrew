@@ -1,4 +1,18 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  - Inactive Account
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url "home" %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Account Inactive</li>
+      </ol>
+  </nav>
+{% endblock breadcrumbs %}
 
 {% load i18n %}
 

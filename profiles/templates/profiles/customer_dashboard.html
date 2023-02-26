@@ -16,13 +16,13 @@
             <h2>Your Profile</h2>
             <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
             <p>Phone Number: {{ profile.default_phone_number }}</p>
-            <a href="{% url 'update_account' %}" class="btn btn-cc">Update Details</a>
+            <a href="{% url "update_account" %}" class="btn btn-cc">Update Details</a>
         </div>
         <div class="col-xs-12 col-md-6">
             <h2>Your Addresses</h2>
             {% if shipping_address %}
                 <h4>Shipping Address</h4>
-                <a href="{% url 'update_address' billing_address.id %}">{{ shipping_address }}
+                <a href="{% url "update_address" billing_address.id %}">{{ shipping_address }}
                     <svg xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -35,7 +35,7 @@
             {% endif %}
             {% if billing_address %}
                 <h4>Billing Address</h4>
-                <a href="{% url 'update_address' billing_address.id %}">{{ billing_address }}
+                <a href="{% url "update_address" billing_address.id %}">{{ billing_address }}
                     <svg xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -72,10 +72,13 @@
             </table>
         </div>
         <p>
-            <a href="{% url 'orders' %}" class="btn btn-cc">See all your orders</a>
+            <a href="{% url "orders" %}" class="btn btn-cc">See all your orders</a>
         </p>
     {% else %}
         No Orders Yet
     {% endif %}
     <hr class="product-hr"/>
+    <a href="{% url "account_change_password" %}" class="btn btn-cc">Change Password</a>
+    <a href="{% url "account_logout" %}" class="btn btn-outline-cc">Sign Out</a>
+
 {% endblock content %}

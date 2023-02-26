@@ -1,4 +1,16 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  - Sign Up
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Home</li>
+      <li class="breadcrumb-item active" aria-current="page">Sign Up</li>
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
 
 {% load i18n %}
 
@@ -11,11 +23,11 @@
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form|crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <button type="submit" class="btn btn-cc">{% trans "Sign Up" %} &raquo;</button>
 </form>
 
 {% endblock %}

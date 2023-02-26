@@ -1,4 +1,18 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  - Verify Your Email
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url "account_signup" %}">Sign Up</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Verify Your E-mail Address</li>
+      </ol>
+  </nav>
+{% endblock breadcrumbs %}
 
 {% load i18n %}
 
@@ -7,7 +21,7 @@
 {% block content %}
 <h1>{% trans "Verify Your E-mail Address" %}</h1>
 
-{% url 'account_email' as email_url %}
+{% url "account_email" as email_url %}
 
 <p>{% blocktrans %}This part of the site requires us to verify that
 you are who you claim to be. For this purpose, we require that you

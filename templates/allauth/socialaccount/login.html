@@ -1,4 +1,19 @@
-{% extends "socialaccount/base.html" %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extra_title %}
+  - Connect Account
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'account_dashboard' %}">Your Account</a>
+        </li>
+        <a href="{% url 'socialaccount_connections' %}"><li class="breadcrumb-item">Account Connections</li></a>
+        <li class="breadcrumb-item-active" aria-current="page">Connect Account</li>
+      </ol>
+  </nav>
+{% endblock breadcrumbs %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
