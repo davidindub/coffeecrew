@@ -3,7 +3,7 @@ from .models import Order, OrderItem
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("user", "updated", "completed", "grand_total")
+    list_display = ("order_number", "user", "updated", "completed", "grand_total")
 
 
 class OrderItemAdmin(admin.ModelAdmin):
