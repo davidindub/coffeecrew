@@ -1,16 +1,16 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import get_object_or_404, render, reverse, redirect
-from django.views import generic, View
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import get_object_or_404, render, reverse
+from django.views import generic
 from django.contrib import messages
-from .models import Product, Coffee, Category, Department, Brand
-from profiles.models import WishList
-from .forms import (ProductForm, CoffeeForm, DepartmentForm,
-                    CategoryForm)
-from checkout.models import Order
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from checkout.models import Order
+from profiles.models import WishList
+from .models import Product, Coffee, Category, Department, Brand
+from .forms import (ProductForm, CoffeeForm, DepartmentForm,
+                    CategoryForm)
 
 
 # Views related to Products:
@@ -155,7 +155,7 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f"Updated successfully! 👍")
+        messages.success(self.request, "Updated successfully! 👍")
         return response
 
     def get_success_url(self):
@@ -169,6 +169,9 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
 
 class CoffeeUpdate(ProductUpdate):
+    """
+    View for updating existing Coffee Products
+    """
     model = Coffee
     form_class = CoffeeForm
 
@@ -255,7 +258,7 @@ class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f"Updated successfully! 👍")
+        messages.success(self.request, "Updated successfully! 👍")
         return response
 
     def get_success_url(self):
@@ -335,7 +338,7 @@ class CategoryUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f"Updated successfully! 👍")
+        messages.success(self.request, "Updated successfully! 👍")
         return response
 
     def get_success_url(self):
@@ -401,7 +404,7 @@ class BrandUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f"Updated successfully! 👍")
+        messages.success(self.request, "Updated successfully! 👍")
         return response
 
     def get_form_action(self):
@@ -519,10 +522,8 @@ class ManageProducts(StaffMemberRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        wishlist = self.kwargs.get("wishlist")
         department = self.kwargs.get("department")
         category = self.kwargs.get("category")
-        query = self.request.GET.get("search", None)
 
         sort = self.request.GET.get("sort")
         order = self.request.GET.get("order")

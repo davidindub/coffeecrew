@@ -3,10 +3,17 @@ from .models import Order, OrderItem
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("order_number", "user", "updated", "completed", "grand_total")
+    """
+    Define properties to be shows in Django admin list
+    """
+    list_display = ("order_number", "user", "updated",
+                    "completed", "grand_total")
 
 
 class OrderItemAdmin(admin.ModelAdmin):
+    """
+    Define properties to be shows in Django admin list
+    """
     list_display = ("product", "quantity", "total")
 
 
