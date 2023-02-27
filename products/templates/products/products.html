@@ -104,11 +104,11 @@
                                         {% if product.image %}
                                             <img src="{{ product.imageURL }}"
                                                  class="card-img-top"
-                                                 alt="{{ product.name }}"/>
+                                                 alt="{{ product.name }}">
                                         {% else %}
                                             <img src="{% static 'images/hero-coffee-filter.jpg' %}"
                                                  class="card-img-top"
-                                                 alt="{{ product.name }}"/>
+                                                 alt="{{ product.name }}">
                                         {% endif %}
                                     </a>
                                     <div class="card-body">
@@ -137,7 +137,7 @@
                                                                      fill="currentColor"
                                                                      class="bi bi-heart-fill"
                                                                      viewBox="0 0 16 16">
-                                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z">
                                                                 </svg>
                                                                 Remove From Wishlist
                                                             </button>
@@ -154,7 +154,7 @@
                                                                      class="bi bi-heart"
                                                                      viewBox="0 0 16 16">
                                                                     <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
                                                                 </svg>
                                                                 Add to Wishlist
                                                             </button>
@@ -174,9 +174,9 @@
                                                                  class="bi bi-cart-plus"
                                                                  viewBox="0 0 16 16">
                                                                 <path
-                                                                d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                                                                d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z">
                                                                 <path
-                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z">
                                                             </svg>
                                                             Add to Cart
                                                         </button>
@@ -190,21 +190,21 @@
                                 </div>
                             </div>
                             <div class="col-12 d-block d-md-none">
-                                <hr class="product-hr"/>
+                                <hr class="product-hr">
                             </div>
                             {% if forloop.counter|divisibleby:2 %}
                                 <div class="col-12 d-none d-md-block d-lg-none">
-                                    <hr class="product-hr"/>
+                                    <hr class="product-hr">
                                 </div>
                             {% endif %}
                             {% if forloop.counter|divisibleby:3 %}
                                 <div class="col-12 d-none d-lg-block d-xl-none">
-                                    <hr class="product-hr"/>
+                                    <hr class="product-hr">
                                 </div>
                             {% endif %}
                             {% if forloop.counter|divisibleby:4 %}
                                 <div class="col-12 d-none d-xl-block">
-                                    <hr class="product-hr"/>
+                                    <hr class="product-hr">
                                 </div>
                             {% endif %}
                         {% endfor %}

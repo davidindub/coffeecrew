@@ -24,10 +24,10 @@
             and
             {% with total=department.num_products %}{{ total }} product{{ total|pluralize }}{% endwith %}
             !
-            <br/>
+            <br>
             Deleting this department will also delete those categories and products and is not recommended.
-            <br/>
-            <br/>
+            <br>
+            <br>
         </p>
         <p>
             You should move the following categories to different departments before deleting:
@@ -45,13 +45,13 @@
         </p>
     {% endif %}
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="confirm-check"/>
+        <input class="form-check-input" type="checkbox" value="" id="confirm-check">
         <label class="form-check-label" for="confirm-check">I understand the consequences of deleting.</label>
     </div>
-    <hr/>
+    <hr>
     <form method="post" action="{% url 'department_delete' department.id %}">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}"/>
+        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
         <button type="submit" class="btn btn-danger" id="delete-button">Delete Department</button>
     </form>
 {% endblock content %}

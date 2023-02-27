@@ -23,22 +23,22 @@
     <strong>This is irreversible.</strong>
     <p class="text-danger">
         {% if product.lifetime_sales > 0 %}
-        <br/>
+        <br>
    {{ product.name }} has sold {% with total=product.lifetime_sales %}{{ total }} {{ total|pluralize:"unit,units" }}{% endwith %} since listed.
    {% endif %}
-        <br/><br/>
+        <br><br>
         Deleting this product will remove it from all customers' carts and wishlists.
     </p>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="confirm-check"/>
+        <input class="form-check-input" type="checkbox" value="" id="confirm-check">
         <label class="form-check-label" for="confirm-check">
           I understand the consequences of deleting.
         </label>
       </div>
-      <hr/>
+      <hr>
     <form method="post" action="{% url 'product_delete' product.id %}">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}"/>
+        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
         <button type="submit" class="btn btn-danger" id="delete-button">Delete Product</button>
     </form>
 {% endblock content %}

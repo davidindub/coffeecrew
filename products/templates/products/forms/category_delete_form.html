@@ -29,22 +29,22 @@
         <p class="text-danger">
             {{ category.display_name }} contains
             {% with total=category.num_products %}{{ total }} product{{ total|pluralize }}{% endwith %}!
-            <br/>
+            <br>
             Deleting this category will also delete those categories products and is not recommended.
-            <br/>
-            <br/>
+            <br>
+            <br>
             You should move <a href="{% url 'manage_products_by_category' category=category.name %}"
     class="text-decoration-underline">these products</a> to categories in different departments before deleting.
         </p>
     {% endif %}
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="confirm-check"/>
+        <input class="form-check-input" type="checkbox" value="" id="confirm-check">
         <label class="form-check-label" for="confirm-check">I understand the consequences of deleting.</label>
     </div>
-    <hr/>
+    <hr>
     <form method="post" action="{% url 'category_delete' category.id %}">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}"/>
+        <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
         <button type="submit" class="btn btn-danger" id="delete-button">Delete Category</button>
     </form>
 {% endblock content %}
