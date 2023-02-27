@@ -35,7 +35,7 @@
   {% else %}
     <h1>New Product</h1>
   {% endif %}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% crispy form %}
   </form>
