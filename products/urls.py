@@ -1,10 +1,10 @@
 from django.urls import path
 from .views import (ProductsList, ProductUpdate,
                     CoffeeUpdate, DepartmentCreate, DepartmentDelete,
-                    DepartmentUpdate, ManageCategories, product_detail,
+                    DepartmentUpdate, ManageShop, product_detail,
                     ProductCreate, CategoryDelete, CategoryUpdate,
                     CategoryCreate, CoffeeCreate, ProductDelete,
-                    ManageProducts)
+                    ManageProducts, BrandCreate, BrandUpdate, BrandDelete)
 
 urlpatterns = [
     path("", ProductsList.as_view(), name="products"),
@@ -21,7 +21,7 @@ urlpatterns = [
          DepartmentDelete.as_view(), name="department_delete"),
     path("staff/department/<int:pk>/update/", DepartmentUpdate.as_view(),
          name="department_update"),
-    path("staff/", ManageCategories.as_view(),
+    path("staff/", ManageShop.as_view(),
          name="manage_shop"),
     path("staff/products/", ManageProducts.as_view(),
          name="manage_products"),
@@ -35,6 +35,12 @@ urlpatterns = [
          CategoryDelete.as_view(), name="category_delete"),
     path("staff/category/<int:pk>/update/", CategoryUpdate.as_view(),
          name="category_update"),
+    path("staff/brand/new/", BrandCreate.as_view(),
+         name="brand_create"),
+    path("staff/brand/<int:pk>/delete/",
+         BrandDelete.as_view(), name="brand_delete"),
+    path("staff/brand/<int:pk>/update/", BrandUpdate.as_view(),
+         name="brand_update"),
     path("staff/product/<slug:slug>/update/",
          ProductUpdate.as_view(), name="product_update"),
     path("staff/coffee/<slug:slug>/update/",

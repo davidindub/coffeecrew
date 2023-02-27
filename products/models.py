@@ -44,9 +44,10 @@ class Brand(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-
-    def get_display_name(self):
-        return self.display_name
+    
+    @property
+    def num_products(self):
+        return self.product_set.count()
 
 
 class Product(models.Model):

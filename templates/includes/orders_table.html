@@ -20,7 +20,7 @@
                           </svg>
                         {% endif %}
                     </td>
-                    <td><a href="{% url 'order_detail' order.order_number %}">{{ order.order_number }}</a></td>
+                    <td><a aria-label="Order {{ order.order_number }}" href="{% url 'order_detail' order.order_number %}">{{ order.order_number }}</a></td>
                     <td>€{{ order.grand_total }}</td>
                 </tr>
             {% endfor %}

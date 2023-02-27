@@ -23,7 +23,7 @@
             <h2>My Addresses</h2>
             {% if shipping_address %}
                 <h4>Shipping Address</h4>
-                <a href="{% url "update_address" billing_address.id %}">{{ shipping_address }}
+                <a aria-label="Edit Shipping Address" href="{% url "update_address" billing_address.id %}">{{ shipping_address }}
                     <svg xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -36,7 +36,7 @@
             {% endif %}
             {% if billing_address %}
                 <h4>Billing Address</h4>
-                <a href="{% url "update_address" billing_address.id %}">{{ billing_address }}
+                <a aria-label="Edit Billing Address" href="{% url "update_address" billing_address.id %}">{{ billing_address }}
                     <svg xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"

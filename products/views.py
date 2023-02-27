@@ -4,8 +4,13 @@ from django.views import generic, View
 from django.contrib import messages
 from .models import Product, Coffee, Category, Department, Brand
 from profiles.models import WishList
-from .forms import ProductForm, CoffeeForm, DepartmentForm, CategoryForm
+from .forms import (ProductForm, CoffeeForm, DepartmentForm,
+                    CategoryForm)
+from checkout.models import Order
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 
 # Views related to Products:
@@ -17,6 +22,7 @@ class ProductsList(generic.ListView):
     model = Product
     template_name = "products/products.html"
     context_object_name = "products"
+    paginate_by = 8
 
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
@@ -279,7 +285,7 @@ class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
 # Views related to Categories:
 
 
-class ManageCategories(StaffMemberRequiredMixin, generic.ListView):
+class ManageShop(StaffMemberRequiredMixin, generic.ListView):
     """
     View for management dash
     """
@@ -290,6 +296,12 @@ class ManageCategories(StaffMemberRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         departments = context["departments"]
+        context["brands"] = Brand.objects.all().order_by("name")
+        context["orders"] = Order.objects.filter().count()
+        context["orders_dispatched"] = Order.objects.filter(
+            shipped_date__isnull=False).count()
+        context["total_users"] = User.objects.count()
+
         for department in departments:
             department.categories = Category.objects.filter(
                 department=department).order_by("name")
@@ -350,6 +362,84 @@ class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
         return response
 
 
+class BrandCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+    """
+    View for creating new Brands
+    """
+    model = Brand
+    fields = ["name", "display_name"]
+    template_name = "products/forms/brand_form.html"
+
+    def get_form_action(self):
+        return reverse("brand_create")
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        helper = FormHelper()
+        helper.form_method = "post"
+        helper.form_action = self.get_form_action()
+        helper.add_input(Submit("submit", "Update", css_class="btn, btn-cc"))
+        form.helper = helper
+        return form
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Brand added successfully! 👍")
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("manage_shop")
+
+
+class BrandUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+    """
+    View for updating existing Brands
+    """
+    model = Brand
+    fields = ["name", "display_name"]
+    template_name = "products/forms/brand_form.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"Updated successfully! 👍")
+        return response
+
+    def get_form_action(self):
+        return reverse("brand_update",  kwargs={"pk": self.object.id})
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        helper = FormHelper()
+        helper.form_method = "post"
+        helper.form_action = self.get_form_action()
+        helper.add_input(Submit("submit", "Update", css_class="btn, btn-cc"))
+        form.helper = helper
+        return form
+
+    def get_success_url(self):
+        return reverse_lazy("manage_shop")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["category"] = self.object
+        return context
+
+
+class BrandDelete(StaffMemberRequiredMixin, generic.DeleteView):
+    """
+    View for confirmation page to delete a category.
+    """
+    model = Brand
+    template_name = "products/forms/category_delete_form.html"
+    success_url = reverse_lazy("manage_shop")
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        messages.success(
+            request, f"{self.object.name} has been deleted successfully!")
+        return response
+
+
 class ManageProducts(StaffMemberRequiredMixin, generic.ListView):
     """
     renders view for all products, including sorting and searching
@@ -357,6 +447,7 @@ class ManageProducts(StaffMemberRequiredMixin, generic.ListView):
     model = Product
     template_name = "products/staff/manage_products.html"
     context_object_name = "products"
+    paginate_by = 12
 
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset()
