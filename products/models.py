@@ -58,7 +58,7 @@ class Product(models.Model):
     category = models.ManyToManyField(Category)
     brand = models.ForeignKey(
         "Brand", null=True, blank=True, on_delete=models.SET_NULL)
-    sku = models.CharField(max_length=254, null=True, blank=True)
+    sku = models.CharField(max_length=254, null=True, blank=True, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     stock = models.PositiveSmallIntegerField()
     date_added = models.DateTimeField(auto_now_add=True)

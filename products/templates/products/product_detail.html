@@ -45,6 +45,7 @@
                          alt="{{ product.name }}">
                 {% endif %}
                 {% if user.is_staff %}
+                <p class="fw-bold font-monospace">SKU: {{ product.sku }}</p>
                     <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}"
                        class="btn btn-sm btn-outline-cc">
                         <svg xmlns="http://www.w3.org/2000/svg"
