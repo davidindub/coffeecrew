@@ -1,3 +1,5 @@
+import random
+import string
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from .models import Product
@@ -14,9 +16,10 @@ def create_sku(sender, instance, **kwargs):
             brand_name = instance.brand.name[:3].upper()
         else:
             brand_name = "CCC"
-        last_sku_number = Product.objects.order_by('-id').first().id + 1
-        sku = f"{brand_name}{last_sku_number:04}"
-        while Product.objects.filter(sku=sku).exists():
-            last_sku_number += 1
-            sku = f"{brand_name}{last_sku_number:04}"
-        instance.sku = sku
+        while True:
+            digits = string.digits
+            sku_number = "".join(random.choice(digits) for i in range(5))
+            sku = f"{brand_name}{sku_number}"
+            if not Product.objects.filter(sku=sku).exists():
+                instance.sku = sku
+                break
