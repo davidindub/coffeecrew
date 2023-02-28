@@ -1,9 +1,9 @@
 from django.urls import path
-from products.views import ProductsList
+from products.views import ProductsListView
 from .views import AddToWishlistView, RemoveFromWishlistView
 
 urlpatterns = [
-    path("", ProductsList.as_view(),
+    path("", ProductsListView.as_view(),
          kwargs={"wishlist": True}, name="wish_list"),
     path("add/<int:product_id>/",
          AddToWishlistView.as_view(), name="add_to_wishlist"),

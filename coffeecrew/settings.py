@@ -176,6 +176,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = (os.path.join(BASE_DIR, "media"))
 
@@ -214,3 +215,9 @@ DELIVERY_COST = Decimal(4.95)
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Limit countries to EU only
+COUNTRIES_FIRST = ["IE"]
+COUNTRIES_ONLY = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
+                  "FR", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT",
+                  "NL", "PL", "PT", "RO", "SE", "SI", "SK"]

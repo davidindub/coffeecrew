@@ -9,14 +9,24 @@
             <li class="breadcrumb-item">
                 <a href="{% url 'account_dashboard' %}">Your Account</a>
             </li>
+            {% if address %}
+            <li class="breadcrumb-item active" aria-current="page">
+                Update Your Address
+            </li>
+            {% else %}
             <li class="breadcrumb-item active" aria-current="page">
                 Update Your Details
             </li>
+            {% endif %}
         </ol>
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
+{% if address %}
+<h1>Update {{ address|capfirst }} Address</h1>
+{% else %}
   <h1>Update Profile</h1>
+  {% endif %}
 
   <form method="post">
     {% csrf_token %}

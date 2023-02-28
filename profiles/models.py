@@ -27,10 +27,10 @@ class Profile(models.Model):
         max_length=20, null=True, blank=True)
     shipping_address = models.ForeignKey(
         "Address", on_delete=models.SET_NULL,
-        null=True, related_name='shipping_address')
+        null=True, blank=True, related_name='shipping_address')
     billing_address = models.ForeignKey(
         "Address", on_delete=models.SET_NULL,
-        null=True, related_name='billing_address')
+        null=True, blank=True, related_name='billing_address')
 
     def __str__(self):
         return f"{self.user.username}"

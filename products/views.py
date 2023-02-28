@@ -15,7 +15,7 @@ from .forms import (ProductForm, CoffeeForm, DepartmentForm,
 
 # Views related to Products:
 
-class ProductsList(generic.ListView):
+class ProductsListView(generic.ListView):
     """
     renders view for all products, including sorting and searching
     """
@@ -144,7 +144,7 @@ class StaffMemberRequiredMixin(UserPassesTestMixin):
         return self.request.user.is_staff
 
 
-class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+class ProductUpdateView(StaffMemberRequiredMixin, generic.edit.UpdateView):
     """
     View for updating existing Products
     """
@@ -168,7 +168,7 @@ class ProductUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         return context
 
 
-class CoffeeUpdate(ProductUpdate):
+class CoffeeUpdateView(ProductUpdateView):
     """
     View for updating existing Coffee Products
     """
@@ -176,7 +176,7 @@ class CoffeeUpdate(ProductUpdate):
     form_class = CoffeeForm
 
 
-class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+class ProductCreateView(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
     View for creating new Products
     """
@@ -195,7 +195,7 @@ class ProductCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
                             kwargs={"slug": self.object.slug})
 
 
-class CoffeeCreate(ProductCreate):
+class CoffeeCreateView(ProductCreateView):
     """
     View for creating new Coffee Products
     """
@@ -213,7 +213,7 @@ class CoffeeCreate(ProductCreate):
                             kwargs={"product_id": self.object.id})
 
 
-class ProductDelete(StaffMemberRequiredMixin, generic.DeleteView):
+class ProductDeleteView(StaffMemberRequiredMixin, generic.DeleteView):
     """
     View for confirmation page to delete a product (or coffee)
     """
@@ -231,7 +231,7 @@ class ProductDelete(StaffMemberRequiredMixin, generic.DeleteView):
 # Views related to Departments:
 
 
-class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+class DepartmentCreateView(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
     View for creating new Departments
     """
@@ -248,7 +248,7 @@ class DepartmentCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
         return reverse_lazy("manage_shop")
 
 
-class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+class DepartmentUpdateView(StaffMemberRequiredMixin, generic.edit.UpdateView):
     """
     View for updating existing Departments
     """
@@ -270,7 +270,7 @@ class DepartmentUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         return context
 
 
-class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
+class DepartmentDeleteView(StaffMemberRequiredMixin, generic.DeleteView):
     """
     View for confirmation page to delete a department.
     """
@@ -288,7 +288,7 @@ class DepartmentDelete(StaffMemberRequiredMixin, generic.DeleteView):
 # Views related to Categories:
 
 
-class ManageShop(StaffMemberRequiredMixin, generic.ListView):
+class ManageShopView(StaffMemberRequiredMixin, generic.ListView):
     """
     View for management dash
     """
@@ -311,7 +311,7 @@ class ManageShop(StaffMemberRequiredMixin, generic.ListView):
         return context
 
 
-class CategoryCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+class CategoryCreateView(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
     View for creating new Categories
     """
@@ -328,7 +328,7 @@ class CategoryCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
         return reverse_lazy("manage_shop")
 
 
-class CategoryUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+class CategoryUpdateView(StaffMemberRequiredMixin, generic.edit.UpdateView):
     """
     View for updating existing Categories
     """
@@ -350,7 +350,7 @@ class CategoryUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         return context
 
 
-class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
+class CategoryDeleteView(StaffMemberRequiredMixin, generic.DeleteView):
     """
     View for confirmation page to delete a category.
     """
@@ -365,7 +365,7 @@ class CategoryDelete(StaffMemberRequiredMixin, generic.DeleteView):
         return response
 
 
-class BrandCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
+class BrandCreateView(StaffMemberRequiredMixin, generic.edit.CreateView):
     """
     View for creating new Brands
     """
@@ -394,7 +394,7 @@ class BrandCreate(StaffMemberRequiredMixin, generic.edit.CreateView):
         return reverse_lazy("manage_shop")
 
 
-class BrandUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
+class BrandUpdateView(StaffMemberRequiredMixin, generic.edit.UpdateView):
     """
     View for updating existing Brands
     """
@@ -428,7 +428,7 @@ class BrandUpdate(StaffMemberRequiredMixin, generic.edit.UpdateView):
         return context
 
 
-class BrandDelete(StaffMemberRequiredMixin, generic.DeleteView):
+class BrandDeleteView(StaffMemberRequiredMixin, generic.DeleteView):
     """
     View for confirmation page to delete a category.
     """
@@ -443,7 +443,7 @@ class BrandDelete(StaffMemberRequiredMixin, generic.DeleteView):
         return response
 
 
-class ManageProducts(StaffMemberRequiredMixin, generic.ListView):
+class ManageProductsView(StaffMemberRequiredMixin, generic.ListView):
     """
     renders view for all products, including sorting and searching
     """

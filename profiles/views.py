@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import View
-from django.views.generic import TemplateView, ListView, UpdateView
+from django.views.generic.edit import FormView
+from django.views.generic import TemplateView, ListView, UpdateView, CreateView
 from products.models import Product
 from .models import WishList, Profile, Address
 from cart.models import Cart, CartItem
@@ -82,15 +83,21 @@ class OrderListView(LoginRequiredMixin, ListView):
         return orders
 
 
-class AddressUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class AddressUpdateView(LoginRequiredMixin, UpdateView):
     model = Address
     fields = ["address_line_1", "address_line_2",
               "city", "postcode", "country"]
     template_name = "profiles/forms/profile_form.html"
 
-    def test_func(self):
-        address = self.get_object()
-        return address.profile.user == self.request.user
+    def get_object(self, queryset=None):
+        address_type = self.kwargs.get("type")
+        profile = self.request.user.profile
+        if address_type == "shipping" and profile.shipping_address:
+            return profile.shipping_address
+        elif address_type == "billing" and profile.billing_address:
+            return profile.billing_address
+        else:
+            return None
 
     def get_form_action(self):
         return reverse("update_account")
@@ -107,9 +114,28 @@ class AddressUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_queryset(self):
         return super().get_queryset().filter(profile__user=self.request.user)
 
-    def get_success_url(self):
+    def form_valid(self, form):
+        address_type = self.kwargs.get("type")
+        profile = self.request.user.profile
+        address = form.save()
+        if address_type == "shipping":
+            profile.shipping_address = address
+        elif address_type == "billing":
+            profile.billing_address = address
+        profile.save()
         messages.success(self.request, "Address updated!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
         return reverse_lazy("account_dashboard")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.kwargs.get("type") == "shipping":
+            context["address"] = "shipping"
+        else:
+            context["address"] = "billing"
+        return context
 
 
 class AddToWishlistView(LoginRequiredMixin, View):
