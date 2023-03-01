@@ -9,8 +9,9 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Product</th>
+                <th class="d-none d-md-table-cell"></th>
                 <th scope="col">Quantity</th>
-                <th scope="col" class="d-none d-md-block">Price</th>
+                <th scope="col" class="d-none d-md-table-cell">Price</th>
                 <th scope="col">Grind</th>
                 <th scope="col">Total</th>
                 <th scope="col">Actions</th>
@@ -21,6 +22,15 @@
                 <tr>
                   <td>
                     <a href="{% url 'product_detail' object.product.slug %}">{{ object.product.name }}</a>
+                  </td>
+                  <td class="d-none d-md-table-cell">
+                    <a href="{% url 'product_detail' object.product.slug %}">
+                      {% if object.product.image %}
+                        <img src="{{ object.product.imageURL }}"
+                             alt="{{ object.product.name }}"
+                             class="cart-product-list-image">
+                      {% endif %}
+                    </a>
                   </td>
                   <td>
                     <form class="cart-form"
@@ -70,9 +80,9 @@
                             Filter/Drip
                           </option>
                           <option value="Aeropress"
-                          {% if object.grind_size == "Aeropress" %}selected{% endif %}>
-                    Aeropress
-                  </option>
+                                  {% if object.grind_size == "Aeropress" %}selected{% endif %}>
+                            Aeropress
+                          </option>
                           <option value="Espresso"
                                   {% if object.grind_size == "Espresso" %}selected{% endif %}>
                             Espresso

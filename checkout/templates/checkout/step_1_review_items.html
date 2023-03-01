@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock extra_css %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">{% include "checkout/includes/checkout_progress.html" %}</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Review Your Order</h1>
+                {% if object_list %}
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Grind</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'product_detail' object.product.slug %}">{{ object.product.name }}</a>
+                                    </td>
+                                    <td>{{ object.quantity }}</td>
+                                    {% if object.product.coffee %}
+                                        <td>{{ object.grind_size }}</td>
+                                    {% else %}
+                                        <td>N/A</td>
+                                    {% endif %}
+                                    <td>€{{ object.total }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="3" class="fs-4">Total</td>
+                                <td class="fs-4">€{{ cart.total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <a href="{% url "checkout_delivery" %}" class="btn btn-cc">Delivery Address
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 fill="currentColor"
+                                 class="bi bi-arrow-right"
+                                 viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </div>
+                {% else %}
+                    <p>Your cart is empty</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

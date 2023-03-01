@@ -25,6 +25,7 @@ class Order(models.Model):
                                       null=False, default=0)
     stripe_pid = models.CharField(max_length=254, null=False, blank=False,
                                   default='')
+    full_name = models.CharField(max_length=200, null=True)
     address_line_1 = models.CharField(max_length=200, null=False)
     address_line_2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
@@ -58,7 +59,6 @@ class Order(models.Model):
         Set the Shipped Date and set order as complete
         """
         self.shipped_date = datetime.datetime.now()
-        self.completed = True
         self.save()
 
     def save(self, *args, **kwargs):
@@ -83,7 +83,7 @@ class Order(models.Model):
         return self.order_number
 
 
-class OrderItem(models.Model):
+class OrderLineItem(models.Model):
     """
     Represents a product in an order. The price is locked in at
     at the time of the orders creation as the price may change in future.
@@ -92,7 +92,8 @@ class OrderItem(models.Model):
                               on_delete=models.CASCADE,
                               related_name="order_items")
     product = models.ForeignKey(
-        Product, null=False, blank=False, editable=False, on_delete=models.CASCADE)
+        Product, null=False, blank=False,
+        on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     grind_size = models.CharField(
         max_length=50,
@@ -126,9 +127,8 @@ class OrderItem(models.Model):
         return f"{self.product.name} ({self.quantity})"
 
 
-@receiver(post_save, sender=OrderItem)
+@receiver(post_save, sender=OrderLineItem)
 def lock_price(sender, instance, created, **kwargs):
     if created:
         instance.set_details()
         instance.save()
-
