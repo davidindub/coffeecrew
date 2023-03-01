@@ -127,6 +127,10 @@ TEMPLATES = [
                 "products.context_processors.get_departments_for_navbar",
                 "profiles.context_processors.get_user_wishlist"
             ],
+            "builtins": [
+                "crispy_forms.templatetags.crispy_forms_tags",
+                "crispy_forms.templatetags.crispy_forms_field",
+            ]
         },
     },
 ]

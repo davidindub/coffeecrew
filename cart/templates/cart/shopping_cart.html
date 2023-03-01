@@ -107,7 +107,7 @@
             <h3>Total: €{{ cart.total_with_delivery }}</h3>
           </div>
           <div class="text-center">
-            <a href="#" class="btn btn-cc">Checkout</a>
+            <a href="{% url "checkout" %}" class="btn btn-cc">Checkout</a>
           </div>
         {% else %}
           <p>Your cart is empty</p>
