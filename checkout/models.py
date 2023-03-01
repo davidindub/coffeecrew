@@ -61,7 +61,6 @@ class Order(models.Model):
         self.completed = True
         self.save()
 
-
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the order number
@@ -92,7 +91,8 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
                               related_name="order_items")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, null=False, blank=False, editable=False, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     grind_size = models.CharField(
         max_length=50,
@@ -100,18 +100,18 @@ class OrderItem(models.Model):
         null=True
     )
     price = models.DecimalField(
-        max_digits=6, decimal_places=2, null=True, blank=True)
-    product_name = models.CharField(max_length=254, null=True, blank=True)
-
-    @property
-    def total(self):
-        return self.product.price * self.quantity
+        max_digits=6, decimal_places=2, null=True, blank=True, editable=False)
+    product_name = models.CharField(
+        max_length=254, null=True, blank=True, editable=False)
+    total = models.DecimalField(
+        max_digits=6, decimal_places=2, null=True, blank=True, editable=False)
 
     def set_details(self):
         if not self.price:
             self.price = self.product.price
         if not self.product_name:
             self.product_name = self.product.name
+        self.total = self.product.price * self.quantity
 
     def save(self, *args, **kwargs):
         """
@@ -123,7 +123,7 @@ class OrderItem(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.product.name} ({self.quantity})"
 
 
 @receiver(post_save, sender=OrderItem)
@@ -131,3 +131,4 @@ def lock_price(sender, instance, created, **kwargs):
     if created:
         instance.set_details()
         instance.save()
+

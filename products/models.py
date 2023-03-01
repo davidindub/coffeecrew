@@ -44,7 +44,7 @@ class Brand(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-    
+
     @property
     def num_products(self):
         return self.product_set.count()
@@ -58,14 +58,16 @@ class Product(models.Model):
     category = models.ManyToManyField(Category)
     brand = models.ForeignKey(
         "Brand", null=True, blank=True, on_delete=models.SET_NULL)
-    sku = models.CharField(max_length=254, null=True, blank=True, unique=True)
+    sku = models.CharField(max_length=254, null=True,
+                           blank=True, unique=True, editable=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     stock = models.PositiveSmallIntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(
         upload_to='product_images/', blank=True, null=True)
-    lifetime_sales = models.PositiveSmallIntegerField(default=0)
+    lifetime_sales = models.PositiveSmallIntegerField(
+        default=0, editable=False)
 
     def save(self, *args, **kwargs):
         # update the slug if the name is changed

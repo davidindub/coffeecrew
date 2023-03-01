@@ -10,6 +10,7 @@ def create_sku(sender, instance, **kwargs):
     """
     Create a SKU based on the brand name,
     if no brand use 'CCC'
+    Adapted from https://github.com/saulacher/SKUgenerator
     """
     if not instance.sku:
         if instance.brand:
