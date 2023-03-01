@@ -75,34 +75,6 @@ main {
     display: inline;
 }
 
-.progress {
-    --bs-progress-bar-bg: var(--color-primary);
-}
-
-.checkout-progress-icons, .checkout-progress-breadcrumbs {
-    display: flex;
-    width: 100%;
-    justify-content: space-between; 
-}
-
-.checkout-progress-breadcrumbs {
-    margin-top: 1rem;
-}
-
-.checkout-progress-breadcrumbs li.active {
-    font-weight: bolder;
-    color: var(--color-primary);
-}
-
-.checkout-progress-icons {
-    margin: 0;
-    padding: 0 1rem 1rem;
-}
-
-.checkout-progress-icon {
-    list-style: none;
-}
-
 .breadcrumb-icon {
     vertical-align: middle;
     display: inline-block;
