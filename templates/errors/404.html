@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block extra_title %}
+    - 404 Page Not Found
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "home" %}">Coffee Crew</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Page Not Found</li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+    <h1 class="text-center">404 - Page not found</h1>
+    <hr class="product-hr">
+    <p class="text-center fs-4">Oops! We can't find that page.</p>
+    <hr class="product-hr">
+    <a href="{% url 'home' %}" class="btn btn-cc">Browse our Coffee</a>
+{% endblock content %}

@@ -19,6 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products.views import ProductsListView
 
+handler403 = 'home.views.handler403'
+handler404 = 'home.views.handler404'
+handler500 = 'home.views.handler500'
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
@@ -28,4 +32,5 @@ urlpatterns = [
     path("wishlist/", include("profiles.urls_wish_list")),
     path("account/", include("profiles.urls")),
     path("orders/", include("checkout.orders_urls")),
+    path("checkout/", include("checkout.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
