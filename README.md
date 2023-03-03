@@ -110,6 +110,16 @@ See:
 Django Messages and Bootstrap's Toast elements were combined to make elegant notification messages when the user performs actions.
 
 
+### Favicon
+
+
+### Printable Order Sheets
+
+I used media queries to create a print friendly layout for Orders so they can be printed out as packing slips by the business owner.
+
+![](docs/images/screenshots/screenshot-printable-order.jpg)
+
+
 ### Staff Only Features
 
 
@@ -118,7 +128,7 @@ Django Messages and Bootstrap's Toast elements were combined to make elegant not
 Custom error pages were added for 403, 404, and 500 errors.
 
 
-### Favicon
+
 
 
 ### Features Left to Implement
@@ -483,11 +493,17 @@ You can fork this repository by using the following steps:
 ### Content 
 - [Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
 
+### Code
+
+- Pagination links adapted from [How to implement a paginator in a Django Class-based ListView compatible with Bootstrap 5](https://ourcodeworld.com/articles/read/1757/how-to-implement-a-paginator-in-a-django-class-based-listview-compatible-with-bootstrap-5)
+- Guest Shopping Cart adapted from [Django Ecommerce Website | Guest User Cart | Part 4](https://www.youtube.com/watch?v=kH2FOWuA4uI) by Denis Ivy.
+- SKU Generator adapted from [SKU Generator](https://github.com/saulacher/SKUgenerator)
 
 ### Media
 
 - [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
 - Hero Image by [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/sn87TQ_o7zs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+- Some product images and descriptions from [Kinto Europe](https://kinto-europe.com/), [Moccamaster](https://www.moccamaster.eu/)
 
 Photo by <a href="https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Dumlao</a> on <a href="https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
@@ -497,6 +513,9 @@ Photo by <a href="https://unsplash.com/@fideletty?utm_source=unsplash&utm_medium
 
 Photo by <a href="https://unsplash.com/ko/@andrewwelch3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">andrew welch</a> on <a href="https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
+Photo by <a href="https://unsplash.com/ja/@goran_ivos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Goran Ivos</a> on <a href="https://unsplash.com/photos/f7MtheMfksk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
 
 
 ### Acknowledgements
