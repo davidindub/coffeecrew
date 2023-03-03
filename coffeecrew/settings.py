@@ -225,3 +225,8 @@ COUNTRIES_FIRST = ["IE"]
 COUNTRIES_ONLY = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
                   "FR", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT",
                   "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
+
+STRIPE_CURRENCY = "eur"
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+# STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")

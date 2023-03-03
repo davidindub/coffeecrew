@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, UpdateView, CreateView
 from products.models import Product
 from .models import WishList, Profile, Address
 from cart.models import Cart, CartItem
-from checkout.models import Order, OrderItem
+from checkout.models import Order, OrderLineItem
 from .forms import ProfileForm, UserForm
 from django.contrib import messages
 from django.urls import reverse_lazy
