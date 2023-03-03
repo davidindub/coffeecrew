@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock extra_css %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">{% include "checkout/includes/checkout_progress.html" %}</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>
+                    Success!
+                </h1>
+            </div>
+            <div class="col">
+
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block post_load_js %}
+{{ block.super }}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ client_secret|json_script:"id_client_secret" }}
+
+{% endblock post_load_js %}

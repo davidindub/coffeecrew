@@ -35,9 +35,18 @@
                     <p class="fs-4 text-end">€4.50</p>
                 </div>
                 <div id="delivery-option-eu">
-                    <p>Standard delivery to other European Union</p>
+                    <p>Standard delivery to European Union</p>
                     <p class="fs-4 text-end">€10.00</p>
                 </div>
+                <hr class="product-hr">
+                <h5>Order Total</h5>
+                <p class="fs-5 text-end">€{{ cart.total }}</p>
+                <h5>Total to Pay</h5>
+                <p class="fs-4 text-end">€ TODO</p>
+                {% csrf_token %}
+                <form action="{% url 'checkout_payment' %}" method="post">
+                    <button type="submit" class="btn btn-cc">Continue to Payment</button>
+                </form>
                 <hr class="product-hr">
             </div>
         </div>
