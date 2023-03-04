@@ -11,15 +11,13 @@
         <div class="row">
             <div class="col-12 col-lg-6">
                 <h1>Delivery Address</h1>
-                {% if default_delivery_address %}
+                {% if address_line_1 %}
                     <div class="form-check my-3">
                         <input class="form-check-input"
                                type="checkbox"
                                name="use_default_delivery_address"
                                id="use_default_delivery_address">
-                        <label class="form-check-label" for="use_default_delivery_address">
-                            Use default delivery address ({{ default_delivery_address }})
-                        </label>
+                        <label class="form-check-label" for="use_default_delivery_address">Use Default Delivery Address</label>
                     </div>
                 {% endif %}
                 {{ form|crispy }}
@@ -50,5 +48,11 @@
     </div>
 {% endblock content %}
 {% block post_load_js %}
+    {% comment %} Passing the address to JS for filling the form on checked box {% endcomment %}
+    {{ address_line_1|json_script:"addressLine1" }}
+    {{ address_line_2|json_script:"addressLine2" }}
+    {{ address_city|json_script:"addressCity" }}
+    {{ address_postcode|json_script:"addressPostcode" }}
+    {{ address_country|json_script:"addressCountry" }}
     <script src="{% static 'js/checkout_delivery.js' %}"></script>
 {% endblock post_load_js %}

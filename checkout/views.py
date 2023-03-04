@@ -14,6 +14,7 @@ import stripe
 from coffeecrew.settings import (STRIPE_PUBLIC_KEY,
                                  STRIPE_SECRET_KEY, STRIPE_CURRENCY)
 
+
 stripe.api_key = STRIPE_SECRET_KEY
 
 
@@ -101,36 +102,26 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
     template_name = "checkout/step_2_shipping.html"
     success_url = reverse_lazy("checkout_payment")
 
-    def get_initial(self):
-        initial = super().get_initial()
-
-        # Check if the user has a default delivery address
-        if self.request.user.is_authenticated:
-            profile = get_object_or_404(Profile, user=self.request.user)
-            default_shipping_address = profile.shipping_address
-
-            initial["full_name"] = self.request.user.get_full_name()
-            if default_shipping_address:
-                initial["address_line_1"] = default_shipping_address.address_line_1
-                initial["address_line_2"] = default_shipping_address.address_line_2
-                initial["city"] = default_shipping_address.city
-                initial["postcode"] = default_shipping_address.postcode
-                initial["country"] = default_shipping_address.country
-
-        return initial
-
     def form_valid(self, form):
-        # Save shipping information to session
-        self.request.session["shipping"] = form.cleaned_data
-        # Create new open order
-        order = Order.objects.create(user=self.request.user)
-        self.request.session["order_id"] = order.id
+        # TODO: Create new open order
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cart"] = Cart.objects.get(user=self.request.user)
+        user = self.request.user
+        context["cart"] = Cart.objects.get(user=user)
         context["checkout_step"] = "delivery"
+
+        if self.request.user.is_authenticated:
+            profile = get_object_or_404(Profile, user=user)
+            default_shipping = profile.shipping_address
+            if default_shipping:
+                context["address_line_1"] = default_shipping.address_line_1
+                context["address_line_2"] = default_shipping.address_line_2
+                context["address_city"] = default_shipping.city
+                context["address_postcode"] = default_shipping.postcode
+                context["address_country"] = default_shipping.country.code
+
         return context
 
 
@@ -160,6 +151,7 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
                     'enabled': True,
                 },
             )
+            print(f"Intent created {intent.id}")
             # Save created payment intent to user's cart
             cart.stripe_payment_intent = intent.id
             cart.save()
@@ -167,6 +159,7 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
             # Update the intent on stripe
             intent = stripe.PaymentIntent.modify(
                 cart.stripe_payment_intent, amount=stripe_total)
+            print(f"Intent updated on stripe {intent.id}")
 
         context["user"] = self.request.user
         context["user_fullname"] = self.request.user.get_full_name
@@ -179,6 +172,11 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
 
 class SuccessView(TemplateView):
     template_name = "checkout/step_4_success.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["checkout_step"] = "complete"
+        return context
 
 
 class CancelView(TemplateView):
