@@ -12,7 +12,7 @@ class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     stripe_payment_intent = models.CharField(
-        max_length=254, null=True, editable=False)
+        max_length=254, null=True, blank=True)
 
     @property
     def item_count(self):

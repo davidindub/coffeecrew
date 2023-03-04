@@ -43,8 +43,8 @@ async function handleSubmit(e) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://8000-davidindub-coffeecrew-xg0tkqn403e.ws-eu89.gitpod.io/checkout/payment",
-        receipt_email: emailAddress,
+        return_url: "https://8000-davidindub-coffeecrew-xg0tkqn403e.ws-eu89.gitpod.io/checkout/success/",
+        receipt_email: userEmail,
       },
     });
   

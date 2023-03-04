@@ -239,6 +239,14 @@ COUNTRIES_ONLY = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
                   "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
 
 STRIPE_CURRENCY = "eur"
-STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+STRIPE_TEST_MODE = True
+
+if not STRIPE_TEST_MODE:
+    STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+    STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+else:
+    STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY")
+    STRIPE_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY")
+
 # STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
