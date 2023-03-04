@@ -123,11 +123,11 @@
                                                     {% if product.image %}
                                                         <img src="{{ product.imageURL }}"
                                                              alt="{{ product.name }}"
-                                                             class="staff-product-list-image{% if not product.visible_to_customers %} product-greyed-img{% endif %}">
+                                                             class="product-list-image{% if not product.visible_to_customers %} product-greyed-img{% endif %}">
                                                     {% else %}
                                                         <img src="{% static 'images/hero-coffee-filter.jpg' %}"
                                                              alt="{{ product.name }}"
-                                                             class="staff-product-list-image">
+                                                             class="product-list-image">
                                                     {% endif %}
                                                 </a>
                                             </td>
