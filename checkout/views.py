@@ -152,14 +152,21 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         cart = get_object_or_404(Cart, user=self.request.user)
         stripe_total = round(cart.total_with_delivery * 100)
 
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=STRIPE_CURRENCY,
-            automatic_payment_methods={
-                'enabled': True,
-            },
-            
-        )
+        if not cart.stripe_payment_intent:
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=STRIPE_CURRENCY,
+                automatic_payment_methods={
+                    'enabled': True,
+                },
+            )
+            # Save created payment intent to user's cart
+            cart.stripe_payment_intent = intent.id
+            cart.save()
+        else:
+            # Update the intent on stripe
+            intent = stripe.PaymentIntent.modify(
+                cart.stripe_payment_intent, amount=stripe_total)
 
         context["user"] = self.request.user
         context["user_fullname"] = self.request.user.get_full_name

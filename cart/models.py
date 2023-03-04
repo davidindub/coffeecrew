@@ -11,6 +11,8 @@ from cart import cart_logic
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
+    stripe_payment_intent = models.CharField(
+        max_length=254, null=True, editable=False)
 
     @property
     def item_count(self):
@@ -37,6 +39,19 @@ class Cart(models.Model):
     @property
     def total_with_delivery(self):
         return cart_logic.calculate_total_with_delivery(self.total())
+
+    def empty_cart(self):
+        """
+        Empty all the cart items
+        """
+        self.cart_item.all().delete()
+
+    def reset_cart_after_sale(self):
+        """
+        Empty the cart items and clear the stripe payment intent
+        """
+        self.empty_cart()
+        self.stripe_payment_intent = None
 
 
 class CartItem(models.Model):
@@ -83,7 +98,6 @@ class CartItem(models.Model):
             return True
         else:
             return False
-        
 
     def total(self):
         return self.product.price * self.quantity

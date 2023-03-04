@@ -43,10 +43,7 @@
                 <p class="fs-5 text-end">€{{ cart.total }}</p>
                 <h5>Total to Pay</h5>
                 <p class="fs-4 text-end">€ TODO</p>
-                {% csrf_token %}
-                <form action="{% url 'checkout_payment' %}" method="post">
-                    <button type="submit" class="btn btn-cc">Continue to Payment</button>
-                </form>
+                <a href="{% url 'checkout_payment' %}" class="btn btn-cc">Continue to Payment</a>
                 <hr class="product-hr">
             </div>
         </div>
