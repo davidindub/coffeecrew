@@ -20,28 +20,31 @@
                         <label class="form-check-label" for="use_default_delivery_address">Use Default Delivery Address</label>
                     </div>
                 {% endif %}
-                {{ form|crispy }}
-            </div>
-            <div class="col" id="delivery-options">
-                <hr class="product-hr">
-                <h5>Delivery</h5>
-                <div id="delivery-option-none">
-                    <p>Please select your country to see delivery cost.</p>
+                <form action="{% url 'checkout_delivery' %}" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
                 </div>
-                <div id="delivery-option-ie">
-                    <p>Express delivery within Ireland</p>
-                    <p class="fs-4 text-end">€4.50</p>
-                </div>
-                <div id="delivery-option-eu">
-                    <p>Standard delivery to European Union</p>
-                    <p class="fs-4 text-end">€10.00</p>
-                </div>
-                <hr class="product-hr">
-                <h5>Order Total</h5>
-                <p class="fs-5 text-end">€{{ cart.total }}</p>
-                <h5>Total to Pay</h5>
-                <p class="fs-4 text-end">€ TODO</p>
-                <a href="{% url 'checkout_payment' %}" class="btn btn-cc">Continue to Payment</a>
+                <div class="col" id="delivery-options">
+                    <hr class="product-hr">
+                    <h5>Delivery</h5>
+                    <div id="delivery-option-none">
+                        <p>Please select your country to see delivery cost.</p>
+                    </div>
+                    <div id="delivery-option-ie">
+                        <p>Express delivery within Ireland</p>
+                        <p class="fs-4 text-end">€4.50</p>
+                    </div>
+                    <div id="delivery-option-eu">
+                        <p>Standard delivery to European Union</p>
+                        <p class="fs-4 text-end">€10.00</p>
+                    </div>
+                    <hr class="product-hr">
+                    <h5>Order Total</h5>
+                    <p class="fs-5 text-end">€{{ cart.total }}</p>
+                    <h5>Total to Pay</h5>
+                    <p class="fs-4 text-end">€ TODO</p>
+                    <input type="submit" class="btn btn-cc" value="Continue to Payment">
+                </form>
                 <hr class="product-hr">
             </div>
         </div>

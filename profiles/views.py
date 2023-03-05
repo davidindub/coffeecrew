@@ -28,7 +28,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context["profile"] = profile
 
         # Get the user's orders and add them to the context
-        orders = Order.objects.filter(user=self.request.user)
+        orders = Order.objects.filter(user=self.request.user, completed=True)
         context["orders"] = orders
 
         shipping_address = profile.shipping_address

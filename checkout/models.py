@@ -6,6 +6,7 @@ from products.models import Product
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 import datetime
+import random
 
 
 class Order(models.Model):
@@ -15,7 +16,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
-    order_number = models.CharField(max_length=10, unique=True)
+    order_number = models.CharField(max_length=15, unique=True)
     delivery_method = models.CharField(max_length=20, null=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2,
                                         null=False, default=DELIVERY_COST)
