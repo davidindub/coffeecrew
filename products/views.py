@@ -92,6 +92,20 @@ class ProductsListView(generic.ListView):
         sort = self.request.GET.get("sort")
         order = self.request.GET.get("order")
 
+        page_number = self.request.GET.get("page")
+
+        # Add the current sorting order as a query parameter to pagination links
+        if page_number:
+            pagination_links = context["paginator"].get_elided_page_range(
+                number=page_number, on_each_side=2)
+            pagination_links = [
+                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+        else:
+            pagination_links = context["paginator"].get_elided_page_range(
+                on_each_side=2)
+            pagination_links = [
+                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+
         if sort == "name":
             if order == "asc":
                 context["sort_selected"] = "Name (A-Z)"
@@ -529,6 +543,22 @@ class ManageProductsView(StaffMemberRequiredMixin, generic.ListView):
 
         sort = self.request.GET.get("sort")
         order = self.request.GET.get("order")
+
+        page_number = self.request.GET.get("page")
+
+        # Add the current sorting order as a query parameter to pagination links
+        if page_number:
+            pagination_links = context["paginator"].get_elided_page_range(
+                number=page_number, on_each_side=2)
+            pagination_links = [
+                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+        else:
+            pagination_links = context["paginator"].get_elided_page_range(
+                on_each_side=2)
+            pagination_links = [
+                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+
+        context["pagination_links"] = pagination_links
 
         if sort == "name":
             if order == "asc":
