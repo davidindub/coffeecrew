@@ -66,10 +66,15 @@ class StaffOrderListView(StaffMemberRequiredMixin, ListView):
     model = Order
     template_name = "profiles/orders.html"
     context_object_name = "orders"
+    paginate_by = 20
 
     def get_queryset(self):
-        orders = Order.objects.filter().order_by("-updated")
-        return orders
+        queryset = Order.objects.filter().order_by("-updated")
+
+        if self.request.GET.get("dispatched") == "false":
+            queryset = queryset.filter(shipped_date__isnull=True)
+
+        return queryset
 
 
 class CheckoutReviewView(ListView):
@@ -103,8 +108,30 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
     success_url = reverse_lazy("checkout_payment")
 
     def form_valid(self, form):
-        # TODO: Create new open order
-        return super().form_valid(form)
+        try:
+            order, created = Order.objects.get_or_create(
+                user=self.request.user,
+                completed=False
+            )
+            address = form.cleaned_data
+
+            order.full_name = address["full_name"]
+            order.address_line_1 = address["address_line_1"]
+            order.address_line_2 = address["address_line_2"]
+            order.city = address["city"]
+            order.postcode = address["postcode"]
+            order.country = address["country"]
+            order.save()
+
+            if created:
+                print(f"New order {order.order_number} created")
+            else:
+                print(f"Order {order.order_number} updated.")
+
+            return super().form_valid(form)
+
+        except IntegrityError:
+            print(e)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

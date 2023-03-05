@@ -18,6 +18,7 @@
     <h1>Orders</h1>
     {% if orders %}
     {% include "includes/orders_table.html" %}
+    {% include "includes/pagination_links.html" %}
     {% else %}
         <p>No orders found.</p>
     {% endif %}

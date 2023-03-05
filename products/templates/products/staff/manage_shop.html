@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block extra_title %}
+  - Manage Shop
+{% endblock extra_title %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
     <ol class="breadcrumb">
@@ -185,6 +188,22 @@
             <tr>
               <td>Orders Dispatched</td>
               <td>{{ orders_dispatched }}</td>
+            </tr>
+            <tr>
+              <td>
+                <a href="{% url 'manage_orders' %}?dispatched=false">
+                Orders to Dispatch
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'manage_orders' %}?dispatched=false">
+                {% if orders_to_dispatch > 0 %}
+                <span class="text-danger fw-bolder">⚠️ {{ orders_to_dispatch }}</span>
+                {% else %}
+                {{ orders_to_dispatch }}
+                {% endif %}
+                </a>
+              </td>
             </tr>
             <tr>
               <td>Registered Users</td>

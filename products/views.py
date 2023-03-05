@@ -303,6 +303,8 @@ class ManageShopView(StaffMemberRequiredMixin, generic.ListView):
         context["orders"] = Order.objects.filter().count()
         context["orders_dispatched"] = Order.objects.filter(
             shipped_date__isnull=False).count()
+        context["orders_to_dispatch"] = Order.objects.filter(
+            shipped_date__isnull=True).count()
         context["total_users"] = User.objects.count()
 
         for department in departments:
