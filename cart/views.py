@@ -1,26 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import Product
-from .models import Cart, CartItem
-from django.views import generic, View
+from django.views import View
+from django.views.generic import ListView
 from django.contrib import messages
+from .models import Cart, CartItem
+from .get_cart import get_cart_for_guest_or_user
 
 
-class CartView(LoginRequiredMixin, generic.ListView):
+class CartView(ListView):
     model = CartItem
     template_name = "cart/shopping_cart.html"
     context_object_name = "cart_items"
     ordering = ["-date_added"]
 
     def get_queryset(self):
-        queryset = self.model.objects.filter(cart__user=self.request.user)
+        queryset = self.model.objects.filter(
+            cart=get_cart_for_guest_or_user(self.request))
+
         queryset = queryset.order_by("date_added", "id")
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart = Cart.objects.get(user=self.request.user)
-        context["cart"] = Cart.objects.get(user=self.request.user)
+        cart = get_cart_for_guest_or_user(self.request)
 
         for item in cart.cart_item.all():
             if item.product.stock == 0:
@@ -42,9 +45,11 @@ class CartView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class CartAddView(LoginRequiredMixin, View):
+class CartAddView(View):
     def post(self, request, product_id):
-        cart = Cart.objects.get(user=request.user)
+
+        cart = get_cart_for_guest_or_user(self.request)
+
         product = Product.objects.get(id=product_id)
         cart_item, created = CartItem.objects.get_or_create(
             cart=cart, product=product)
@@ -61,18 +66,18 @@ class CartAddView(LoginRequiredMixin, View):
         return redirect("shopping_cart")
 
 
-class CartRemoveView(LoginRequiredMixin, View):
+class CartRemoveView(View):
     def post(self, request, product_id):
-        cart = Cart.objects.get(user=request.user)
+        cart = get_cart_for_guest_or_user(self.request)
         product = Product.objects.get(id=product_id)
         cart_item = get_object_or_404(CartItem, cart=cart, product=product)
         cart_item.adjust_quantity(0)
         return redirect("shopping_cart")
 
 
-class CartAdjustQuantityView(LoginRequiredMixin, View):
+class CartAdjustQuantityView(View):
     def post(self, request, product_id):
-        cart = Cart.objects.get(user=request.user)
+        cart = get_cart_for_guest_or_user(self.request)
         cart_item = CartItem.objects.get(cart=cart, product__id=product_id)
         new_quantity = int(request.POST.get("new_quantity"))
 
@@ -88,7 +93,7 @@ class CartAdjustQuantityView(LoginRequiredMixin, View):
 
 class UpdateCartItemGrindSize(View):
     def post(self, request, product_id, *args, **kwargs):
-        cart = Cart.objects.get(user=request.user)
+        cart = get_cart_for_guest_or_user(self.request)
         product = Product.objects.get(id=product_id)
         cart_item = get_object_or_404(CartItem, cart=cart, product=product)
 

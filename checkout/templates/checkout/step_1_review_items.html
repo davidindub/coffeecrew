@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock extra_css %}
 {% block content %}
     <div class="container-fluid">
@@ -38,13 +38,19 @@
                             {% endfor %}
                             <tr>
                                 <td colspan="3" class="fs-4">Total</td>
-                                <td class="fs-4">€{{ cart.total }}</td>
+                                <td class="fs-4">€{{ cart_total }}</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="text-center">
-                        <a href="{% url "checkout_delivery" %}" class="btn btn-cc">Continue to Delivery
-                        </a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url "checkout_delivery" %}" class="btn btn-cc">Continue to Delivery</a>
+                        {% else %}
+                            You need to Login or Register to continue with your order.
+                            <hr class="product-hr">
+                            <a class="btn btn-cc" href="{% url 'account_login' %}">Login to Continue</a>
+                            <a class="btn btn-cc" href="{% url 'account_signup' %}">Register</a>
+                        {% endif %}
                     </div>
                 {% else %}
                     <p>Your cart is empty</p>

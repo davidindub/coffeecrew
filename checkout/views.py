@@ -6,13 +6,15 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (DetailView, ListView,
                                   View, TemplateView, FormView)
-from .models import Order
+from django.db import IntegrityError
+from .models import Order, OrderLineItem
 from cart.models import CartItem, Cart
 from .forms import CheckoutAddressForm
 from profiles.models import Profile
 import stripe
 from coffeecrew.settings import (STRIPE_PUBLIC_KEY,
                                  STRIPE_SECRET_KEY, STRIPE_CURRENCY)
+from cart.get_cart import get_cart_for_guest_or_user
 
 
 stripe.api_key = STRIPE_SECRET_KEY
@@ -66,7 +68,7 @@ class StaffOrderListView(StaffMemberRequiredMixin, ListView):
     model = Order
     template_name = "profiles/orders.html"
     context_object_name = "orders"
-    paginate_by = 20
+    # paginate_by = 20
 
     def get_queryset(self):
         queryset = Order.objects.filter().order_by("-updated")
@@ -87,14 +89,13 @@ class CheckoutReviewView(ListView):
     ordering = ["-date_added"]
 
     def get_queryset(self):
-        queryset = self.model.objects.filter(cart__user=self.request.user)
+        queryset = self.model.objects.filter(
+            cart=get_cart_for_guest_or_user(self.request))
         queryset = queryset.order_by("date_added", "id")
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart = Cart.objects.get(user=self.request.user)
-        context["cart"] = Cart.objects.get(user=self.request.user)
         context["checkout_step"] = "review"
         return context
 
@@ -108,41 +109,67 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
     success_url = reverse_lazy("checkout_payment")
 
     def form_valid(self, form):
-        try:
-            order, created = Order.objects.get_or_create(
-                user=self.request.user,
-                completed=False
+        order, created = Order.objects.get_or_create(
+            user=self.request.user,
+            completed=False
+        )
+        cart = get_object_or_404(Cart, user=self.request.user)
+
+        if created:
+            print("NEW ORDER CREATED")
+        else:
+            print(f"UPDATING EXISTING ORDER {order.order_number}")
+
+        address = form.cleaned_data
+
+        print(address)
+        print("UPDATING ADDRESS:")
+        print(address["full_name"])
+
+        order.full_name = address["full_name"]
+        order.address_line_1 = address["address_line_1"]
+        order.address_line_2 = address["address_line_2"]
+        order.city = address["city"]
+        order.postcode = address["postcode"]
+        order.country = address["country"]
+        order.save()
+
+        print(f"full name in order: {order.full_name}")
+
+        if not created:
+            print("Deleting existing Order line items")
+            order.order_items.all().delete()
+
+        for item in cart.cart_item.all():
+            print("adding new order line items")
+            OrderLineItem.objects.create(
+                order=order,
+                product=item.product,
+                quantity=item.quantity,
+                price=item.product.price,
+                product_name=item.product.name,
+                grind_size=item.grind_size,
             )
-            address = form.cleaned_data
+        order.save()
 
-            order.full_name = address["full_name"]
-            order.address_line_1 = address["address_line_1"]
-            order.address_line_2 = address["address_line_2"]
-            order.city = address["city"]
-            order.postcode = address["postcode"]
-            order.country = address["country"]
-            order.save()
+        if created:
+            print(f"New order {order.order_number} created")
+        else:
+            print(f"Order {order.order_number} updated.")
 
-            if created:
-                print(f"New order {order.order_number} created")
-            else:
-                print(f"Order {order.order_number} updated.")
-
-            return super().form_valid(form)
-
-        except IntegrityError:
-            print(e)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context["cart"] = Cart.objects.get(user=user)
+        # context["cart"] = Cart.objects.get(user=user)
         context["checkout_step"] = "delivery"
 
         if self.request.user.is_authenticated:
             profile = get_object_or_404(Profile, user=user)
             default_shipping = profile.shipping_address
             if default_shipping:
+                context["full_name"] = user.get_full_name()
                 context["address_line_1"] = default_shipping.address_line_1
                 context["address_line_2"] = default_shipping.address_line_2
                 context["address_city"] = default_shipping.city
@@ -167,10 +194,13 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         if not STRIPE_PUBLIC_KEY:
             messages.warning(request, "Stripe Public Key Missing!!")
 
-        cart = get_object_or_404(Cart, user=self.request.user)
-        stripe_total = round(cart.total_with_delivery * 100)
+        # cart = get_object_or_404(Cart, user=self.request.user)
+        order = get_object_or_404(Order, user=self.request.user,
+                                  completed=False)
+        stripe_total = round(order.grand_total * 100)
+        print(f"stripe total is {stripe_total}")
 
-        if not cart.stripe_payment_intent:
+        if not order.stripe_pid:
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
                 currency=STRIPE_CURRENCY,
@@ -179,13 +209,13 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
                 },
             )
             print(f"Intent created {intent.id}")
-            # Save created payment intent to user's cart
-            cart.stripe_payment_intent = intent.id
-            cart.save()
+            # Save created payment intent to order
+            order.stripe_pid = intent.id
+            order.save()
         else:
             # Update the intent on stripe
             intent = stripe.PaymentIntent.modify(
-                cart.stripe_payment_intent, amount=stripe_total)
+                order.stripe_pid, amount=stripe_total)
             print(f"Intent updated on stripe {intent.id}")
 
         context["user"] = self.request.user
@@ -193,7 +223,7 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         context["checkout_step"] = "payment"
         context["stripe_public_key"] = STRIPE_PUBLIC_KEY
         context["client_secret"] = intent.client_secret
-        context["cart"] = cart
+        context["order"] = order
         return context
 
 
@@ -202,7 +232,56 @@ class SuccessView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["checkout_step"] = "complete"
+
+        cart = get_object_or_404(Cart, user=self.request.user)
+        order = get_object_or_404(Order, user=self.request.user,
+                                  completed=False)
+
+        print(f"order no: {order}")
+        print(f"order stripe pid: {order.stripe_pid}")
+
+        client_secret = self.request.GET.get(
+            "payment_intent_client_secret")
+        print(f"client_secret status: {client_secret}")
+
+        payment_status = stripe.PaymentIntent.retrieve(order.stripe_pid).status
+        print(f"payment status: {payment_status}")
+
+        if payment_status == "succeeded":
+            context["success"] = True
+            print("PAYMENT SUCCESSFUL")
+
+            cart.reset_cart_after_sale()
+            print("CART RESET")
+
+            order.complete_order()
+            print("SETTING ORDER AS COMPLETE")
+
+            context["checkout_step"] = "complete"
+            # TODO: Send customer email
+
+            context["order"] = order
+            return context
+
+        else:
+            context["success"] = False
+            print("Payment NOT successful")
+
+            context["checkout_step"] = "payment"
+            return redirect("payment_failure")
+
+        context["order"] = order
+        return context
+
+
+class PaymentFailedView(TemplateView):
+    template_name = "checkout/step_4_failure.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["success"] = False
+        print("Payment NOT successful")
+
         return context
 
 

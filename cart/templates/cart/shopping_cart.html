@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra_title %}
+  - Cart
+{% endblock extra_title %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+    <ol class="breadcrumb">
+      {% if user.is_authenticated %}
+      <li class="breadcrumb-item">
+        <a href="{% url 'account_dashboard' %}">My Account</a>
+      </li>
+      {% else %}
+      <li class="breadcrumb-item">
+        <a href="{% url 'products' %}">Products</a>
+        </li>
+      {% endif %}
+      <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
 {% block content %}
   <div class="container-fluid">
     <div class="row">
@@ -13,8 +32,8 @@
                 <th scope="col">Quantity</th>
                 <th scope="col" class="d-none d-md-table-cell">Price</th>
                 <th scope="col">Grind</th>
-                <th scope="col">Total</th>
                 <th scope="col">Actions</th>
+                <th scope="col">Total</th>
               </tr>
             </thead>
             <tbody>
@@ -93,31 +112,26 @@
                   {% else %}
                     <td>N/A</td>
                   {% endif %}
-                  <td>€{{ object.total }}</td>
                   <td>
                     <form action="{% url 'cart_remove' object.product.id %}" method="post">
                       {% csrf_token %}
                       <button class="btn btn-sm btn-outline-cc" type="submit">Remove</button>
                     </form>
                   </td>
+                  <td>€{{ object.total }}</td>
                 </tr>
               {% endfor %}
+              <tr>
+              <td colspan="4">
+                <strong>Order Total</strong>
+              </td>
+              <td colspan="2" class="d-none d-md-table-cell"></td>
+              <td><h3>€ {{ cart_total }}</h3></td>
+            </tr>
             </tbody>
           </table>
-          <div class="text-right my-3">
-            {% if not cart.free_delivery %}<p>Spent €{{ cart.spend_for_free_delivery }} more for free delivery!</p>{% endif %}
-            <h5 class="text-muted">
-              Delivery:
-              {% if cart.free_delivery %}
-                FREE
-              {% else %}
-                €{{ cart.delivery_total }}
-              {% endif %}
-            </h5>
-            <h3>Total: €{{ cart.total_with_delivery }}</h3>
-          </div>
           <div class="text-center">
-            <a href="{% url "checkout" %}" class="btn btn-cc">Checkout</a>
+            <a href="{% url "checkout" %}" class="btn btn-lg btn-cc text-end">Checkout</a>
           </div>
         {% else %}
           <p>Your cart is empty</p>

@@ -5,11 +5,16 @@ from django.dispatch import receiver
 from products.models import Product, Coffee
 from coffeecrew import settings
 from decimal import Decimal
-from cart import cart_logic
+from cart.cart_logic import (calculate_delivery_cost,
+                             calculate_total_with_delivery,
+                             get_spend_for_free_delivery,
+                             is_free_delivery)
 
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                null=True, blank=True)
+    guest_id = models.CharField(max_length=100, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
 
     @property
@@ -20,23 +25,26 @@ class Cart(models.Model):
         return Decimal(sum(item.total() for item in self.cart_item.all()))
 
     def __str__(self):
-        return f"{self.user.username}'s Cart"
+        if self.user:
+            return f"{self.user.username}'s Cart"
+        else:
+            return f"Guest Cart ID last updated { self.updated }"
 
     @property
     def delivery_total(self):
-        return cart_logic.calculate_delivery_cost(self.total())
+        return calculate_delivery_cost(self.total())
 
     @property
     def free_delivery(self):
-        return cart_logic.is_free_delivery(self.total())
+        return is_free_delivery(self.total())
 
     @property
     def spend_for_free_delivery(self):
-        return cart_logic.get_spend_for_free_delivery(self.total())
+        return get_spend_for_free_delivery(self.total())
 
     @property
     def total_with_delivery(self):
-        return cart_logic.calculate_total_with_delivery(self.total())
+        return calculate_total_with_delivery(self.total())
 
     def empty_cart(self):
         """

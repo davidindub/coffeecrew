@@ -84,11 +84,14 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
 ROOT_URLCONF = "coffeecrew.urls"
 
 SITE_ID = 1
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 LOGIN_URL = "/accounts/login/"
 
@@ -136,6 +139,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.request",
                 "cart.context_processors.cart_total",
+                "cart.context_processors.cart",
                 "products.context_processors.get_departments_for_navbar",
                 "profiles.context_processors.get_user_wishlist"
             ],
