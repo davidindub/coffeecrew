@@ -3,6 +3,9 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock extra_css %}
+{% block extra_title %}
+    - Order {{ order.order_number }} Confirmed!
+{% endblock extra_title %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -10,20 +13,25 @@
         </div>
         <div class="row">
             <div class="col">
-                <h1>
-                    Success!
-                </h1>
+                <h1>Success!</h1>
+                <p>
+                    {% if success %}
+                        Payment Successful 💸
+                        Your order number is <span class="text-fs2">{{ order.order_number }}</span>
+                        <br>
+                        An email confirmation is on the way!
+                    {% else %}
+                        Payment NOT successful 🚫
+                    {% endif %}
+                </p>
             </div>
-            <div class="col">
-
-            </div>
-            </div>
+            <div class="col"></div>
         </div>
     </div>
+</div>
 {% endblock content %}
 {% block post_load_js %}
-{{ block.super }}
-{{ stripe_public_key|json_script:"id_stripe_public_key" }}
-{{ client_secret|json_script:"id_client_secret" }}
-
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
 {% endblock post_load_js %}
