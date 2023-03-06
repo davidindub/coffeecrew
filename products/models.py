@@ -69,8 +69,19 @@ class Product(models.Model):
     lifetime_sales = models.PositiveSmallIntegerField(
         default=0, editable=False)
 
+    def make_sale(self, quantity):
+        """
+        Decrement the stock of an item
+        Increment the lifetime sales
+        quantity: amount to decrement by
+        """
+        # TODO: Test for exceptions
+        self.stock = self.stock - quantity
+        self.lifetime_sales = self.lifetime_sales + quantity
+        self.save()
+
     def save(self, *args, **kwargs):
-        # update the slug if the name is changed
+        # Update the slug if the name is changed
         if self.pk:
             original_name = Product.objects.get(pk=self.pk).name
             if original_name != self.name:

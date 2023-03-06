@@ -19,11 +19,7 @@ class Order(models.Model):
     order_number = models.CharField(max_length=15, unique=True)
     delivery_method = models.CharField(max_length=20, null=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2,
-                                        null=False, default=DELIVERY_COST)
-    order_total = models.DecimalField(max_digits=10, decimal_places=2,
-                                      null=False, default=0)
-    grand_total = models.DecimalField(max_digits=10, decimal_places=2,
-                                      null=False, default=0)
+                                        null=False, default=0.00)
     stripe_pid = models.CharField(max_length=254, null=False, blank=False,
                                   default='')
     full_name = models.CharField(max_length=200, null=True)
@@ -33,6 +29,16 @@ class Order(models.Model):
     postcode = models.CharField(max_length=200, null=False)
     country = CountryField(null=False, blank=False)
     shipped_date = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def order_total(self):
+        line_items = self.order_items.all()
+        return sum([item.total for item in line_items])
+
+    @property
+    def grand_total(self):
+        order_total = self.order_total
+        return self.order_total + self.delivery_cost
 
     def generate_order_number(self):
         """
@@ -46,20 +52,23 @@ class Order(models.Model):
         random_digits = "".join(random.choice("0123456789") for _ in range(8))
         return f"{month}{day}{random_digits}"
 
-    def update_totals(self):
-        """
-        Update order_total to the total of all OrderItems
-        """
-        order_items = self.order_items.all()
-        total = sum([item.price for item in order_items])
-        self.order_total = total
-        self.grand_total = self.order_total + self.delivery_cost
-
     def set_as_shipped(self):
         """
         Set the Shipped Date and set order as complete
         """
         self.shipped_date = datetime.datetime.now()
+        self.save()
+
+    def complete_order(self):
+        """
+        Set order as complete, decrement product stock
+        """
+        self.completed = True
+
+        for item in self.order_items.all():
+            quantity = item.quantity
+            item.product.make_sale(quantity)
+        
         self.save()
 
     def save(self, *args, **kwargs):
@@ -69,16 +78,22 @@ class Order(models.Model):
         try to save again.
         Update the order total & grand total
         """
+
         if not self.order_number:
             self.order_number = self.generate_order_number()
-
-        while True:
-            try:
-                # self.update_totals()
-                super().save(*args, **kwargs)
-                break
-            except IntegrityError:
-                self.order_number = self.generate_order_number()
+            while True:
+                try:
+                    super().save(*args, **kwargs)
+                    break
+                except IntegrityError:
+                    print(f"Duplicate order number")
+                    # Catch potential duplicate order numbers and
+                    #  generate new order number
+                    self.order_number = self.generate_order_number()
+                except ValueError:
+                    print("Can't update totals until order created")
+        else:
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return self.order_number
@@ -102,13 +117,21 @@ class OrderLineItem(models.Model):
         null=True
     )
     price = models.DecimalField(
-        max_digits=6, decimal_places=2, null=True, blank=True, editable=False)
+        max_digits=6, decimal_places=2, null=True, blank=True)
     product_name = models.CharField(
         max_length=254, null=True, blank=True, editable=False)
-    total = models.DecimalField(
-        max_digits=6, decimal_places=2, null=True, blank=True, editable=False)
+
+    @property
+    def total(self):
+        return self.price * self.quantity
 
     def set_details(self):
+        """
+        Set the price if it hasn't been already set.
+        Save the product's name in case it becomes unavailable on the site,
+        so not to break users order history.
+        Should only be called when the order is created.
+        """
         if not self.price:
             self.price = self.product.price
         if not self.product_name:
@@ -121,15 +144,7 @@ class OrderLineItem(models.Model):
         Save the product's name in case it becomes unavailable on the site,
         so not to break users order history.
         """
-        self.set_details()
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.product.name} ({self.quantity})"
-
-
-@receiver(post_save, sender=OrderLineItem)
-def lock_price(sender, instance, created, **kwargs):
-    if created:
-        instance.set_details()
-        instance.save()
