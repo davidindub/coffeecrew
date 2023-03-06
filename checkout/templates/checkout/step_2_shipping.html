@@ -3,6 +3,9 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock extra_css %}
+{% block extra_title %}
+  - Checkout Delivery Address
+{% endblock extra_title %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -52,6 +55,7 @@
 {% endblock content %}
 {% block post_load_js %}
     {% comment %} Passing the address to JS for filling the form on checked box {% endcomment %}
+    {{ full_name|json_script:"fullName" }}
     {{ address_line_1|json_script:"addressLine1" }}
     {{ address_line_2|json_script:"addressLine2" }}
     {{ address_city|json_script:"addressCity" }}
