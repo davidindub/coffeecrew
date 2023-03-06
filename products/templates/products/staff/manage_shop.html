@@ -106,7 +106,7 @@
                width="16"
                height="16"
                fill="currentColor"
-               class="bi bi-plus-square-fill"
+               class="bi bi-plus-square-fill svg-in-btn"
                viewBox="0 0 16 16">
             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
           </svg>
@@ -116,7 +116,7 @@
                width="16"
                height="16"
                fill="currentColor"
-               class="bi bi-plus-square-fill"
+               class="bi bi-plus-square-fill svg-in-btn"
                viewBox="0 0 16 16">
             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
           </svg>
@@ -165,7 +165,7 @@
                width="16"
                height="16"
                fill="currentColor"
-               class="bi bi-plus-square-fill"
+               class="bi bi-plus-square-fill svg-in-btn"
                viewBox="0 0 16 16">
             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
           </svg>
@@ -173,6 +173,7 @@
       </div>
     </div>
     <div class="col- col-lg-6">
+      <hr class="product-hr d-lg-none">
       <h2>Stats</h2>
       <div class="table-responsive">
         <table class="table">
@@ -186,22 +187,24 @@
               </td>
             </tr>
             <tr>
-              <td>Orders Dispatched</td>
-              <td>{{ orders_dispatched }}</td>
+              <td>
+                <a href="{% url 'manage_orders' %}?dispatched=true">Orders Dispatched</a>
+              </td>
+              <td>
+                <a href="{% url 'manage_orders' %}?dispatched=true">{{ orders_dispatched }}</a>
+              </td>
             </tr>
             <tr>
               <td>
-                <a href="{% url 'manage_orders' %}?dispatched=false">
-                Orders to Dispatch
-                </a>
+                <a href="{% url 'manage_orders' %}?dispatched=false">Orders to Dispatch</a>
               </td>
               <td>
                 <a href="{% url 'manage_orders' %}?dispatched=false">
-                {% if orders_to_dispatch > 0 %}
-                <span class="text-danger fw-bolder">⚠️ {{ orders_to_dispatch }}</span>
-                {% else %}
-                {{ orders_to_dispatch }}
-                {% endif %}
+                  {% if orders_to_dispatch > 0 %}
+                    <span class="text-danger">{{ orders_to_dispatch }}</span>
+                  {% else %}
+                    {{ orders_to_dispatch }}
+                  {% endif %}
                 </a>
               </td>
             </tr>
@@ -209,8 +212,22 @@
               <td>Registered Users</td>
               <td>{{ total_users }}</td>
             </tr>
+            <tr>
+              <td>Guest Carts</td>
+              <td>{{ num_guest_carts }}</td>
+            </tr>
           </tbody>
         </table>
+        <hr class="product-hr">
+        {% if orders_to_dispatch > 0 %}
+        <a href="{% url 'manage_orders' %}?dispatched=false" class="btn btn-sm btn-cc position-relative">
+            Orders to Dispatch
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ orders_to_dispatch }}
+              <span class="visually-hidden">orders to dispatch</span>
+            </span>
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

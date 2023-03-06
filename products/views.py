@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from cart.models import Cart
 from checkout.models import Order
 from profiles.models import WishList
 from .models import Product, Coffee, Category, Department, Brand
@@ -320,6 +321,8 @@ class ManageShopView(StaffMemberRequiredMixin, generic.ListView):
         context["orders_to_dispatch"] = Order.objects.filter(
             shipped_date__isnull=True).count()
         context["total_users"] = User.objects.count()
+        context["num_guest_carts"] = Cart.objects.filter(
+            guest_id__isnull=False).count()
 
         for department in departments:
             department.categories = Category.objects.filter(

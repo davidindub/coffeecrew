@@ -75,6 +75,8 @@ class StaffOrderListView(StaffMemberRequiredMixin, ListView):
 
         if self.request.GET.get("dispatched") == "false":
             queryset = queryset.filter(shipped_date__isnull=True)
+        if self.request.GET.get("dispatched") == "true":
+            queryset = queryset.filter(shipped_date__isnull=False)
 
         return queryset
 
