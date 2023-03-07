@@ -5,9 +5,14 @@ from .get_cart import get_cart_for_guest_or_user
 
 
 def cart_total(request):
-    print("cart_total() called")
-    cart = get_cart_for_guest_or_user(request)
-    return {"cart_total": cart.total() if cart else 0.00}
+    cart = None
+    try:
+        cart = get_cart_for_guest_or_user(request)
+    except KeyError as e:
+        # Guest cart not yet created, let cart() create cookie and cart first
+        print(e)
+    finally:
+        return {"cart_total": cart.total() if cart else 0.00}
 
 
 def cart(request):
