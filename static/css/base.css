@@ -259,6 +259,10 @@ footer a,
     --bs-btn-active-border-color: var(--color-primary);
 }
 
+.svg-in-btn {
+    margin-right: 0.5rem;
+}
+
 .hero-button {
     padding: 1rem 2rem;
     margin-top: 2rem;
