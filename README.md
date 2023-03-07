@@ -110,13 +110,26 @@ See:
 
 ### Notifications
 
-Django Messages and Bootstrap's Toast elements were combined to make elegant notification messages when the user performs actions.
+Django Messages and Bootstrap's Alerts elements were combined to make elegant notification messages when the user performs actions.
 
 
 ### Favicon
 
 
-### Staff Only Features
+### Newsletter
+
+I used [Mailchimp](https://mailchimp.com/) to set up an optional Newsletter subscription service to drive repeat business.
+
+I created a template of a potential welcome email and mapped out a customer journey in Mailchimp.
+
+![](docs/images/newsletter-preview-1.jpg)
+
+![](docs/images/newsletter-preview-2.jpg)
+
+
+
+
+## Staff Only Features
 
 
 ### Shop Management Dashboard
@@ -155,6 +168,8 @@ Features I didn't implement in this iteration but plan to add in future include
 - A Discount Code system
 - Option for time-based Sales
 - Use more Stripe features, like possibly use for receipts
+- Mailchimp could be connected to user profiles to include campaigns such as birthday emails with discounts, or follow up emails on completed orders.
+
 
 ## Technologies Used
 
@@ -177,6 +192,7 @@ Features I didn't implement in this iteration but plan to add in future include
 - [Safari](https://www.apple.com/safari/) on iOS and iPadOS 15.
 - [Google Chrome](https://www.google.com/intl/en_ie/chrome/) on Android 12.
 - [Miro](https://www.miro.com/) for drawing database diagrams.
+- [Mailchimp](https://mailchimp.com/) for newsletter subscription service.
 - [Copy.ai](https://www.copy.ai/) for inspiration for some of the slogans and headlines.
 - [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
 - [Device Frames](https://deviceframes.com/) for the device mockups in this README.
