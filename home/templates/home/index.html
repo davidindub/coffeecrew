@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block page_header %}
 <div class="container">
   <div class="row">
@@ -16,4 +17,32 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+<h2><a href="{% url 'products'%}?sort=date_added">New Products</a></h2>
+  <div class="card-group">
+    {% for product in latest_products %}
+    <div class="card">
+      <a href="{% url 'product_detail' product.slug %}">
+        {% if product.image %}
+            <img src="{{ product.imageURL }}"
+                 class="card-img-top"
+                 alt="{{ product.name }}">
+        {% else %}
+            <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                 class="card-img-top"
+                 alt="{{ product.name }}">
+        {% endif %}
+    </a>
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a></h5>
+        <p class="card-text">{{ product.description|truncatewords:12 }}</p>
+        <p class="card-text"><small class="text-muted">Added {{ product.date_added|naturaltime }}</small></p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
 {% endblock content %}

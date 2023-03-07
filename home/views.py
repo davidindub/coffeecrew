@@ -1,32 +1,40 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from products.models import Product
 
 
-def index(request):
+class IndexView(TemplateView):
     """
     renders view for the homepage
     """
-    return render(request, "home/index.html")
+    template_name = "home/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_products"] = Product.objects.order_by(
+            "-date_added")[:3]
+        return context
 
 
-def about(request):
+class AboutView(TemplateView):
     """
     renders view for the about page
     """
-    return render(request, "home/about.html")
+    template_name = "home/about.html"
 
 
-def privacy_policy(request):
+class PrivacyPolicyView(TemplateView):
     """
     renders view for the privacy policy page
     """
-    return render(request, "home/privacy_policy.html")
+    template_name = "home/privacy_policy.html"
 
 
-def contact_us(request):
+class ContactUsView(TemplateView):
     """
     renders view for the contact page
     """
-    return render(request, "home/contact.html")
+    template_name = "home/contact.html"
 
 
 def handler403(request, exception):
