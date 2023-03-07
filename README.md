@@ -12,6 +12,8 @@ Users can register to submit resources to the directory, and upvote and bookmark
 
 The project was built keeping the Agile management principles in mind, and I utilised many of GitHub's features such as Issue and Projects to implement Scrum methodology.
 
+I wanted to build a front end for the business owner to manage the shop without entering the Django Admin panel.
+
 [Kanban Board for project](https://github.com/users/davidindub/projects/8/)
 
 [Closed Issues on GitHub for the project](https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed)
@@ -33,6 +35,7 @@ User Stories can been seen below under [User Story Testing](#user-story-testing)
 
 ## UX  
 
+![](docs/docs-colour-palette.png)
 
 ### Typography
 
@@ -113,14 +116,28 @@ Django Messages and Bootstrap's Toast elements were combined to make elegant not
 ### Favicon
 
 
+### Staff Only Features
+
+
+### Shop Management Dashboard
+
+
 ### Printable Order Sheets
 
 I used media queries to create a print friendly layout for Orders so they can be printed out as packing slips by the business owner.
 
+A Print Order button is included on the page for staff only.
+
+<details>
+<summary>
+Screenshots of Printable Order Sheet Feature
+</summary>
+
+![](docs/images/screenshots/screenshot-order-print-btn.jpg)
+
 ![](docs/images/screenshots/screenshot-printable-order.jpg)
 
-
-### Staff Only Features
+</details>
 
 
 ### Custom Error Pages
@@ -133,6 +150,11 @@ Custom error pages were added for 403, 404, and 500 errors.
 
 ### Features Left to Implement
 
+Features I didn't implement in this iteration but plan to add in future include
+
+- A Discount Code system
+- Option for time-based Sales
+- Use more Stripe features, like possibly use for receipts
 
 ## Technologies Used
 
