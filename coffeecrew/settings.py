@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "cart",
     "storages",
     "checkout",
+    "staff",
     "django_countries",
     "crispy_forms",
     "crispy_bootstrap5",

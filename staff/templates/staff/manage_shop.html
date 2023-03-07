@@ -228,6 +228,15 @@
             </span>
           </a>
         {% endif %}
+        <a href="{% url 'purge_stale_carts' %}" class="btn btn-sm btn-cc btn-outline-cc position-relative">
+          Purge Stale Guest Carts
+          {% if stale_guest_carts > 0 %}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ stale_guest_carts }}
+            <span class="visually-hidden">stale guest carts</span>
+          </span>
+          {% endif %}
+        </a>
       </div>
     </div>
   </div>

@@ -1,32 +1,20 @@
-import os
 from django.contrib import messages
-from django.http import JsonResponse
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (DetailView, ListView,
                                   View, TemplateView, FormView)
-from django.db import IntegrityError
-from .models import Order, OrderLineItem
-from cart.models import CartItem, Cart
-from .forms import CheckoutAddressForm
-from profiles.models import Profile
 import stripe
+from profiles.models import Profile
+from cart.models import CartItem, Cart
+from cart.get_cart import get_cart_for_guest_or_user
+from coffeecrew.StaffMemberRequiredMixin import StaffMemberRequiredMixin
 from coffeecrew.settings import (STRIPE_PUBLIC_KEY,
                                  STRIPE_SECRET_KEY, STRIPE_CURRENCY)
-from cart.get_cart import get_cart_for_guest_or_user
-
+from .forms import CheckoutAddressForm
+from .models import Order, OrderLineItem
 
 stripe.api_key = STRIPE_SECRET_KEY
-
-
-class StaffMemberRequiredMixin(UserPassesTestMixin):
-    """
-    Check is the user a staff member to restrict access
-    """
-
-    def test_func(self):
-        return self.request.user.is_staff
 
 
 class OrderDetailView(LoginRequiredMixin, DetailView):
@@ -40,45 +28,6 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(Order,
                                  order_number=self.kwargs["order_number"])
-
-
-class OrderDispatchView(StaffMemberRequiredMixin, View):
-    """
-    View for showing setting an order as dispatched,
-    redirects to the Order Detail View
-    """
-
-    def get(self, request, order_number):
-        order = get_object_or_404(Order, order_number=order_number)
-        try:
-            order.set_as_shipped()
-            messages.success(
-                self.request, f"Order {order.order_number} dispatched!")
-        except Order.DoesNotExist:
-            messages.error(self.request, "Order does not exist")
-
-        return redirect(reverse("order_detail",
-                                kwargs={'order_number': order.order_number}))
-
-
-class StaffOrderListView(StaffMemberRequiredMixin, ListView):
-    """
-    View for Staff view list of orders
-    """
-    model = Order
-    template_name = "profiles/orders.html"
-    context_object_name = "orders"
-    # paginate_by = 20
-
-    def get_queryset(self):
-        queryset = Order.objects.filter().order_by("-updated")
-
-        if self.request.GET.get("dispatched") == "false":
-            queryset = queryset.filter(shipped_date__isnull=True)
-        if self.request.GET.get("dispatched") == "true":
-            queryset = queryset.filter(shipped_date__isnull=False)
-
-        return queryset
 
 
 class CheckoutReviewView(ListView):
@@ -194,9 +143,8 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
 
         if not STRIPE_PUBLIC_KEY:
-            messages.warning(request, "Stripe Public Key Missing!!")
+            messages.warning(self.request, "Stripe Public Key Missing!!")
 
-        # cart = get_object_or_404(Cart, user=self.request.user)
         order = get_object_or_404(Order, user=self.request.user,
                                   completed=False)
         stripe_total = round(order.grand_total * 100)

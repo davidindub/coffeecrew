@@ -1,7 +1,7 @@
-from products.models import Product, Coffee, Department, Category
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from products.models import Product, Coffee, Department, Category
 
 
 class ProductForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class ProductForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="btn-cc"))
+            Submit("submit", "Save", css_class="btn btn-cc"))
 
 
 class CoffeeForm(ProductForm):
@@ -45,7 +45,7 @@ class DepartmentForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="btn-cc"))
+            Submit("submit", "Save", css_class="btn btn-cc"))
 
 
 class CategoryForm(forms.ModelForm):
@@ -61,4 +61,21 @@ class CategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit("submit", "Save", css_class="btn-cc"))
+            Submit("submit", "Save", css_class="btn btn-cc"))
+
+
+class PurgeStaleCartsForm(forms.Form):
+    """
+    Form for purging stale guest carts
+    """
+    purge_stale_carts = forms.BooleanField(
+        required=True,
+        label="Are you sure you want to purge these carts?"
+            )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.add_input(
+            Submit("submit", "Purge Cards", css_class="btn btn-cc"))

@@ -75,11 +75,12 @@ class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = "profiles/orders.html"
     context_object_name = "orders"
-    paginate_by = 10
+    # paginate_by = 10
 
     def get_queryset(self):
         user = self.request.user
-        orders = Order.objects.filter(user=user).order_by("-updated")
+        orders = Order.objects.filter(
+            user=user, completed=True).order_by("-updated")
         return orders
 
 

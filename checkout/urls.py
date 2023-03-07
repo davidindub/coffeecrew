@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import (CheckoutReviewView, CheckOutShippingView,
-                    CheckoutPaymentView, SuccessView, CancelView)
+                    CheckoutPaymentView, SuccessView, CancelView,
+                    PaymentFailedView)
 
 urlpatterns = [
     path("", CheckoutReviewView.as_view(), name="checkout"),
@@ -9,5 +10,7 @@ urlpatterns = [
     path("payment/", CheckoutPaymentView.as_view(),
          name="checkout_payment"),
     path("cancel/", CancelView.as_view(), name="cancel"),
-    path("success/", SuccessView.as_view(), name="success"),
+    path("success/", SuccessView.as_view(), name="payment_success"),
+    path("payment/failure/", PaymentFailedView.as_view(),
+         name="payment_failure"),
 ]
