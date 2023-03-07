@@ -22,6 +22,13 @@ def privacy_policy(request):
     return render(request, "home/privacy_policy.html")
 
 
+def contact_us(request):
+    """
+    renders view for the contact page
+    """
+    return render(request, "home/contact.html")
+
+
 def handler403(request, exception):
     """
     View for 403 Error Page
