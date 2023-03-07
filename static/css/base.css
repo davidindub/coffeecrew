@@ -43,7 +43,7 @@ body {
 a {
     color: inherit;
     transition: all 0.2s ease-in-out;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
@@ -59,7 +59,13 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6
+{
+    color: var(--color-primary);
+    font-family: var(--font-display-font);
+    margin: 0.5rem 0;
+}
+
 .breadcrumb-item {
     color: var(--color-primary);
     font-family: var(--font-display-font);
@@ -263,6 +269,10 @@ footer a,
     margin-right: 0.5rem;
 }
 
+.svg-primary {
+    fill: var(--color-primary);
+}
+
 .hero-button {
     padding: 1rem 2rem;
     margin-top: 2rem;
@@ -323,7 +333,15 @@ footer .footer-container {
 }
 
 
-footer a {
+footer a, 
+nav a, 
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a
+{
     text-decoration: none;
 }
 

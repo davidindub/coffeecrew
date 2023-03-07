@@ -1,8 +1,93 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_title %}
-- Privacy Policy
+    - Privacy Policy
 {% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">Coffee Crew</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
 {% block content %}
-    <h1>Privacy Policy</h1>
+<div class="row">
+    <div class="col-12 col-lg-8">
+<section>    
+<h1>Privacy Policy</h1>
+    This privacy policy describes how we collect, use, and protect your personal information when you use the Coffee Crew website. By using our website, you agree to the terms of this privacy policy.
+</section>
+<section>
+    <h3>Collection of Personal Information</h3>
+    When you use our website, we may collect certain personal information from you, including your name, email address, shipping address, billing address, and payment information. We collect this information when you make a purchase, create an account, or contact us through our website.
+    We may also collect certain non-personal information from you, such as your IP address, browser type, and operating system, in order to improve our website and analyze user behavior.
+</section>
+<section>
+    <h3>Use of Personal Information</h3>
+    We use your personal information to process your orders, provide customer service, and communicate with you about your orders and our products. We may also use your personal information to send you promotional emails or newsletters if you have opted in to receive them.
+    We will never sell or share your personal information with third parties for marketing purposes.
+</section>
+<section>
+    <h3>Cookies</h3>
+    We use cookies on our website to provide you with a more personalized shopping experience. Cookies are small text files that are placed on your device when you use our website. We use both session cookies and persistent cookies.
+    Session cookies are temporary and are deleted after two weeks. We use session cookies to allow guest users to have a shopping cart.
+    <br><br>
+    For further information, visit <a href="https://allaboutcookies.org" target="_blank" rel="noopener">allaboutcookies.org</a>.
+
+</section>
+<section>
+    <h3>Payments</h3>
+    We use <a href="https://stripe.com/" target="_blank" rel="noopener">Stripe</a> to process payments on our website. When you make a purchase through our website, Stripe may collect certain personal information from you, such as your name, email address, shipping address, and payment information. Stripe's collection and use of your personal information is governed by the <a href="https://stripe.com/ie/privacy" target="_blank" rel="noopener">Stripe Privacy Policy</a>.
+    We do not store or have access to your full credit card details, as Stripe handles all payment processing securely.
+</section>
+<section>
+    <h3>Security</h3>
+    We take the security of your payment information seriously and use Stripe to ensure the secure transmission of your payment details. Stripe uses industry-standard security measures such as SSL encryption to protect your payment information during transmission.
+    By using our website and making a purchase through Stripe, you agree to Stripe's privacy policy and terms of service. If you have any questions or concerns about Stripe's collection and use of your personal information, please contact Stripe directly.
+    
+    <section>
+    <h3>What are your data protection rights?</h3>
+    <p>
+    Coffee Crew would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:
+    <br><br>
+    <strong>The right to access –</strong> You have the right to request Our Company for copies of your personal data. We may charge you a small fee for this service.
+    <br><br>
+    <strong>The right to rectification –</strong> You have the right to request that Our Company correct any information you believe is inaccurate. You also have the right to request Our Company to complete the information you believe is incomplete.
+    <br><br>
+    <strong>The right to erasure –</strong> You have the right to request that Our Company erase your personal data, under certain conditions.
+    <br><br>
+    <strong>The right to restrict processing –</strong> You have the right to request that Our Company restrict the processing of your personal data, under certain conditions.
+    <br><br>
+    <strong>The right to object to processing –</strong> You have the right to object to Our Company’s processing of your personal data, under certain conditions.
+    <br><br>
+    <strong>The right to data portability –</strong> You have the right to request that Our Company transfer the data that we have collected to another organization, or directly to you, under certain conditions.
+    <br><br>
+</p>
+</section>
+<section>
+    <h3>Changes to this Privacy Policy</h3>
+    This Privacy Policy was last updated on <time datetime="2023-03-07">7 March 2023</time>.
+    <br><br>
+    We reserve the right to update or change this privacy policy at any time. We will notify you of any changes by posting the new privacy policy on our website. Your continued use of our website after we make changes to this privacy policy constitutes your acceptance of the changes.
+</section>
+</div>
+<div class="col text-center">
+    <section>
+    <hr class="product-hr d-lg-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-question-circle-fill svg-primary" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+      </svg>
+    <h3>Contact Us</h3>
+    If you have any questions or concerns about this privacy policy or our use of your personal information, please  <a href="{% url 'contact' %}">contact us</a>.
+</section>
+<hr class="product-hr">
+<section>
+    <h3>How to contact the appropriate authority</h3>
+    Should you wish to report a complaint or if you feel that Our Company has not addressed your concern in a satisfactory manner, you may contact the <a href="https://www.dataprotection.ie/" target="_blank" rel="noopener">The Data Protection Commission</a>.
+</section>
+</div>
+</div>
 {% endblock content %}

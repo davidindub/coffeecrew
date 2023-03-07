@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %}
+    - Contact Us
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">Coffee Crew</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+    <h1>Contact Us</h1>
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis natus modi at deserunt harum ipsum quae vel! Voluptas eaque soluta, consequuntur labore deserunt natus, id similique officiis nam vero quam.
+{% endblock content %}
