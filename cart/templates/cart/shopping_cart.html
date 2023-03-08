@@ -32,7 +32,7 @@
                 <th scope="col">Quantity</th>
                 <th scope="col" class="d-none d-md-table-cell">Price</th>
                 <th scope="col">Grind</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="d-none d-md-table-cell">Actions</th>
                 <th scope="col">Total</th>
               </tr>
             </thead>
@@ -112,7 +112,7 @@
                   {% else %}
                     <td>N/A</td>
                   {% endif %}
-                  <td>
+                  <td class="d-none d-md-table-cell">
                     <form action="{% url 'cart_remove' object.product.id %}" method="post">
                       {% csrf_token %}
                       <button class="btn btn-sm btn-outline-cc" type="submit">Remove</button>
@@ -122,10 +122,12 @@
                 </tr>
               {% endfor %}
               <tr>
-              <td colspan="4">
-                <strong>Order Total</strong>
+              <td colspan="3" class="d-table-cell d-md-none">
+                <h3>Order Total</h3>
               </td>
-              <td colspan="2" class="d-none d-md-table-cell"></td>
+              <td colspan="6" class="d-none d-md-table-cell">
+                <h3>Order Total</h3>
+              </td>
               <td><h3>€ {{ cart_total }}</h3></td>
             </tr>
             </tbody>
