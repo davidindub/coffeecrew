@@ -1,10 +1,11 @@
 // Following documentation from https://stripe.com/docs/js/
 
 
-let stripePublicKey = document.querySelector("#id_stripe_public_key").textContent.slice(1,-1);
-let clientSecret = document.querySelector("#id_client_secret").textContent.slice(1,-1);
+const stripePublicKey = document.querySelector("#id_stripe_public_key").textContent.slice(1,-1);
+const clientSecret = document.querySelector("#id_client_secret").textContent.slice(1,-1);
 
-let userEmail = document.querySelector("#user_email").textContent.slice(1,-1);
+const stripeReturnURL = document.querySelector("#stripeReturnURL").textContent.slice(1,-1);
+const userEmail = document.querySelector("#user_email").textContent.slice(1,-1);
 
 const stripe = Stripe(stripePublicKey);
 
@@ -43,7 +44,7 @@ async function handleSubmit(e) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://8000-davidindub-coffeecrew-xg0tkqn403e.ws-eu89.gitpod.io/checkout/success/",
+        return_url: stripeReturnURL,
         receipt_email: userEmail,
       },
     });

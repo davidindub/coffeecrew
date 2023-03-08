@@ -43,6 +43,7 @@
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
+    {{ stripe_return_url|json_script:"stripeReturnURL" }}
 
     {{ user.email|json_script:"user_email" }}
 

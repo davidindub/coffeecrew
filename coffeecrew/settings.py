@@ -163,7 +163,19 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        },
+        "TEST": {
+            "NAME": "mytestdatabase",
+        },
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -256,4 +268,5 @@ else:
     STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY")
     STRIPE_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY")
 
-# STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
+STRIPE_RETURN_URL = os.environ.get("STRIPE_RETURN_URL")
+STRIPE_WH_SECRET = os.environ.get("STRIPE_WH_SECRET")

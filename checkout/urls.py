@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import (CheckoutReviewView, CheckOutShippingView,
                     CheckoutPaymentView, SuccessView, CancelView,
-                    PaymentFailedView)
+                    PaymentFailedView, my_webhook_view)
 
 urlpatterns = [
     path("", CheckoutReviewView.as_view(), name="checkout"),
@@ -13,4 +13,5 @@ urlpatterns = [
     path("success/", SuccessView.as_view(), name="payment_success"),
     path("payment/failure/", PaymentFailedView.as_view(),
          name="payment_failure"),
+    path("payment/stripe-webhooks/", my_webhook_view, name="stripe_webhooks"),
 ]

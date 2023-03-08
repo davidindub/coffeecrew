@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -9,8 +11,9 @@ from profiles.models import Profile
 from cart.models import CartItem, Cart
 from cart.get_cart import get_cart_for_guest_or_user
 from coffeecrew.StaffMemberRequiredMixin import StaffMemberRequiredMixin
-from coffeecrew.settings import (STRIPE_PUBLIC_KEY,
-                                 STRIPE_SECRET_KEY, STRIPE_CURRENCY)
+from coffeecrew.settings import (STRIPE_PUBLIC_KEY, STRIPE_RETURN_URL,
+                                 STRIPE_SECRET_KEY, STRIPE_CURRENCY,
+                                 STRIPE_WH_SECRET)
 from .forms import CheckoutAddressForm
 from .models import Order, OrderLineItem
 
@@ -173,6 +176,7 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         context["checkout_step"] = "payment"
         context["stripe_public_key"] = STRIPE_PUBLIC_KEY
         context["client_secret"] = intent.client_secret
+        context["stripe_return_url"] = STRIPE_RETURN_URL
         context["order"] = order
         return context
 
@@ -237,3 +241,34 @@ class PaymentFailedView(TemplateView):
 
 class CancelView(TemplateView):
     template_name = "cancel.html"
+
+
+@csrf_exempt
+def my_webhook_view(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, STRIPE_WH_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the event
+    if event.type == 'payment_intent.succeeded':
+        payment_intent = event.data.object  # contains a stripe.PaymentIntent
+        print('PaymentIntent was successful!')
+    elif event.type == 'payment_method.attached':
+        payment_method = event.data.object  # contains a stripe.PaymentMethod
+        print('PaymentMethod was attached to a Customer!')
+    # ... handle other event types
+    else:
+        print('Unhandled event type {}'.format(event.type))
+
+    return HttpResponse(status=200)
