@@ -1,6 +1,4 @@
-
 # Coffee Crew
-
 
 ## Table of Contents
 
@@ -8,9 +6,11 @@
 
 The project is an E-commerce site for a shop selling specialty coffee equipment.
 
-Users can register to submit resources to the directory, and upvote and bookmark resources they find useful.
+Users including guests can browse products and add products to their cart.
 
-The project was built keeping the Agile management principles in mind, and I utilised many of GitHub's features such as Issue and Projects to implement Scrum methodology.
+Registered users can place orders, save products to a wishlist, save their details for future and see their past orders.
+
+The project was built keeping the Agile management principles in mind, and I utilised many of GitHub's features such as Issue and Projects to implement Scrum methodology despite working alone.
 
 I wanted to build a front end for the business owner to manage the shop without entering the Django Admin panel.
 
@@ -20,11 +20,9 @@ I wanted to build a front end for the business owner to manage the shop without 
 
 I used [GitHub issues](https://github.com/davidindub/coffeecrew/issues) for the product backlog containing the user stories. Issues were also used for bug reports so I could keep track of tricky bugs over time.
 
-
 I used the tags feature in GitHub Issues for assigning story points, prioritising features based on [the MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method), and categorising the user stories.
 
 I used the [Milestones feature](https://github.com/davidindub/coffeecrew/milestones) to plan sprints and set deadlines.
-
 
 ## User Stories
 
@@ -32,17 +30,13 @@ User stories were prepared using GitHub Issues and assigned story points based o
 
 User Stories can been seen below under [User Story Testing](#user-story-testing), and in the [GitHub Issues](https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed) for full details including screenshots, story points and associated sprints.
 
-
-## UX  
+## UX
 
 ![](docs/docs-colour-palette.png)
 
 ### Typography
 
-
-
 ### Wireframes
-
 
 ## Accessibility
 
@@ -56,48 +50,45 @@ I used inline SVGs for icons in the project.
 
 I recently watched [Seren Davies](https://github.com/ninjanails)' talk [Death to Icon Fonts](https://www.youtube.com/watch?v=9xXBYcWgCHA) where I learned of the issues that icon fonts can cause for accessibility. I researched the best way to use inline SVG icons, including descriptions where appropriate for screen readers. By using SVGs the icons don't break if a user chooses to use a custom font such as [Dyslexie](https://www.dyslexiefont.com/).
 
+SVGs that aren't purely decorative always include an `aria-label` for screenreaders, and I tested them using VoiceOver on macOS.
+
 See also:
+
 - [Inline SVG vs Icon Fonts - CSS Tricks](https://css-tricks.com/icon-fonts-vs-svg/)
 - [SVG, Icon Fonts, and Accessibility: A Case Study - 24 Accessibility](https://www.24a11y.com/2017/svg-icon-fonts-accessibility-case-study/)
 
 ## Database Design
 
-I used [Miro](https://miro.com/) to design the models. I created a Profile model to associate extra information with users not included in the default Django user model. 
+I used [Miro](https://miro.com/) to design the models. I created a Profile model to associate extra information with users not included in the default Django user model.
 
 ![Database Diagram](/docs/images/database-diagram.jpg)
 
-
-## Features 
-
+## Features
 
 ## Existing Features
 
 ### Landing Page
 
-
-
 ### Navbar
-
 
 ### Register / Login
 
 Users can either sign up using their Google or directly on the site.
 
-Users signing up with Google just need to pick a username, and don't need to create a password.
+Users signing up with Google don't need to create a password.
 
 Users who have previously registered with Google can easily sign in again with one click.
 
-
 ### Wishlist
 
-Users can save products to a wishlist for future reference.
-
+Logged in users can save products to a wishlist for future reference.
 
 ### Footer
 
 The Footer includes:
+
 - A link back to the homepage
-- Copyright information
+- Links to the Contact Us page.
 - A link to the Privacy Policy
 - A link to the [GitHub repository for the project](https://github.com/davidindub/coffeecrew).
 
@@ -112,9 +103,13 @@ See:
 
 Django Messages and Bootstrap's Alerts elements were combined to make elegant notification messages when the user performs actions.
 
-
 ### Favicon
 
+![](static/images/favicons/android-chrome-192x192.png)
+
+I included metadata for favicons and web app icons
+
+I themed the browser window to match the site with the `theme-color <meta>` tag for browsers that support it such as Safari on macOS and Chrome on Android.
 
 ### Newsletter
 
@@ -122,18 +117,24 @@ I used [Mailchimp](https://mailchimp.com/) to set up an optional Newsletter subs
 
 I created a template of a potential welcome email and mapped out a customer journey in Mailchimp.
 
+<details>
+<summary>
+Screenshots of Mailchimp Campaign
+</summary>
+
 ![](docs/images/newsletter-preview-1.jpg)
 
 ![](docs/images/newsletter-preview-2.jpg)
 
-
-
+</details>
 
 ## Staff Only Features
 
-
 ### Shop Management Dashboard
 
+I wanted to create a front-end for a business owner to manage the store themselves without needing to code or enter the django-admin panel.
+
+I protected fields in the django-admin panel that shouldn't be manually edited.
 
 ### Printable Order Sheets
 
@@ -152,14 +153,9 @@ Screenshots of Printable Order Sheet Feature
 
 </details>
 
-
 ### Custom Error Pages
 
 Custom error pages were added for 403, 404, and 500 errors.
-
-
-
-
 
 ### Features Left to Implement
 
@@ -169,7 +165,7 @@ Features I didn't implement in this iteration but plan to add in future include
 - Option for time-based Sales
 - Use more Stripe features, like possibly use for receipts
 - Mailchimp could be connected to user profiles to include campaigns such as birthday emails with discounts, or follow up emails on completed orders.
-
+- A "recently viewed" carousel of products to follow the user around the site
 
 ## Technologies Used
 
@@ -201,26 +197,19 @@ Features I didn't implement in this iteration but plan to add in future include
 
 ## External Python Packages Used
 
-
-## Testing 
+## Testing
 
 I performed manual testing continuously as the project was being developed, and filed [bug reports on GitHub](https://github.com/davidindub/designland/issues?q=is%3Aissue+is%3Aclosed+label%3Abug) as issues were discovered to keep track of bugs. I kept track of how to recreate bugs, expected behaviour, screenshots of the issue and how it was resolved to help myself in future.
 
-
 ### Browser Compatibility
 
-
-### Responsiveness 
-
+### Responsiveness
 
 ### Performance Testing
 
-
 ### Accessibility Testing
 
-
 ### User Story Testing
-
 
 ### Challenges Faced
 
@@ -228,21 +217,15 @@ I performed manual testing continuously as the project was being developed, and 
 
 #### HTML Validation
 
-
 #### CSS Validation
-
 
 #### Python Validation
 
-
 #### JavaScript
 
-
-***
-
+---
 
 ## Deployment
-
 
 The live deployed application can be found deployed on [Heroku](https://coffee-crew-shop.herokuapp.com).
 
@@ -251,6 +234,7 @@ The live deployed application can be found deployed on [Heroku](https://coffee-c
 This project uses [ElephantSQL](https://www.elephantsql.com) for the PostgreSQL Database.
 
 To obtain your own Postgres Database, sign-up with your GitHub account, then follow these steps:
+
 - Click **Create New Instance** to start a new database.
 - Provide a name (this is commonly the name of the project: coffeecrew).
 - Select the **Tiny Turtle (Free)** plan.
@@ -267,7 +251,6 @@ Make sure you're on the **AWS Management Console** page.
 
 <details>
 <summary>Full details of setting up AWS for deployment</summary>
-
 
 #### S3 Bucket
 
@@ -385,11 +368,10 @@ Once on the IAM page, follow these steps:
 - If Heroku Config Vars has `DISABLE_COLLECTSTATIC` still, this can be removed now, so that AWS will handle the static files.
 - Back within **S3**, create a new folder called: `media`.
 - Select any existing media images for your project to prepare them for being uploaded into the new folder.
-- Under **Manage Public Permissions**, select **Grant public read access to this object(s)**.
-- No further settings are required, so click **Upload**.
+- Under**Manage Public Permissions**, select**Grant public read access to this object(s)**.
+- No further settings are required, so click**Upload**.
 
 </details>
-
 
 ### django-aullauth Setup
 
@@ -397,16 +379,15 @@ You need to use your own [Google Cloud](https://cloud.google.com/) credentials t
 
 The [django-allauth documentation](https://django-allauth.readthedocs.io/en/latest/providers.html) provides instructions for how to complete setup in your Google Cloud Console settings.
 
-
 ### Heroku Deployment
 
 This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 
 Deployment steps are as follows, after account setup:
 
-- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
-- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
-- From the new app **Settings**, click **Reveal Config Vars**, and set your environment variables.
+- Select**New** in the top-right corner of your Heroku Dashboard, and select**Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select**Create App**.
+- From the new app**Settings**, click**Reveal Config Vars**, and set your environment variables.
 
 | Key | Value |
 | --- | --- |
@@ -534,27 +515,12 @@ You can fork this repository by using the following steps:
 ### Code
 
 - Pagination links adapted from [How to implement a paginator in a Django Class-based ListView compatible with Bootstrap 5](https://ourcodeworld.com/articles/read/1757/how-to-implement-a-paginator-in-a-django-class-based-listview-compatible-with-bootstrap-5)
-- Guest Shopping Cart adapted from [Django Ecommerce Website | Guest User Cart | Part 4](https://www.youtube.com/watch?v=kH2FOWuA4uI) by Denis Ivy.
 - SKU Generator adapted from [SKU Generator](https://github.com/saulacher/SKUgenerator)
 
 ### Media
 
 - [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
-- Hero Image by [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/sn87TQ_o7zs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
-- Some product images and descriptions from [Kinto Europe](https://kinto-europe.com/), [Moccamaster](https://www.moccamaster.eu/)
-
-Photo by <a href="https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Dumlao</a> on <a href="https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
-Photo by <a href="https://unsplash.com/@gtk1x?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Gerson Cifuentes</a> on <a href="https://unsplash.com/photos/HmZCtvtS6ds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
-Photo by <a href="https://unsplash.com/@fideletty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Etty Fidele</a> on <a href="https://unsplash.com/photos/oJpkjWcScyg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
-Photo by <a href="https://unsplash.com/ko/@andrewwelch3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">andrew welch</a> on <a href="https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
-Photo by <a href="https://unsplash.com/ja/@goran_ivos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Goran Ivos</a> on <a href="https://unsplash.com/photos/f7MtheMfksk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
-
-
+- Some product images and descriptions edited from [Kinto Europe](https://kinto-europe.com/), [Moccamaster](https://www.moccamaster.eu/), [Hario](https://global.hario.com/).
+- Stock images from [Unsplash](https://unsplash.com/), thanks to photographers [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Nathan Dumlao](https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Gerson Cifuentes](https://unsplash.com/photos/HmZCtvtS6ds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Etty Fidele](https://unsplash.com/photos/oJpkjWcScyg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Andrew Welch](https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), and [Goran Ivos](https://unsplash.com/photos/f7MtheMfksk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) for their beautiful photos.
 
 ### Acknowledgements
-
