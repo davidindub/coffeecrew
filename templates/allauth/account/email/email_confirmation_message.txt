@@ -2,6 +2,24 @@
 {% load account %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're receiving this e-mail because user {{ user_display }} has given your e-mail address to register an account on {{ site_domain }}.
+{% block content %}{% autoescape off %}{% user_display user as user_display %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Welcome to Coffee Crew {{ user_display }}!
 
-To confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
+You're one step closer to delicious freshly brewed coffee at home!
+
+Before we can activate your account, we need you to click on the confirmation link below to verify your email address and complete the registration process:
+
+{{ activate_url }}
+
+If you did not register for Coffee Crew or if you have any questions or concerns, please contact us immediately at coffeecrewshop@gmail.com
+
+Thank you again for choosing Coffee Crew.
+We look forward to serving you soon!
+
+Best regards,
+
+Coffee Crew Team
+https://coffee-crew-shop.herokuapp.com/
+
+{% endblocktrans %}{% endautoescape %}{% endblock %}
