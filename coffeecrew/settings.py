@@ -45,9 +45,20 @@ if development:
         "127.0.0.1",
     ]  # noqa
     CSRF_TRUSTED_ORIGINS = [os.environ.get("GITPOD_WORKSPACE")]
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "coffeecrewshop@gmail.com"
 else:
     ALLOWED_HOSTS = [os.environ.get("HEROKU_HOSTNAME")]
     CSRF_TRUSTED_ORIGINS = [os.environ.get("HEROKU_FULL_URL")]
+
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASS")
+
 
 # Application definition
 
@@ -105,15 +116,15 @@ LOGOUT_REDIRECT_URL = "/"
 # Allauth settings:
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
         ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
+        "AUTH_PARAMS": {
+            "access_type": "online",
         },
-        'OAUTH_PKCE_ENABLED': True,
+        "OAUTH_PKCE_ENABLED": True,
     }
 }
 
