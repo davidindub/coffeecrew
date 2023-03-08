@@ -5,6 +5,15 @@
     {% block core_meta %}
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <!-- Favicons and mobile icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+    <meta name="theme-color" content="#0f4a3b">
+
     {% endblock core_meta %}
     {% block extra_meta %}
     {% endblock extra_meta %}
