@@ -32,7 +32,7 @@
         {% csrf_token %}
         {% crispy form %}
     </form>
-    <hr>
+    <hr class="custom-hr">
     {% if brand %}
         <a href="{% url 'brand_delete' brand.id %}"
            class="btn btn-sm btn-danger">

@@ -35,7 +35,7 @@
           I understand the consequences of deleting.
         </label>
       </div>
-      <hr>
+      <hr class="custom-hr">
     <form method="post" action="{% url 'product_delete' product.id %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">

@@ -41,7 +41,7 @@
         <input class="form-check-input" type="checkbox" value="" id="confirm-check">
         <label class="form-check-label" for="confirm-check">I understand the consequences of deleting.</label>
     </div>
-    <hr>
+    <hr class="custom-hr">
     <form method="post" action="{% url 'category_delete' category.id %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">

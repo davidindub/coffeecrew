@@ -80,7 +80,7 @@
             {% endif %}
         </div>
     </div>
-    <hr class="product-hr">
+    <hr class="custom-hr">
     <h2>My Orders</h2>
     {% if orders %}
         {% include "includes/orders_table.html" %}
@@ -90,7 +90,7 @@
     {% else %}
         No Orders Yet
     {% endif %}
-    <hr class="product-hr">
+    <hr class="custom-hr">
     <a href="{% url "account_change_password" %}"
        class="btn btn-sm btn-outline-cc">Change Password</a>
     <a href="{% url "account_logout" %}" class="btn btn-sm btn-outline-cc">Sign Out</a>
