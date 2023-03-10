@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 const countryDropdown = document.querySelector("#id_country");
 const deliveryOptionNone = document.querySelector("#delivery-option-none");
 const deliveryOptionIE = document.querySelector("#delivery-option-ie");

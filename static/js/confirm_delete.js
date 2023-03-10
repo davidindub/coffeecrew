@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 window.onload = function() {
     const confirmCheck = document.querySelector("#confirm-check");
     const deleteButton = document.querySelector("#delete-button");
