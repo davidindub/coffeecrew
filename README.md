@@ -77,6 +77,21 @@ Users can either sign up using their Google or directly on the site.
 
 Users signing up with Google don't need to create a password.
 
+After signing up, users need to verify their account by clicking the link in the welcome email.
+
+Handy links to popular Email services are included for quick access.
+
+<details>
+<summary>
+Screenshot of Verification Email Sent page
+</summary>
+
+![](docs/images/screenshots/screenshot-verify-email-links.png)
+
+</details>
+
+
+
 Users who have previously registered with Google can easily sign in again with one click.
 
 ### Wishlist
@@ -110,6 +125,17 @@ Django Messages and Bootstrap's Alerts elements were combined to make elegant no
 I included metadata for favicons and web app icons
 
 I themed the browser window to match the site with the `theme-color <meta>` tag for browsers that support it such as Safari on macOS and Chrome on Android.
+
+<details>
+<summary>
+Screenshot of Themed Browser Window
+</summary>
+
+![](docs/images/screenshots/screenshot-themed-browser-safari.png)
+
+</details>
+
+
 
 ### Newsletter
 
@@ -393,6 +419,8 @@ Deployment steps are as follows, after account setup:
 | --- | --- |
 | `AWS_ACCESS_KEY_ID` | insert your own AWS Access Key ID key here |
 | `AWS_SECRET_ACCESS_KEY` | insert your own AWS Secret Access key here |
+| `AWS_S3_REGION_NAME` | region name of the AWS region used (e.g 'eu-central-2')
+| `AWS_STORAGE_BUCKET_NAME` | name of the bucket in AWS
 | `DATABASE_URL` | insert your own ElephantSQL database URL here |
 | `DISABLE_COLLECTSTATIC` | 1 (*this is temporary, and can be removed for the final deployment*) |
 | `SECRET_KEY` | insert your Django secret key
@@ -402,6 +430,8 @@ Deployment steps are as follows, after account setup:
 | `STRIPE_PUBLIC_KEY` | insert your own Stripe Public API key here |
 | `STRIPE_SECRET_KEY` | insert your own Stripe Secret API key here |
 | `STRIPE_WH_SECRET` | insert your own Stripe Webhook API key here |
+| `EMAIL_HOST_USER` | insert your email address for sending emails (I used a Gmail account)
+| `EMAIL_HOST_PASS` | insert your app password for the email address
 | `USE_AWS` | True |
 | `HEROKU_HOSTNAME` | insert url of deployed project on Heroku
 
@@ -449,6 +479,8 @@ import os
 
 os.environ.setdefault["AWS_ACCESS_KEY_ID"] = insert your own AWS Access Key ID key here
 os.environ.setdefault["AWS_SECRET_ACCESS_KEY"] = insert your own AWS Secret Access key here
+os.environ.setdefault["AWS_S3_REGION_NAME"] = insert your AWS bucket region here e.g. 'eu-central-2'
+os.environ.setdefault["AWS_STORAGE_BUCKET_NAME"] = insert your own AWS Secret Access key here
 os.environ.setdefault["DATABASE_URL"] = insert your own ElephantSQL database URL here
 os.environ.setdefault["EMAIL_HOST_PASS"] = insert your own Gmail API key here
 os.environ.setdefault["EMAIL_HOST_USER"] = insert your own Gmail email address here
@@ -456,6 +488,9 @@ os.environ.setdefault["SECRET_KEY"] = this can be any random secret key
 os.environ.setdefault["STRIPE_PUBLIC_KEY"] = insert your own Stripe Public API key here
 os.environ.setdefault["STRIPE_SECRET_KEY"] = insert your own Stripe Secret API key here
 os.environ.setdefault["STRIPE_WH_SECRET"] = insert your own Stripe Webhook API key here
+os.environ.setdefault["STRIPE_RETURN_URL"] = URL for the return address in the Stripe JS
+os.environ.setdefault["EMAIL_HOST_USER"] = Email address for email account used to sent emails (I used Gmail)
+os.environ.setdefault["EMAIL_HOST_PASS"] = App Password for the email account used
 os.environ.setdefault["HEROKU_HOSTNAME"] = insert url of deployed project on Heroku
 
 # local environment only (do not include these in production/deployment!)
