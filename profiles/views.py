@@ -1,12 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.views.generic.edit import FormView
-from django.views.generic import TemplateView, ListView, UpdateView, CreateView
+from django.views.generic import TemplateView, ListView, UpdateView
 from products.models import Product
 from .models import WishList, Profile, Address
-from cart.models import Cart, CartItem
-from checkout.models import Order, OrderLineItem
+from checkout.models import Order
 from .forms import ProfileForm, UserForm
 from django.contrib import messages
 from django.urls import reverse_lazy

@@ -86,17 +86,19 @@ class ProductsListView(ListView):
 
         page_number = self.request.GET.get("page")
 
-        # Add the current sorting order as a query parameter to pagination links
+        # Add the current sorting order as a query
+        # parameter to pagination links
+
         if page_number:
             pagination_links = context["paginator"].get_elided_page_range(
                 number=page_number, on_each_side=2)
             pagination_links = [
-                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]  # noqa
         else:
             pagination_links = context["paginator"].get_elided_page_range(
                 on_each_side=2)
             pagination_links = [
-                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+                f'{reverse("products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]  # noqa
 
         if sort == "name":
             if order == "asc":
