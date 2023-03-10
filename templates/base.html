@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     {% block core_meta %}
@@ -7,10 +7,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
           <!-- Favicons and mobile icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+    <link rel="manifest" crossorigin="use-credentials" href="{% static "manifest.json" %}">
 
     <meta name="theme-color" content="#0f4a3b">
 
