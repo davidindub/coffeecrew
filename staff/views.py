@@ -408,17 +408,18 @@ class ManageProductsView(StaffMemberRequiredMixin, ListView):
 
         page_number = self.request.GET.get("page")
 
-        # Add the current sorting order as a query parameter to pagination links
+        # Add the current sorting order as a query
+        # parameter to pagination links
         if page_number:
             pagination_links = context["paginator"].get_elided_page_range(
                 number=page_number, on_each_side=2)
             pagination_links = [
-                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]  # noqa
         else:
             pagination_links = context["paginator"].get_elided_page_range(
                 on_each_side=2)
             pagination_links = [
-                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]
+                f'{reverse("manage_products")}?{self.request.GET.urlencode()}&page={i}' for i in pagination_links]  # noqa
 
         context["pagination_links"] = pagination_links
 
@@ -528,7 +529,7 @@ class PurgeStaleCartsView(StaffMemberRequiredMixin, FormView):
         stale_carts_num = stale_carts.count()
         # Delete Stale Carts from DB
         stale_carts.delete()
-        
+
         messages.success(self.request,
                          f"{stale_carts_num} stale carts have been deleted.")
         return stale_carts_num
