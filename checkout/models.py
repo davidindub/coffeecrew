@@ -68,7 +68,7 @@ class Order(models.Model):
         for item in self.order_items.all():
             quantity = item.quantity
             item.product.make_sale(quantity)
-        
+
         self.save()
 
     def save(self, *args, **kwargs):

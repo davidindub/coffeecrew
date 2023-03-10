@@ -13,8 +13,9 @@ from cart.cart_logic import (calculate_delivery_cost,
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                null=True, blank=True)
-    guest_id = models.CharField(max_length=100, null=True, blank=True)
+                                null=True, blank=True, editable=False)
+    guest_id = models.CharField(
+        max_length=100, null=True, blank=True, unique=True, editable=False)
     updated = models.DateTimeField(auto_now=True)
 
     @property
@@ -26,7 +27,7 @@ class Cart(models.Model):
 
     def __str__(self):
         if self.user:
-            return f"{self.user.username}'s Cart"
+            return f"User {self.user.username}'s Cart"
         else:
             return f"Guest Cart ID last updated { self.updated }"
 
