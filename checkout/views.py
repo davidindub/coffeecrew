@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (DetailView, ListView,
                                   View, TemplateView, FormView)
@@ -16,6 +16,7 @@ from coffeecrew.settings import (STRIPE_PUBLIC_KEY, STRIPE_RETURN_URL,
                                  STRIPE_WH_SECRET)
 from .forms import CheckoutAddressForm
 from .models import Order, OrderLineItem
+from .emails import send_confirmation_email
 
 stripe.api_key = STRIPE_SECRET_KEY
 
@@ -181,28 +182,28 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class SuccessView(TemplateView):
+class SuccessView(View):
     template_name = "checkout/step_4_success.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        cart = get_object_or_404(Cart, user=self.request.user)
-        order = get_object_or_404(Order, user=self.request.user,
-                                  completed=False)
+    def get(self, request, *args, **kwargs):
+        cart = get_object_or_404(Cart, user=request.user)
+        order = get_object_or_404(Order, user=request.user, completed=False)
 
         print(f"order no: {order}")
         print(f"order stripe pid: {order.stripe_pid}")
 
-        client_secret = self.request.GET.get(
-            "payment_intent_client_secret")
+        client_secret = request.GET.get("payment_intent_client_secret")
         print(f"client_secret status: {client_secret}")
 
         payment_status = stripe.PaymentIntent.retrieve(order.stripe_pid).status
         print(f"payment status: {payment_status}")
 
         if payment_status == "succeeded":
+            context = {}
+
             context["success"] = True
+            context["checkout_step"] = "complete"
+            context["order"] = order
             print("PAYMENT SUCCESSFUL")
 
             cart.reset_cart_after_sale()
@@ -211,32 +212,23 @@ class SuccessView(TemplateView):
             order.complete_order()
             print("SETTING ORDER AS COMPLETE")
 
-            context["checkout_step"] = "complete"
             # TODO: Send customer email
 
-            context["order"] = order
-            return context
+            return render(request, self.template_name, context)
 
         else:
-            context["success"] = False
             print("Payment NOT successful")
-
-            context["checkout_step"] = "payment"
             return redirect("payment_failure")
 
-        context["order"] = order
-        return context
 
-
-class PaymentFailedView(TemplateView):
+class PaymentFailedView(View):
     template_name = "checkout/step_4_failure.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
+        context = {}
         context["success"] = False
         print("Payment NOT successful")
-
-        return context
+        return render(request, self.template_name, context)
 
 
 class CancelView(TemplateView):
@@ -246,7 +238,7 @@ class CancelView(TemplateView):
 @csrf_exempt
 def my_webhook_view(request):
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     event = None
 
     try:
@@ -261,14 +253,20 @@ def my_webhook_view(request):
         return HttpResponse(status=400)
 
     # Handle the event
-    if event.type == 'payment_intent.succeeded':
+    if event.type == "payment_intent.succeeded":
         payment_intent = event.data.object  # contains a stripe.PaymentIntent
-        print('PaymentIntent was successful!')
-    elif event.type == 'payment_method.attached':
+        print("PaymentIntent was successful!")
+
+        # TODO: Send out the confirmation email
+        order = get_object_or_404(Order, stripe_pid=payment_intent.id)
+        send_confirmation_email(order)
+        print("confirmation email sent")
+
+    elif event.type == "payment_method.attached":
         payment_method = event.data.object  # contains a stripe.PaymentMethod
-        print('PaymentMethod was attached to a Customer!')
+        print("PaymentMethod was attached to a Customer!")
     # ... handle other event types
     else:
-        print('Unhandled event type {}'.format(event.type))
+        print("Unhandled event type {}".format(event.type))
 
     return HttpResponse(status=200)

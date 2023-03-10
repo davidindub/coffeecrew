@@ -1,0 +1,57 @@
+<h1>Order Confirmed!</h1>
+
+<h2>Order No. : {{ order.order_number }}</h2>
+
+<p>Please find your order details below.</p>
+
+<h3>Delivery Address</h3>
+{{ order.full_name }}
+{{ order.address_line_1 }}
+{{ order.address_line_2 }}
+{{ order.city }}
+{{ order.postcode }}
+{{ order.country }}
+
+<h3>Order Details</h3>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Grind</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.order_items.all %}
+            <tr>
+                <td>
+                    {{ item.product.name }}
+                </td>
+                <td>{{ item.quantity }}</td>
+                {% if item.product.coffee %}
+                    <td>{{ item.grind_size }}</td>
+                {% else %}
+                    <td>N/A</td>
+                {% endif %}
+                <td>€{{ item.total }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Total</td>
+            <td>€{{ order.order_total }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Delivery Details</h3>
+<p>Delivery Via: {{ order.delivery_method }}</p>
+<p>Delivery Cost: {{ order.delivery_cost }}</p>
+
+<h3>Total Cost:</h3>
+{{ order.grand_total }}
+
+<p>Thanks for shopping with Coffee Crew.</p>
+<p>If you have any questions, please reply to this email.</p>
+<hr>
+<a href="https://coffee-crew-shop.herokuapp.com/">Coffee Crew</a>
