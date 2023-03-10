@@ -7,12 +7,12 @@
   <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
     <ol class="breadcrumb">
       {% if user.is_authenticated %}
-      <li class="breadcrumb-item">
-        <a href="{% url 'account_dashboard' %}">My Account</a>
-      </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'account_dashboard' %}">My Account</a>
+        </li>
       {% else %}
-      <li class="breadcrumb-item">
-        <a href="{% url 'products' %}">Products</a>
+        <li class="breadcrumb-item">
+          <a href="{% url 'products' %}">Products</a>
         </li>
       {% endif %}
       <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
@@ -122,14 +122,16 @@
                 </tr>
               {% endfor %}
               <tr>
-              <td colspan="3" class="d-table-cell d-md-none">
-                <h3>Order Total</h3>
-              </td>
-              <td colspan="6" class="d-none d-md-table-cell">
-                <h3>Order Total</h3>
-              </td>
-              <td><h3>€ {{ cart_total }}</h3></td>
-            </tr>
+                <td colspan="3" class="d-table-cell d-md-none">
+                  <h3>Order Total</h3>
+                </td>
+                <td colspan="6" class="d-none d-md-table-cell">
+                  <h3>Order Total</h3>
+                </td>
+                <td>
+                  <h3>€ {{ cart_total }}</h3>
+                </td>
+              </tr>
             </tbody>
           </table>
           <div class="text-center">

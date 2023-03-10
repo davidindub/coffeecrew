@@ -112,11 +112,9 @@
                                         {% endif %}
                                     </a>
                                     <div class="card-body">
-                                        <a href="#">
                                             <h5 class="card-title">
                                                 <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
                                             </h5>
-                                        </a>
                                         <p class="card-text">{{ product.description|truncatewords:20 }}</p>
                                     </div>
                                     <div class="card-body">
