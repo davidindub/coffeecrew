@@ -162,6 +162,17 @@ I wanted to create a front-end for a business owner to manage the store themselv
 
 I protected fields in the django-admin panel that shouldn't be manually edited.
 
+<details>
+<summary>
+Screenshots of Printable Order Sheet Feature
+</summary>
+
+Warning before deleting a Department that contains categories and products:
+![](docs/images/screenshots/screenshot-staff-delete-dept-warning.png)
+
+</details>
+
+
 ### Printable Order Sheets
 
 I used media queries to create a print friendly layout for Orders so they can be printed out as packing slips by the business owner.
