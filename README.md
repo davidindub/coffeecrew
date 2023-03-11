@@ -98,6 +98,52 @@ Users who have previously registered with Google can easily sign in again with o
 
 Logged in users can save products to a wishlist for future reference.
 
+### Checkout
+
+There are four stages to the checkout process, the customer can easily see what stage of the process they are at with the progress bar at the top. I used combination of bootstrap elements to make this semantic progress bar.
+
+![](docs/images/screenshots/screenshot-checkout-progress.png)
+
+1. Review Order
+2. Shipping Address
+3. Billing Details
+4. Order Confirmation
+
+If the customer has a saved shipping address, they can populate the form with it by checking the box.
+
+Delivery cost is shown when the user has filled out their address.
+
+The Payment page clearly displays the total to be paid.
+
+All information related to Billing is handled by Stripe.
+If the user has a default billing address saved in their profile, it will be pre-populated in the Stripe form.
+
+Billing Address or Card details are **never** saved in the database.
+
+
+### Notification Emails
+
+An email is sent to the customer when they make a new order.
+
+I used Stripe's webhooks to only send the email when the payment is successfully completed.
+
+<details>
+<summary>Screenshot of an Order Confirmation Email</summary>
+
+![](docs/images/screenshots/screenshot-email-confirmed.jpg)
+
+</details>
+
+
+Another email is sent to the customer when their order is dispatched.
+
+<details>
+<summary>Screenshot of Customer Dispatch Email</summary>
+
+![](docs/images/screenshots/screenshot-email-dispatched.jpg)
+
+</details>
+
 ### Footer
 
 The Footer includes:
@@ -116,7 +162,7 @@ See:
 
 ### Notifications
 
-Django Messages and Bootstrap's Alerts elements were combined to make elegant notification messages when the user performs actions.
+Django Messages and Bootstrap's Alerts elements were combined to make elegant dismissible notification messages when the user performs actions.
 
 ### Favicon
 
@@ -190,19 +236,50 @@ Screenshots of Printable Order Sheet Feature
 
 </details>
 
+### Dispatch Orders
+
+The Order page also includes a button for staff members to mark an order as dispatched.
+
+<details>
+<summary>Screenshot of Dispatching a Customer Order</summary>
+
+![](docs/images/screenshots/screenshot-order-dispatch-button.jpg)
+
+![](docs/images/screenshots/screenshot-order-dispatched.jpg)
+
+
+</details>
+
+
+This updates the order in the database and sends the customer a dispatch notification email.
+
+
+<details>
+<summary>Screenshot of Customer Dispatch Email</summary>
+
+![](docs/images/screenshots/screenshot-email-dispatched.jpg)
+
+</details>
+
+
+
+
+
 ### Custom Error Pages
 
 Custom error pages were added for 403, 404, and 500 errors.
 
 ### Features Left to Implement
 
-Features I didn't implement in this iteration but plan to add in future include
+Features I didn't implement in this iteration but plan to add in future include:
 
 - A Discount Code system
 - Option for time-based Sales
-- Use more Stripe features, like possibly use for receipts
+- I would like migrate to using Stripe Checkout as some of these features like discount codes are built-in.
 - Mailchimp could be connected to user profiles to include campaigns such as birthday emails with discounts, or follow up emails on completed orders.
-- A "recently viewed" carousel of products to follow the user around the site
+- A "recently viewed" carousel of products to follow the user around the site.
+- Sign in with Google, I had trouble getting this working error-free despite using it on previous projects. I will reinstate it in future.
+- When a guest user signs in or registers, it would be preferable for their cart to persist to their new profile.
 
 ## Technologies Used
 
