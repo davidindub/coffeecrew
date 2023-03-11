@@ -17,7 +17,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     def get_recent_orders(self):
         user = self.request.user
-        return Order.objects.filter(user=user).order_by("-updated")[:5]
+        return Order.objects.filter(
+            user=user).order_by("-order_placed_date")[:5]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

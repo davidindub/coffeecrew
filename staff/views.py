@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DeleteView, View
@@ -11,6 +11,7 @@ from coffeecrew.StaffMemberRequiredMixin import StaffMemberRequiredMixin
 from products.models import Product, Coffee, Category, Department, Brand
 from cart.models import Cart
 from checkout.models import Order
+from checkout.emails import send_dispatch_email
 from .forms import (ProductForm, CoffeeForm, DepartmentForm,
                     CategoryForm, PurgeStaleCartsForm)
 
@@ -462,10 +463,12 @@ class OrderDispatchView(StaffMemberRequiredMixin, View):
     redirects to the Order Detail View
     """
 
-    def get(self, order_number):
+    def get(self, request, *args, **kwargs):
+        order_number = self.kwargs.get("order_number")
         order = get_object_or_404(Order, order_number=order_number)
         try:
             order.set_as_shipped()
+            send_dispatch_email(order)
             messages.success(
                 self.request, f"Order {order.order_number} dispatched!")
         except Order.DoesNotExist:

@@ -4,6 +4,8 @@
 
 <p>Good news! Your order has been dispatched.</p>
 
+Dispatched on {{ order.shipped_date|date:"d M Y" }}
+
 <h3>Delivery Address</h3>
 {{ order.full_name }}
 <br>

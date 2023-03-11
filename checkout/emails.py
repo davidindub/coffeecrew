@@ -30,7 +30,7 @@ def send_dispatch_email(order):
     Sends customer an email that their order has been dispatched
     """
     print("send_dispatch_email() called")
-    message = get_template("checkout/email/order_dispatched_email.html"
+    message = get_template("checkout/email/order_dispatch_email.html"
                            ).render({
                                "order": order
                            })

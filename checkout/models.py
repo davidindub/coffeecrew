@@ -6,6 +6,7 @@ from products.models import Product
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 import datetime
+from django.utils import timezone
 import random
 
 
@@ -16,6 +17,8 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
+    order_placed_date = models.DateTimeField(null=True, blank=True,
+                                             editable=False)
     order_number = models.CharField(max_length=15, unique=True)
     delivery_method = models.CharField(max_length=20, null=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2,
@@ -56,7 +59,7 @@ class Order(models.Model):
         """
         Set the Shipped Date and set order as complete
         """
-        self.shipped_date = datetime.datetime.now()
+        self.shipped_date = datetime.datetime.now(tz=timezone.utc)
         self.save()
 
     def complete_order(self):
@@ -64,6 +67,7 @@ class Order(models.Model):
         Set order as complete, decrement product stock
         """
         self.completed = True
+        self.order_placed_date = datetime.datetime.now(tz=timezone.utc)
 
         for item in self.order_items.all():
             quantity = item.quantity
