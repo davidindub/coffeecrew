@@ -17,6 +17,7 @@ from coffeecrew.settings import (STRIPE_PUBLIC_KEY, STRIPE_RETURN_URL,
 from .forms import CheckoutAddressForm
 from .models import Order, OrderLineItem
 from .emails import send_confirmation_email
+from .helpers.calculate_delivery import calculate_delivery_cost
 
 stripe.api_key = STRIPE_SECRET_KEY
 
@@ -87,6 +88,10 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
         order.city = address["city"]
         order.postcode = address["postcode"]
         order.country = address["country"]
+
+        # Calculate delivery based on country:
+        calculate_delivery_cost(order)
+
         order.save()
 
         print(f"full name in order: {order.full_name}")

@@ -10,20 +10,35 @@ const addressLine2 = document.querySelector("#addressLine2").textContent.slice(1
 const addressCity = document.querySelector("#addressCity").textContent.slice(1, -1);
 const addressPostcode = document.querySelector("#addressPostcode").textContent.slice(1, -1);
 const addressCountry = document.querySelector("#addressCountry").textContent.slice(1, -1);
+const submitButton = document.querySelector("#submit-btn");
+const IE_COST = 4.50;
+const EU_COST = 10.00;
+const ieCostEl = document.querySelector("#ie-cost");
+const euCostEl = document.querySelector("#eu-cost");
+const grandTotal = document.querySelector("#grand-total");
+
+ieCostEl.textContent = `€${IE_COST.toFixed(2)}`;
+euCostEl.textContent = `€${EU_COST.toFixed(2)}`;
 
 function updateDeliveryOptions(country) {
     if (!country) {
         deliveryOptionNone.style.display = "block";
         deliveryOptionIE.style.display = "none";
         deliveryOptionEU.style.display = "none";
+        grandTotal.textContent = "";
+        submitButton.disabled = true;
     } else if (country == "IE") {
         deliveryOptionNone.style.display = "none";
         deliveryOptionIE.style.display = "block";
         deliveryOptionEU.style.display = "none";
+        grandTotal.textContent = "";
+        submitButton.disabled = false;
     } else {
         deliveryOptionNone.style.display = "none";
         deliveryOptionIE.style.display = "none";
         deliveryOptionEU.style.display = "block";
+        grandTotal.textContent = "";
+        submitButton.disabled = false;
     }
 }
 
@@ -46,15 +61,12 @@ checkbox.addEventListener("change", function () {
         document.querySelector("#id_postcode").value = addressPostcode;
         document.querySelector("#id_country").value = addressCity;
 
-        for (let option of document.querySelector("#id_country").options)
-        {
-        if (option.value === addressCountry)
-        {
-            option.selected = true;
-            console.log(addressCountry);
-            updateDeliveryOptions(addressCountry);
-            return;
-        }
+        for (let option of document.querySelector("#id_country").options) {
+            if (option.value === addressCountry) {
+                option.selected = true;
+                updateDeliveryOptions(addressCountry);
+                return;
+            }
         }
     }
     // If checkbox is unchecked clear the form

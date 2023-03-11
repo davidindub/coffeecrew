@@ -35,18 +35,18 @@
                     </div>
                     <div id="delivery-option-ie">
                         <p>Express delivery within Ireland</p>
-                        <p class="fs-4 text-end">€4.50</p>
+                        <p class="fs-4 text-end" id="ie-cost"></p>
                     </div>
                     <div id="delivery-option-eu">
                         <p>Standard delivery to European Union</p>
-                        <p class="fs-4 text-end">€10.00</p>
+                        <p class="fs-4 text-end" id="eu-cost"></p>
                     </div>
                     <hr class="custom-hr">
                     <h5>Order Total</h5>
                     <p class="fs-5 text-end">€{{ cart.total }}</p>
                     <h5>Total to Pay</h5>
-                    <p class="fs-4 text-end">€ TODO</p>
-                    <input type="submit" class="btn btn-cc" value="Continue to Payment">
+                    <p class="fs-4 text-end" id="grand-total"></p>
+                    <input type="submit" class="btn btn-cc" id="submit-btn" value="Continue to Payment">
                 </form>
                 <hr class="custom-hr">
             </div>
