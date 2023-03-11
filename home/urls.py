@@ -6,4 +6,6 @@ urlpatterns = [
     path("about", views.AboutView.as_view(), name="about"),
     path("privacy", views.PrivacyPolicyView.as_view(), name="privacy"),
     path("contact", views.ContactUsView.as_view(), name="contact"),
-    ]
+    path("contact/submit", views.ContactUsSuccessView.as_view(),
+         name="contact_submit"),
+]

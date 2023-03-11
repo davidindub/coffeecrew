@@ -15,12 +15,23 @@
 {% endblock breadcrumbs %}
 {% block content %}
     <div class="row">
+        <section class="col-lg-4">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you!</p>
+            <form method="post">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </section>
         <div class="col">
-            <h1>Contact Us</h1>
+            <img src="{% static 'images/contact-us.jpg' %}"
+                 class="d-none d-lg-inline img-fluid rounded"
+                 alt="A person typing on a laptop with a latte beside it">
         </div>
         <div class="col-lg-4">
+            <hr class="custom-hr d-lg-none">
             <!-- Begin Mailchimp Signup Form -->
-            <div class="row text-end">
+            <section class="row">
                 <form action="https://herokuapp.us11.list-manage.com/subscribe/post?u=050aaf91f720b2a632e30513d&amp;id=35ea912d6b&amp;f_id=001d9ce0f0"
                       method="post"
                       id="mc-embedded-subscribe-form"
@@ -28,10 +39,11 @@
                       class="validate"
                       target="_blank"
                       novalidate>
-                    <h3 class="text-center">Sign Up to our Newsletter</h3>
+                    <h2 class="text-center">Sign Up to our Newsletter</h2>
+                    <p>Subscribers get first dibs on special limited edition small roasts!</p>
                     <div class="form-floating mb-3">
                         <input type="email"
-                               value=""
+                               {% if user.is_authenticated %} value="{{ user.em }}" {% else %} value="" {% endif %}
                                name="EMAIL"
                                class="form-control form-control-small"
                                id="mce-EMAIL"
@@ -40,10 +52,10 @@
                         <label for="mce-EMAIL">Email Address</label>
                     </div>
                     <input type="submit"
-                    value="Subscribe"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    class="btn btn-cc">
+                           value="Subscribe"
+                           name="subscribe"
+                           id="mc-embedded-subscribe"
+                           class="btn btn-cc">
                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                     <div style="position: absolute; left: -5000px;" aria-hidden="true">
                         <input type="text"
@@ -52,7 +64,7 @@
                                value="">
                     </div>
                 </form>
-            </div>
+            </section>
         </div>
     {% endblock content %}
     {% block extra_js %}

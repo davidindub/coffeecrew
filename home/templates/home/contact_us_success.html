@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %}
+    - Thank You!
+{% endblock extra_title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">Coffee Crew</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        </ol>
+    </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1>Thank you!</h1>
+            <p>Thanks for getting in touch. We'll get back you you as soon as possible.
+            </p>
+        </div>
+        <div class="col col-lg-6">
+            <img src="{% static 'images/contact-us.jpg' %}"
+            class="d-none d-lg-inline img-fluid rounded"
+            alt="A person typing on a laptop with a latte beside it">
+        </div>
+        </div>
+    {% endblock content %}

@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.core.mail import send_mail
+from django.views.generic import TemplateView, FormView
+from coffeecrew.settings import DEFAULT_FROM_EMAIL
 from products.models import Product
+from .forms import ContactForm
 
 
 class IndexView(TemplateView):
@@ -30,11 +34,45 @@ class PrivacyPolicyView(TemplateView):
     template_name = "home/privacy_policy.html"
 
 
-class ContactUsView(TemplateView):
+class ContactUsView(FormView):
     """
-    renders view for the contact page
+    Renders view for the contact page
+
+    Pre-populate the name and email field if the user is logged in.
     """
     template_name = "home/contact.html"
+    form_class = ContactForm
+    success_url = reverse_lazy("contact_submit")
+
+    def form_valid(self, form):
+        name = form.cleaned_data["full_name"]
+        email = form.cleaned_data["email"]
+        message = form.cleaned_data["message"]
+
+        subject = "Contact Us Form Submission"
+        message = f"Name: {name}\nEmail: {email}\n\n{message}"
+        sender_email = DEFAULT_FROM_EMAIL
+        recipient_email = [DEFAULT_FROM_EMAIL]
+        send_mail(subject, message, sender_email, recipient_email)
+        return super().form_valid(form)
+
+    def get_initial(self):
+        user = self.request.user
+        if user.is_anonymous:
+            return {
+            }
+        if user.id:
+            return {
+                "full_name": user.get_full_name(),
+                "email": user.email,
+            }
+
+
+class ContactUsSuccessView(TemplateView):
+    """
+    View for successful contact us form submission
+    """
+    template_name = "home/contact_us_success.html"
 
 
 def handler403(request, exception):
