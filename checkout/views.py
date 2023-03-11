@@ -260,7 +260,6 @@ def my_webhook_view(request):
         # TODO: Send out the confirmation email
         order = get_object_or_404(Order, stripe_pid=payment_intent.id)
         send_confirmation_email(order)
-        print("confirmation email sent")
 
     elif event.type == "payment_method.attached":
         payment_method = event.data.object  # contains a stripe.PaymentMethod
