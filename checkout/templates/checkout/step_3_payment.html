@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock extra_css %}
 {% block extra_title %}
-  - Checkout Payment Info
+    - Checkout Payment Info
 {% endblock extra_title %}
 {% block content %}
     <div class="container-fluid">
@@ -16,7 +16,7 @@
                 <h1>Payment</h1>
                 <hr class="custom-hr">
                 <h5>Total to Pay</h5>
-                <p class="fs-4">€{{ order.grand_total }}</p>
+                <p class="fs-5 text-end">€{{ order.grand_total }}</p>
                 <hr class="custom-hr">
             </div>
             <div class="col">
@@ -24,6 +24,9 @@
                 <form id="payment-form">
                     <div id="link-authentication-element">
                         <!--Stripe.js injects the Link Authentication Element-->
+                    </div>
+                    <div id="address-element">
+                        <!-- Elements will create form elements here -->
                     </div>
                     <div id="payment-element">
                         <!--Stripe.js injects the Payment Element-->
@@ -44,8 +47,12 @@
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
     {{ stripe_return_url|json_script:"stripeReturnURL" }}
-
     {{ user.email|json_script:"user_email" }}
-
+    {{ full_name|json_script:"fullName" }}
+    {{ address_line_1|json_script:"addressLine1" }}
+    {{ address_line_2|json_script:"addressLine2" }}
+    {{ address_city|json_script:"addressCity" }}
+    {{ address_postcode|json_script:"addressPostcode" }}
+    {{ address_country|json_script:"addressCountry" }}
     <script src="{% static 'js/stripe_elements.js' %}"></script>
 {% endblock post_load_js %}

@@ -10,34 +10,44 @@ const addressLine2 = document.querySelector("#addressLine2").textContent.slice(1
 const addressCity = document.querySelector("#addressCity").textContent.slice(1, -1);
 const addressPostcode = document.querySelector("#addressPostcode").textContent.slice(1, -1);
 const addressCountry = document.querySelector("#addressCountry").textContent.slice(1, -1);
+const ORDER_TOTAL = parseFloat(document.querySelector("#orderTotal").textContent.slice(1, -1));
 const submitButton = document.querySelector("#submit-btn");
-const IE_COST = 4.50;
-const EU_COST = 10.00;
 const ieCostEl = document.querySelector("#ie-cost");
 const euCostEl = document.querySelector("#eu-cost");
-const grandTotal = document.querySelector("#grand-total");
+const grandTotalEl = document.querySelector("#grand-total");
+// Cost of Ireland and EU Delivery. Later to be moved to db.
+const IE_COST = 4.50;
+const EU_COST = 10.00;
 
 ieCostEl.textContent = `€${IE_COST.toFixed(2)}`;
 euCostEl.textContent = `€${EU_COST.toFixed(2)}`;
+
+function calculateGrandTotal(country) {
+    if (country == "IE") {
+        return `€${(ORDER_TOTAL + IE_COST).toFixed(2)}`
+    } else {
+        return `€${(ORDER_TOTAL + EU_COST).toFixed(2)}`
+    }
+}
 
 function updateDeliveryOptions(country) {
     if (!country) {
         deliveryOptionNone.style.display = "block";
         deliveryOptionIE.style.display = "none";
         deliveryOptionEU.style.display = "none";
-        grandTotal.textContent = "";
+        grandTotalEl.textContent = "";
         submitButton.disabled = true;
     } else if (country == "IE") {
         deliveryOptionNone.style.display = "none";
         deliveryOptionIE.style.display = "block";
         deliveryOptionEU.style.display = "none";
-        grandTotal.textContent = "";
+        grandTotalEl.textContent = calculateGrandTotal(country);
         submitButton.disabled = false;
     } else {
         deliveryOptionNone.style.display = "none";
         deliveryOptionIE.style.display = "none";
         deliveryOptionEU.style.display = "block";
-        grandTotal.textContent = "";
+        grandTotalEl.textContent = calculateGrandTotal(country);
         submitButton.disabled = false;
     }
 }

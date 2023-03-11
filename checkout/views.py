@@ -125,6 +125,8 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
         # context["cart"] = Cart.objects.get(user=user)
         context["checkout_step"] = "delivery"
 
+        context["order_total"] = user.cart.total
+
         if self.request.user.is_authenticated:
             profile = get_object_or_404(Profile, user=user)
             default_shipping = profile.shipping_address
@@ -178,12 +180,21 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
             print(f"Intent updated on stripe {intent.id}")
 
         context["user"] = self.request.user
-        context["user_fullname"] = self.request.user.get_full_name
+        context["full_name"] = self.request.user.get_full_name
         context["checkout_step"] = "payment"
         context["stripe_public_key"] = STRIPE_PUBLIC_KEY
         context["client_secret"] = intent.client_secret
         context["stripe_return_url"] = STRIPE_RETURN_URL
         context["order"] = order
+
+        profile = get_object_or_404(Profile, user=self.request.user)
+        default_billing = profile.billing_address
+        if default_billing:
+            context["address_line_1"] = default_billing.address_line_1
+            context["address_line_2"] = default_billing.address_line_2
+            context["address_city"] = default_billing.city
+            context["address_postcode"] = default_billing.postcode
+            context["address_country"] = default_billing.country.code
         return context
 
 

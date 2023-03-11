@@ -23,15 +23,15 @@
     border: var(--color-secondary);
 }
 
-body>footer {
+/* body>footer {
     position: sticky;
     top: 100vh;
-}
+} */
 
-html,
+/* html,
 body {
     height: 100%;
-}
+} */
 
 body {
     background-color: var(--main-bg-color);
@@ -309,9 +309,9 @@ footer {
     background-color: var(--color-primary);
     color: var(--color-off-white);
     text-align: center;
-    position: relative;
+    /* position: relative;
     left: 0;
-    bottom: 0;
+    bottom: 0; */
     width: 100%;
     padding: 1rem 0;
     align-items: center;

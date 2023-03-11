@@ -7,6 +7,12 @@ const clientSecret = document.querySelector("#id_client_secret").textContent.sli
 
 const stripeReturnURL = document.querySelector("#stripeReturnURL").textContent.slice(1, -1);
 const userEmail = document.querySelector("#user_email").textContent.slice(1, -1);
+const fullName = document.querySelector("#fullName").textContent.slice(1, -1);
+const addressLine1 = document.querySelector("#addressLine1").textContent.slice(1, -1);
+const addressLine2 = document.querySelector("#addressLine2").textContent.slice(1, -1);
+const addressCity = document.querySelector("#addressCity").textContent.slice(1, -1);
+const addressPostcode = document.querySelector("#addressPostcode").textContent.slice(1, -1);
+const addressCountry = document.querySelector("#addressCountry").textContent.slice(1, -1);
 
 const stripe = Stripe(stripePublicKey);
 
@@ -27,18 +33,34 @@ let elements = stripe.elements({
   appearance
 });
 
-const paymentElementOptions = {
-    layout: "tabs",
-    defaultValues: {
-        billingDetails: {
-          email: userEmail,
-        },
-  }
-};
+// Passing in the email is required for this integration. The other fields are optional.
+// This is useful if you want to prefill consumer information to ease consumer experience.
+const paymentElement = elements.create('payment', {
+  defaultValues: {
+    billingDetails: {
+      email: userEmail,
+      name: fullName,
+    },
+  },
+});
 
-const paymentElement = elements.create("payment", paymentElementOptions);
-
+// Mount the Elements to their corresponding DOM node
 paymentElement.mount("#payment-element");
+
+const addressElement = elements.create("address", {
+  mode: "billing",
+  defaultValues: {
+    name: fullName,
+    address: {
+      line1: addressLine1,
+      line2: addressLine2,
+      city: addressCity,
+      postal_code: addressPostcode,
+      country: addressCountry,
+    },
+  },
+});
+addressElement.mount("#address-element");
 
 async function handleSubmit(e) {
   e.preventDefault();
