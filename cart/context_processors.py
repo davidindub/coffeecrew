@@ -28,7 +28,9 @@ def cart(request):
             guest_id = request.session["guest_id"]
             print("stored in session")
 
-        cart = Cart.objects.get_or_create(guest_id=guest_id)
-        print("got guest cart!")
+        cart, created = Cart.objects.get_or_create(guest_id=guest_id)
+
+        if created:
+            print("NEW GUEST CARD CREATED")
 
         return {"cart": cart}
