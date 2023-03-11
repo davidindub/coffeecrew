@@ -5,6 +5,7 @@ from .models import Order, OrderLineItem
 class OrderLineItemAdminInline(admin.TabularInline):
     model = OrderLineItem
     fields = ("product", "quantity", "price")
+    extra = 0
 
 
 class OrderAdmin(admin.ModelAdmin):
