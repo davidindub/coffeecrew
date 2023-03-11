@@ -129,26 +129,5 @@ class OrderLineItem(models.Model):
     def total(self):
         return self.price * self.quantity
 
-    def set_details(self):
-        """
-        Set the price if it hasn't been already set.
-        Save the product's name in case it becomes unavailable on the site,
-        so not to break users order history.
-        Should only be called when the order is created.
-        """
-        if not self.price:
-            self.price = self.product.price
-        if not self.product_name:
-            self.product_name = self.product.name
-        self.total = self.product.price * self.quantity
-
-    def save(self, *args, **kwargs):
-        """
-        Set the price if it hasn't been already set.
-        Save the product's name in case it becomes unavailable on the site,
-        so not to break users order history.
-        """
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.product.name} ({self.quantity})"
