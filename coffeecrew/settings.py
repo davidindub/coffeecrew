@@ -47,7 +47,6 @@ if development:
     CSRF_TRUSTED_ORIGINS = [os.environ.get("GITPOD_WORKSPACE")]
 
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-    DEFAULT_FROM_EMAIL = "coffeecrewshop@gmail.com"
 else:
     ALLOWED_HOSTS = [os.environ.get("HEROKU_HOSTNAME")]
     CSRF_TRUSTED_ORIGINS = [os.environ.get("HEROKU_FULL_URL")]
@@ -59,6 +58,7 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASS")
 
+DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
 
 # Application definition
 
