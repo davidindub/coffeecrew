@@ -72,7 +72,8 @@ h6 {
     font-family: var(--font-display-font);
 }
 
-main > :not(.hero-container) {
+main {
+    height: 100%;
     background-color: var(--color-white);
     margin: auto;
     padding: 0.5rem;
@@ -103,8 +104,9 @@ main > :not(.hero-container) {
 }
 
 
-.product-hr {
+.custom-hr {
     border: 0.1rem dashed var(--color-primary);
+    background: none;
     border-radius: 5px;
     margin-bottom: 1.5rem;
 }
