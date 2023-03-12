@@ -312,7 +312,7 @@ class BrandDeleteView(StaffMemberRequiredMixin, DeleteView):
     View for confirmation page to delete a category.
     """
     model = Brand
-    template_name = "staff/forms/category_delete_form.html"
+    template_name = "staff/forms/brand_delete_form.html"
     success_url = reverse_lazy("manage_shop")
 
     def post(self, request, *args, **kwargs):
