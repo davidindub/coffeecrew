@@ -21,9 +21,9 @@ def cart(request):
         return {"cart": Cart.objects.get(user=request.user)}
 
     guest_id = request.COOKIES.get("guest_id")
-    try:
-        cart = Cart.objects.get(guest_id=guest_id)
-    except Cart.DoesNotExist:
-        cart = Cart.objects.create(guest_id=guest_id)
-    print("It worked")
-    return {"cart": cart}
+    if guest_id:
+        cart = Cart.objects.get_or_create(guest_id=guest_id)
+        return {"cart": cart}
+
+    if not guest_id:
+        return {"cart": None}
