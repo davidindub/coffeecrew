@@ -156,7 +156,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "cart.context_processors.cart_total",
                 "cart.context_processors.cart",
-                "products.context_processors.get_departments_for_navbar",
+                "products.context_processors.get_context_for_navbar",
                 "profiles.context_processors.get_user_wishlist"
             ],
             "builtins": [

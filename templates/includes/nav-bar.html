@@ -75,8 +75,21 @@
                         </ul>
                     </li>
                 {% endfor %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">Brands</a>
+                    <ul class="dropdown-menu">
+                        {% for brand in brands %}
+                            <li>
+                                <a class="dropdown-item"
+                                   href="{% url "products_by_brand" brand.name %}"
+                                   class="">{{ brand.display_name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
