@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /staff/
+Disallow: /checkout/
+Sitemap: https://coffee-crew-shop.herokuapp.com/sitemap.xml

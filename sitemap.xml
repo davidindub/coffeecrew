@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/cart/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso-machines/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/about</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/accounts/login/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/mini-slim-plus-grinder</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/ode-brew-grinder</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/v60-drip-coffee-scale</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/contact</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/privacy</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Coffee/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/gachatha</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/la-union</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/el-manzano</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/fazenda</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/espresso/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/v60-dripper-set</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/chemex-6-cup</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/to-go-tumbler-360</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/to-go-tumbler-240</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/brewer-stand-set-4-cup</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/moccamaster-kbg-select</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/moccamaster-cup-one</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/linea-mini</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=1</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=2</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=3</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/measuring/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/acaia-lunar-scales</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/travel/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/aeropress</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/filter-machines/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/pourover/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/cotton-paper-filter-4-cup</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/chemex-filter-papers-6-cup</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/v60-filter-papers-02</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/item/pour-over-kettle</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/?sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/c/grinders/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=1</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=2</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=3</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=1&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=2&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=3&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/b/hario/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/b/fellow/</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=1&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=2&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=3&amp;sort=date_added</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=1&amp;sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=2&amp;sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=3&amp;sort=name&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=1&amp;sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=2&amp;sort=name&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/?page=3&amp;sort=price&amp;order=asc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://coffee-crew-shop.herokuapp.com/shop/?page=3&amp;sort=price&amp;order=desc</loc>
+  <lastmod>2023-03-12T00:03:58+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
