@@ -15,7 +15,7 @@ class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 null=True, blank=True, editable=False)
     guest_id = models.CharField(
-        max_length=100, null=True, blank=True, unique=True, editable=False)
+        max_length=200, null=True, blank=True, unique=True, editable=False)
     updated = models.DateTimeField(auto_now=True)
 
     @property
@@ -117,8 +117,3 @@ class CartItem(models.Model):
 def create_cart(sender, instance, created, **kwargs):
     if created:
         Cart.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_cart(sender, instance, **kwargs):
-    instance.cart.save()

@@ -1,7 +1,8 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 import uuid
-from .models import Cart
-from .get_cart import get_cart_for_guest_or_user
+from .models import Cart, CartItem
+from .helpers.cart import get_cart_for_guest_or_user
 
 
 def cart_total(request):
@@ -17,20 +18,12 @@ def cart_total(request):
 
 def cart(request):
     if request.user.is_authenticated:
-        print("got user cart!")
         return {"cart": Cart.objects.get(user=request.user)}
-    else:
-        try:
-            guest_id = request.session["guest_id"]
-        except KeyError:
-            print("storing id in session")
-            request.session["guest_id"] = str(uuid.uuid4())
-            guest_id = request.session["guest_id"]
-            print("stored in session")
 
-        cart, created = Cart.objects.get_or_create(guest_id=guest_id)
-
-        if created:
-            print("NEW GUEST CARD CREATED")
-
-        return {"cart": cart}
+    guest_id = request.COOKIES.get("guest_id")
+    try:
+        cart = Cart.objects.get(guest_id=guest_id)
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(guest_id=guest_id)
+    print("It worked")
+    return {"cart": cart}

@@ -9,7 +9,7 @@ from django.views.generic import (DetailView, ListView,
 import stripe
 from profiles.models import Profile
 from cart.models import CartItem, Cart
-from cart.get_cart import get_cart_for_guest_or_user
+from cart.helpers.cart import get_cart_for_guest_or_user
 from coffeecrew.StaffMemberRequiredMixin import StaffMemberRequiredMixin
 from coffeecrew.settings import (STRIPE_PUBLIC_KEY, STRIPE_RETURN_URL,
                                  STRIPE_SECRET_KEY, STRIPE_CURRENCY,

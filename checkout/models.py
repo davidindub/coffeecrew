@@ -3,8 +3,6 @@ from coffeecrew.settings import FREE_DELIVERY_THRESHOLD, DELIVERY_COST
 from django.db import models, IntegrityError
 from django_countries.fields import CountryField
 from products.models import Product
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 import datetime
 from django.utils import timezone
 import random

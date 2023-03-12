@@ -94,10 +94,13 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "cart.set_cookie.set_guest_cookie_middleware",
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_AGE = 1209600
+
+ACCOUNT_ADAPTER = "cart.adapters.MyAccountAdapter"
 
 ROOT_URLCONF = "coffeecrew.urls"
 

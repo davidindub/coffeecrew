@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import Product
 from django.views import View
 from django.views.generic import ListView
 from django.contrib import messages
 from .models import Cart, CartItem
-from .get_cart import get_cart_for_guest_or_user
+from .helpers.cart import get_cart_for_guest_or_user
 
 
 class CartView(ListView):
@@ -13,6 +14,11 @@ class CartView(ListView):
     template_name = "cart/shopping_cart.html"
     context_object_name = "cart_items"
     ordering = ["-date_added"]
+
+    def dispatch(self, request, *args, **kwargs):
+        if not get_cart_for_guest_or_user(self.request):
+            return redirect("home")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         queryset = self.model.objects.filter(

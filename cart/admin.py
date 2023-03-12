@@ -3,7 +3,7 @@ from .models import Cart, CartItem
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ("user", "updated")
+    list_display = ("user", "guest_id", "updated")
 
 
 class CartItemAdmin(admin.ModelAdmin):
