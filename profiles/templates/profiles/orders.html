@@ -8,18 +8,18 @@
             <li class="breadcrumb-item">
                 <a href="{% url 'account_dashboard' %}">My Account</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                My Orders
-            </li>
+            <li class="breadcrumb-item active" aria-current="page">My Orders</li>
         </ol>
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-    <h1>Orders</h1>
-    {% if orders %}
-    {% include "includes/orders_table.html" %}
-    {% include "includes/pagination_links.html" %}
-    {% else %}
-        <p>No orders found.</p>
-    {% endif %}
+    <div class="container-fluid">
+        <h1>Orders</h1>
+        {% if orders %}
+            {% include "includes/orders_table.html" %}
+            {% include "includes/pagination_links.html" %}
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
 {% endblock content %}

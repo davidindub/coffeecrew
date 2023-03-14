@@ -10,67 +10,27 @@
   </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-  <h1 class="text-center">Manage Shop</h1>
-  <div class="row">
-    <div class="col">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Departments</th>
-              <th class="d-none d-md-table-cell">On Display</th>
-              <th>Categories</th>
-              <th>Products</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for department in departments %}
+  <div class="container-fluid">
+    <h1 class="text-center">Manage Shop</h1>
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
               <tr>
-                <td>
-                  <a href="{% url 'department_update' department.id %}"
-                     class="fs-5 fw-bolder">{{ department.name }}
-                    <svg aria-label="Edit {{ department.name }}"
-                         xmlns="http://www.w3.org/2000/svg"
-                         width="16"
-                         height="16"
-                         fill="currentColor"
-                         class="bi bi-pencil"
-                         viewBox="0 0 16 16">
-                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
-                    </svg>
-                  </a>
-                </td>
-                <td class="d-none d-md-table-cell">
-                  {% if department.visible_to_customers %}
-                    <svg aria-label="Visible"
-                         xmlns="http://www.w3.org/2000/svg"
-                         width="24"
-                         height="24"
-                         fill="currentColor"
-                         class="bi bi-eye-fill"
-                         viewBox="0 0 16 16">
-                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                    </svg>
-                  {% else %}
-                    <svg aria-label="Hidden"
-                         xmlns="http://www.w3.org/2000/svg"
-                         width="24"
-                         height="24"
-                         fill="currentColor"
-                         class="bi bi-eye-slash"
-                         viewBox="0 0 16 16">
-                      <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                      <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                      <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                    </svg>
-                  {% endif %}
-                </td>
-                <td>
-                  {% for category in department.categories.all %}
-                    <a href="{% url 'category_update' category.id %}" class="">
-                      {{ category.display_name }}
-                      <svg aria-label="Edit {{ category.display_name }}"
+                <th>Departments</th>
+                <th class="d-none d-md-table-cell">On Display</th>
+                <th>Categories</th>
+                <th>Products</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for department in departments %}
+                <tr>
+                  <td>
+                    <a href="{% url 'department_update' department.id %}"
+                       class="fs-5 fw-bolder">{{ department.name }}
+                      <svg aria-label="Edit {{ department.name }}"
                            xmlns="http://www.w3.org/2000/svg"
                            width="16"
                            height="16"
@@ -80,163 +40,207 @@
                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
                       </svg>
                     </a>
-                    <br>
-                  {% empty %}
-                    No categories found
-                  {% endfor %}
-                </td>
-                <td>
-                  {% for category in department.categories.all %}
-                    {{ category.num_products }}
-                    <br>
-                  {% empty %}
-                    -
-                  {% endfor %}
-                </td>
-              </tr>
-            {% empty %}
-              <tr>
-                <td colspan="3">No departments found</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <a href="{% url 'department_create' %}" class="btn btn-sm btn-cc">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="16"
-               height="16"
-               fill="currentColor"
-               class="bi bi-plus-square-fill svg-in-btn"
-               viewBox="0 0 16 16">
-            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
-          </svg>
-        Add Department</a>
-        <a href="{% url 'category_create' %}" class="btn btn-sm btn-cc">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="16"
-               height="16"
-               fill="currentColor"
-               class="bi bi-plus-square-fill svg-in-btn"
-               viewBox="0 0 16 16">
-            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
-          </svg>
-        Add Category</a>
+                  </td>
+                  <td class="d-none d-md-table-cell">
+                    {% if department.visible_to_customers %}
+                      <svg aria-label="Visible"
+                           xmlns="http://www.w3.org/2000/svg"
+                           width="24"
+                           height="24"
+                           fill="currentColor"
+                           class="bi bi-eye-fill"
+                           viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg>
+                    {% else %}
+                      <svg aria-label="Hidden"
+                           xmlns="http://www.w3.org/2000/svg"
+                           width="24"
+                           height="24"
+                           fill="currentColor"
+                           class="bi bi-eye-slash"
+                           viewBox="0 0 16 16">
+                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                      </svg>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% for category in department.categories.all %}
+                      <a href="{% url 'category_update' category.id %}" class="">
+                        {{ category.display_name }}
+                        <svg aria-label="Edit {{ category.display_name }}"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="16"
+                             height="16"
+                             fill="currentColor"
+                             class="bi bi-pencil"
+                             viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
+                        </svg>
+                      </a>
+                      <br>
+                    {% empty %}
+                      No categories found
+                    {% endfor %}
+                  </td>
+                  <td>
+                    {% for category in department.categories.all %}
+                      {{ category.num_products }}
+                      <br>
+                    {% empty %}
+                      -
+                    {% endfor %}
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="3">No departments found</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'department_create' %}" class="btn btn-sm btn-cc">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="16"
+                 height="16"
+                 fill="currentColor"
+                 class="bi bi-plus-square-fill svg-in-btn"
+                 viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
+            </svg>
+          Add Department</a>
+          <a href="{% url 'category_create' %}" class="btn btn-sm btn-cc">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="16"
+                 height="16"
+                 fill="currentColor"
+                 class="bi bi-plus-square-fill svg-in-btn"
+                 viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
+            </svg>
+          Add Category</a>
+        </div>
       </div>
     </div>
-  </div>
-  <hr class="custom-hr">
-  <div class="row">
-    <div class="col- col-lg-6">
-      <h2>Brands</h2>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Brand</th>
-              <th>Products</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for brand in brands %}
+    <hr class="custom-hr">
+    <div class="row">
+      <div class="col- col-lg-6">
+        <h2>Brands</h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Products</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for brand in brands %}
+                <tr>
+                  <td>
+                    <a href="{% url 'brand_update' brand.id %}">{{ brand.display_name }}</a>
+                    <svg aria-label="Edit {{ brand.display_name }}"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-pencil"
+                         viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
+                    </svg>
+                  </td>
+                  <td>{{ brand.num_products }}</td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="2">No brands found</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'brand_create' %}" class="btn btn-sm btn-cc">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="16"
+                 height="16"
+                 fill="currentColor"
+                 class="bi bi-plus-square-fill svg-in-btn"
+                 viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
+            </svg>
+          Add Brand</a>
+        </div>
+      </div>
+      <div class="col- col-lg-6">
+        <hr class="product-hr d-lg-none">
+        <h2>Stats</h2>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
               <tr>
                 <td>
-                  <a href="{% url 'brand_update' brand.id %}">{{ brand.display_name }}</a>
-                  <svg aria-label="Edit {{ brand.display_name }}"
-                       xmlns="http://www.w3.org/2000/svg"
-                       width="16"
-                       height="16"
-                       fill="currentColor"
-                       class="bi bi-pencil"
-                       viewBox="0 0 16 16">
-                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z">
-                  </svg>
+                  <a href="{% url 'manage_orders' %}">Total Orders</a>
                 </td>
-                <td>{{ brand.num_products }}</td>
+                <td>
+                  <a href="{% url 'manage_orders' %}">{{ orders }}</a>
+                </td>
               </tr>
-            {% empty %}
               <tr>
-                <td colspan="2">No brands found</td>
+                <td>
+                  <a href="{% url 'manage_orders' %}?dispatched=true">Orders Dispatched</a>
+                </td>
+                <td>
+                  <a href="{% url 'manage_orders' %}?dispatched=true">{{ orders_dispatched }}</a>
+                </td>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <a href="{% url 'brand_create' %}" class="btn btn-sm btn-cc">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="16"
-               height="16"
-               fill="currentColor"
-               class="bi bi-plus-square-fill svg-in-btn"
-               viewBox="0 0 16 16">
-            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z">
-          </svg>
-        Add Brand</a>
-      </div>
-    </div>
-    <div class="col- col-lg-6">
-      <hr class="product-hr d-lg-none">
-      <h2>Stats</h2>
-      <div class="table-responsive">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>
-                <a href="{% url 'manage_orders' %}">Total Orders</a>
-              </td>
-              <td>
-                <a href="{% url 'manage_orders' %}">{{ orders }}</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="{% url 'manage_orders' %}?dispatched=true">Orders Dispatched</a>
-              </td>
-              <td>
-                <a href="{% url 'manage_orders' %}?dispatched=true">{{ orders_dispatched }}</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="{% url 'manage_orders' %}?dispatched=false">Orders to Dispatch</a>
-              </td>
-              <td>
-                <a href="{% url 'manage_orders' %}?dispatched=false">
-                  {% if orders_to_dispatch > 0 %}
-                    <span class="text-danger">{{ orders_to_dispatch }}</span>
-                  {% else %}
-                    {{ orders_to_dispatch }}
-                  {% endif %}
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Registered Users</td>
-              <td>{{ total_users }}</td>
-            </tr>
-            <tr>
-              <td>Guest Carts</td>
-              <td>{{ num_guest_carts }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <hr class="custom-hr">
-        {% if orders_to_dispatch > 0 %}
-        <a href="{% url 'manage_orders' %}?dispatched=false" class="btn btn-sm btn-cc position-relative">
-            Orders to Dispatch
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ orders_to_dispatch }}
-              <span class="visually-hidden">orders to dispatch</span>
-            </span>
-          </a>
-        {% endif %}
-        <a href="{% url 'purge_stale_carts' %}" class="btn btn-sm btn-cc btn-outline-cc position-relative">
-          Purge Stale Guest Carts
-          {% if stale_guest_carts > 0 %}
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ stale_guest_carts }}
-            <span class="visually-hidden">stale guest carts</span>
-          </span>
+              <tr>
+                <td>
+                  <a href="{% url 'manage_orders' %}?dispatched=false">Orders to Dispatch</a>
+                </td>
+                <td>
+                  <a href="{% url 'manage_orders' %}?dispatched=false">
+                    {% if orders_to_dispatch > 0 %}
+                      <span class="text-danger">{{ orders_to_dispatch }}</span>
+                    {% else %}
+                      {{ orders_to_dispatch }}
+                    {% endif %}
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Registered Users</td>
+                <td>{{ total_users }}</td>
+              </tr>
+              <tr>
+                <td>Guest Carts</td>
+                <td>{{ num_guest_carts }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr class="custom-hr">
+          {% if orders_to_dispatch > 0 %}
+            <a href="{% url 'manage_orders' %}?dispatched=false"
+               class="btn btn-sm btn-cc position-relative">
+              Orders to Dispatch
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ orders_to_dispatch }}
+                <span class="visually-hidden">orders to dispatch</span>
+              </span>
+            </a>
           {% endif %}
-        </a>
+          <a href="{% url 'purge_stale_carts' %}" 
+             class="btn btn-sm btn-cc btn-outline-cc position-relative ms-5">
+            Purge Stale Guest Carts
+            {% if stale_guest_carts > 0 %}
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ stale_guest_carts }}
+                <span class="visually-hidden">stale guest carts</span>
+              </span>
+            {% endif %}
+          </a>
+        </div>
       </div>
     </div>
   </div>

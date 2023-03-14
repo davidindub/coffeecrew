@@ -2,40 +2,62 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
-<div class="hero-container">
-  <div class="hero-image">
-    <div class="hero-inner">
-      <h2 class="hero-headline">We Got Your Coffee.</h2>
-      <a href="{% url 'products' %}" class="hero-button">Let's Brew!</a>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-<h2><a href="{% url 'products' %}?sort=date_added">New Products</a></h2>
-  <div class="card-group">
-    {% for product in latest_products %}
-    <div class="card">
-      <a href="{% url 'product_detail' product.slug %}">
-        {% if product.image %}
-            <img src="{{ product.imageURL }}"
-                 class="card-img-top"
-                 alt="{{ product.name }}">
-        {% else %}
-            <img src="{% static 'images/hero-coffee-filter.jpg' %}"
-                 class="card-img-top"
-                 alt="{{ product.name }}">
-        {% endif %}
-    </a>
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a></h5>
-        <p class="card-text">{{ product.description|truncatewords:12 }}</p>
-        <p class="card-text"><small class="text-muted">Added {{ product.date_added|naturaltime }}</small></p>
+  <div class="hero-container">
+    <div class="hero-image">
+      <div class="hero-inner">
+        <h2 class="hero-headline">We Got Your Coffee.</h2>
+        <a href="{% url 'products' %}" class="hero-button">Let's Brew!</a>
       </div>
     </div>
-    {% endfor %}
   </div>
-
-</div>
-
+  <div class="row py-5 mx-2">
+    <div class="col-lg-6">
+      <p>
+        Coffee Crew is a local, small business based in Dublin passionate about bringing you carefully sourced coffee beans from quality roasters.
+        <br><br>
+        We curate our offering and bring new varieties weekly, so come back to us regularly to sample the best blends in the world.
+        <br><br>
+        We’ve also got a host of the finest coffee making equipment from worldwide brand leaders, from expert grinders to beautifully crafter tumblers, browse our collection today.
+      </p>
+    </div>
+    <div class="col-lg-6 text-center d-flex flex-column align-items-center">
+      <a href="{% url 'products_by_department' department='Coffee' %}" class="btn btn-cc">Browse Coffee</a>
+      <br>
+      <br>
+      <a href="{% url 'products_by_department' department='Equipment' %}" class="btn btn-cc">Browse Equipment</a>
+    </div>
+  </div>
+  <div class="row mx-2 pb-5">
+    <h2>
+      <a href="{% url 'products' %}?sort=date_added">New Products</a>
+    </h2>
+    <div class="card-group">
+      {% for product in latest_products %}
+        <div class="card">
+          <a href="{% url 'product_detail' product.slug %}">
+            {% if product.image %}
+              <img src="{{ product.imageURL }}"
+                   width="500px"
+                   class="card-img-top"
+                   alt="{{ product.name }}">
+            {% else %}
+              <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                   width="500px"
+                   class="card-img-top"
+                   alt="{{ product.name }}">
+            {% endif %}
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
+            </h5>
+            <p class="card-text">{{ product.description|truncatewords:12 }}</p>
+            <p class="card-text">
+              <small class="text-muted">Added {{ product.date_added|naturaltime }}</small>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

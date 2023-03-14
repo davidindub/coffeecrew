@@ -50,7 +50,7 @@
             <div class="col">
                 {% if department %}
                     <h2>{{ department }}</h2>
-                    {% if department.description %}<p>{{ department.description|linebreaks}}</p>{% endif %}
+                    {% if department.description %}<p>{{ department.description|linebreaks }}</p>{% endif %}
                 {% elif category %}
                     <h2>{{ category.display_name }}</h2>
                     {% if category.description %}<p>{{ category.description|linebreaks }}</p>{% endif %}
