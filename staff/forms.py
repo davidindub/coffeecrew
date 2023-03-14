@@ -27,8 +27,8 @@ class CoffeeForm(ProductForm):
     """
     class Meta:
         model = Coffee
-        fields = ["name", "visible_to_customers", "description", "brand",
-                  "category", "stock", "image",
+        fields = ["name", "visible_to_customers", "description", "price",
+                  "brand", "category", "stock", "image",
                   "country", "process", "harvest_year", "weight"]
 
 
