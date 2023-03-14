@@ -4,7 +4,7 @@ from .models import Order, OrderLineItem
 
 class OrderLineItemAdminInline(admin.TabularInline):
     model = OrderLineItem
-    fields = ("product", "quantity", "price")
+    fields = ("product", "grind_size", "quantity", "price")
     extra = 0
 
 

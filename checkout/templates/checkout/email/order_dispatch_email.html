@@ -27,7 +27,6 @@ Dispatched on {{ order.shipped_date|date:"d M Y" }}
         <tr>
             <th scope="col">Product</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Grind</th>
             <th scope="col">Total</th>
         </tr>
     </thead>
@@ -36,13 +35,9 @@ Dispatched on {{ order.shipped_date|date:"d M Y" }}
             <tr>
                 <td>
                     {{ item.product.name }}
+                    {% if item.grind_size %}<small>({{ item.grind_size }})</small>{% endif %}
                 </td>
                 <td>{{ item.quantity }}</td>
-                {% if item.product.coffee %}
-                    <td>{{ item.grind_size }}</td>
-                {% else %}
-                    <td>N/A</td>
-                {% endif %}
                 <td>€{{ item.total }}</td>
             </tr>
         {% endfor %}
