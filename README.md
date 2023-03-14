@@ -222,8 +222,28 @@ The Footer includes:
 
 As the project can collect data from users, I included a Privacy Policy link in the Footer which explains how data may be used. I used [GDPR.eu](https://gdpr.eu/) for help writing the policy.
 
+The Privacy Policy is also clearly displayed to users on their first visit in the Cookie Consent popup.
+
+
 See:
 [Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
+
+### Cookie Consent Banner
+
+I implemented a cookie consent banner using handy code from [GDPR Compliant Cookie Consent Banner In JavaScript – GlowCookies](https://www.cssscript.com/gdpr-cookie-consent-banner/).
+
+This code is well set up to later implement analytics such as Google Analytics or Meta Pixel.
+
+<details>
+<summary>
+Screenshot of Cookie Consent banner
+</summary>
+![](docs/images/screenshots/screenshot-mobile-cookie-consent.jpeg)
+
+![](docs/images/screenshots/screenshot-cookie-consent.jpg)
+
+</details>
+
 
 ### Notifications
 
@@ -802,6 +822,7 @@ You can fork this repository by using the following steps:
 - SKU Generator adapted from [SKU Generator](https://github.com/saulacher/SKUgenerator)
 - Set cookie code from [Adding Items to Cart without Registering a Account by Dennis Ivy](https://www.youtube.com/watch?v=-7a8sth8gKo)
 - [Stack Overflow - Django rest auth user_logged_in signal](https://stackoverflow.com/questions/43300305/django-rest-auth-user-logged-in-signal)
+- Cookie Consent from [GDPR Compliant Cookie Consent Banner In JavaScript – GlowCookies](https://www.cssscript.com/gdpr-cookie-consent-banner/)
 
 ### Media
 
