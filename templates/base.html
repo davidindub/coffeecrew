@@ -106,6 +106,8 @@
       {% endblock content %}
     </main>
     {% block post_load_js %}
+    <link rel="stylesheet" href="{% static 'css/glowCookies.css' %}" />
+    <script src="{% static 'js/glowCookies.js' %}"></script>
     {% endblock post_load_js %}
     {% block footer %}
       {% include "includes/footer.html" %}
