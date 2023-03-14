@@ -14,8 +14,9 @@
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
+<div class="container-fluid">
     <div class="row">
-        <section class="col-lg-4">
+        <section class="col-lg-6">
             <h2>Contact Us</h2>
             <p>We'd love to hear from you!</p>
             <form method="post">
@@ -28,46 +29,5 @@
                  class="d-none d-lg-inline img-fluid rounded"
                  alt="A person typing on a laptop with a latte beside it">
         </div>
-        <div class="col-lg-4">
-            <hr class="custom-hr d-lg-none">
-            <!-- Begin Mailchimp Signup Form -->
-            <section class="row">
-                <form action="https://herokuapp.us11.list-manage.com/subscribe/post?u=050aaf91f720b2a632e30513d&amp;id=35ea912d6b&amp;f_id=001d9ce0f0"
-                      method="post"
-                      id="mc-embedded-subscribe-form"
-                      name="mc-embedded-subscribe-form"
-                      class="validate"
-                      target="_blank"
-                      novalidate>
-                    <h2 class="text-center">Sign Up to our Newsletter</h2>
-                    <p>Subscribers get first dibs on special limited edition small roasts!</p>
-                    <div class="form-floating mb-3">
-                        <input type="email"
-                               {% if user.is_authenticated %} value="{{ user.em }}" {% else %} value="" {% endif %}
-                               name="EMAIL"
-                               class="form-control form-control-small"
-                               id="mce-EMAIL"
-                               placeholder="Email Address"
-                               required>
-                        <label for="mce-EMAIL">Email Address</label>
-                    </div>
-                    <input type="submit"
-                           value="Subscribe"
-                           name="subscribe"
-                           id="mc-embedded-subscribe"
-                           class="btn btn-cc">
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                        <input type="text"
-                               name="b_050aaf91f720b2a632e30513d_35ea912d6b"
-                               tabindex="-1"
-                               value="">
-                    </div>
-                </form>
-            </section>
-        </div>
+</div>
     {% endblock content %}
-    {% block extra_js %}
-        <script type='text/javascript'
-                src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-    {% endblock extra_js %}
