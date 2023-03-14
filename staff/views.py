@@ -112,7 +112,7 @@ class CoffeeCreateView(ProductCreateView):
 
     def get_success_url(self):
         return reverse_lazy("product_detail",
-                            kwargs={"product_id": self.object.id})
+                            kwargs={"slug": self.object.slug})
 
 
 class ProductDeleteView(StaffMemberRequiredMixin, DeleteView):
@@ -278,7 +278,7 @@ class BrandUpdateView(StaffMemberRequiredMixin, UpdateView):
     View for updating existing Brands
     """
     model = Brand
-    fields = ["name", "display_name"]
+    fields = ["name", "display_name", "description"]
     template_name = "staff/forms/brand_form.html"
 
     def form_valid(self, form):
