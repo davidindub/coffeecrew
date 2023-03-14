@@ -122,10 +122,12 @@
                                                 <a href="{% url 'product_detail' product.slug %}">
                                                     {% if product.image %}
                                                         <img src="{{ product.imageURL }}"
+                                                             width="500px"
                                                              alt="{{ product.name }}"
                                                              class="product-list-image{% if not product.visible_to_customers %} product-greyed-img{% endif %}">
                                                     {% else %}
                                                         <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                                                             width="500px"
                                                              alt="{{ product.name }}"
                                                              class="product-list-image">
                                                     {% endif %}

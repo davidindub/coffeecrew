@@ -37,12 +37,32 @@
             <div class="col-12 col-md-6 col-lg-4">
                 {% if product.image %}
                     <img src="{{ product.imageURL }}"
+                         width="500px"
                          class="card-img-top"
                          alt="{{ product.name }}">
                 {% else %}
                     <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                         width="500px"
                          class="card-img-top"
                          alt="{{ product.name }}">
+                {% endif %}
+                {% if user.is_staff %}
+                    <hr class="custom-hr">
+                    <div class="d-flex justify-content-evenly">
+                        <span class="fw-bold font-monospace btn btn-sm btn-outline-cc disabled">SKU: {{ product.sku }}</span>
+                        <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}"
+                           class="btn btn-sm btn-outline-cc">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-pencil-square"
+                                 viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
+                            </svg>
+                        Edit Product</a>
+                    </div>
                 {% endif %}
             </div>
             <div class="col">
@@ -60,34 +80,23 @@
                     </ul>
                     <hr class="custom-hr">
                     <small>You can select if you would like your coffee ground after adding it to your cart.</small>
-                    <hr class="custom-hr">
                 {% endif %}
-
-                <h4>Price: €{{ product.price }}</h4>
-                <div class="d-flex flex-row justify-content-between">
-                    {% if user.is_authenticated %}
-                        {% include "includes/buttons/wishlist.html" %}
-                    {% endif %}
-                    {% if product.stock %}
-                        {% include "includes/buttons/add_to_cart.html" %}
-                    {% else %}
-                        <span class="btn btn-cc-greyed">Out of Stock</span>
-                    {% endif %}
-                    {% if user.is_staff %}
-                        <span class="fw-bold font-monospace btn btn-sm btn-outline-cc disabled">SKU: {{ product.sku }}</span>
-                        <a href="{% if product.coffee %}{% url 'coffee_update' product.slug %}{% else %}{% url 'product_update' product.slug %}{% endif %}"
-                           class="btn btn-sm btn-outline-cc">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 width="16"
-                                 height="16"
-                                 fill="currentColor"
-                                 class="bi bi-pencil-square"
-                                 viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
-                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
-                            </svg>
-                        Edit Product</a>
-                    {% endif %}
+                <hr class="custom-hr">
+                <div class="row d-flex justify-content-evenly">
+                    <h3 class="text-end">
+                        €{{ product.price }}
+                    </h3>
+                </div>
+                    <div class="d-flex flex-row justify-content-evenly">
+                        {% if user.is_authenticated %}
+                            {% include "includes/buttons/wishlist.html" %}
+                        {% endif %}
+                        {% if product.stock %}
+                            {% include "includes/buttons/add_to_cart.html" %}
+                        {% else %}
+                            <span class="btn btn-cc-greyed">Out of Stock</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

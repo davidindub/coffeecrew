@@ -103,18 +103,20 @@
                                     <a href="{% url 'product_detail' product.slug %}">
                                         {% if product.image %}
                                             <img src="{{ product.imageURL }}"
+                                                 width="500px"
                                                  class="card-img-top"
                                                  alt="{{ product.name }}">
                                         {% else %}
                                             <img src="{% static 'images/hero-coffee-filter.jpg' %}"
+                                                 width="500px"
                                                  class="card-img-top"
                                                  alt="{{ product.name }}">
                                         {% endif %}
                                     </a>
                                     <div class="card-body">
-                                            <h5 class="card-title">
-                                                <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
-                                            </h5>
+                                        <h5 class="card-title">
+                                            <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
+                                        </h5>
                                         <p class="card-text">{{ product.description|truncatewords:20 }}</p>
                                     </div>
                                     <div class="card-body">
@@ -123,9 +125,7 @@
                                                 <h5>€{{ product.price }}</h5>
                                             </li>
                                             {% if user.is_authenticated %}
-                                                <li class="list-group-item">
-                                                    {% include "includes/buttons/wishlist.html" %}
-                                                </li>
+                                                <li class="list-group-item">{% include "includes/buttons/wishlist.html" %}</li>
                                             {% endif %}
                                             <li class="list-group-item">
                                                 {% if product.stock %}

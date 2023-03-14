@@ -140,7 +140,7 @@
             {% for brand in brands %}
               <tr>
                 <td>
-                  <a href="{% url 'brand_update' brand.id %}" class="">{{ brand.display_name }}</a>
+                  <a href="{% url 'brand_update' brand.id %}">{{ brand.display_name }}</a>
                   <svg aria-label="Edit {{ brand.display_name }}"
                        xmlns="http://www.w3.org/2000/svg"
                        width="16"
