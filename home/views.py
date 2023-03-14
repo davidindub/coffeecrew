@@ -20,11 +20,11 @@ class IndexView(TemplateView):
         return context
 
 
-class AboutView(TemplateView):
+class NewsletterView(TemplateView):
     """
-    renders view for the about page
+    renders view for the newsletter page
     """
-    template_name = "home/about.html"
+    template_name = "home/newsletter.html"
 
 
 class PrivacyPolicyView(TemplateView):
