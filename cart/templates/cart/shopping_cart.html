@@ -22,6 +22,7 @@
 {% block content %}
   <div class="container-fluid">
     <div class="row">
+      <h2>Shopping Cart</h2>
       <div class="col">
         {% if object_list %}
           <table class="table table-bordered">
@@ -46,6 +47,7 @@
                     <a href="{% url 'product_detail' object.product.slug %}">
                       {% if object.product.image %}
                         <img src="{{ object.product.imageURL }}"
+                             width="500px"
                              alt="{{ object.product.name }}"
                              class="product-list-image">
                       {% endif %}
