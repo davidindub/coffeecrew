@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class Department(models.Model):
     name = models.CharField(max_length=254)
     visible_to_customers = models.BooleanField(default=False)
+    description = models.TextField(max_length=200, null=True, blank=True)
 
     @property
     def num_products(self):
@@ -26,6 +27,7 @@ class Category(models.Model):
     display_name = models.CharField(max_length=254, null=True, blank=True)
     department = models.ForeignKey(
         "Department", null=True, blank=True, on_delete=models.CASCADE)
+    description = models.TextField(max_length=200, null=True, blank=True)
 
     class Meta(object):
         verbose_name_plural = "Categories"
@@ -41,6 +43,7 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=254)
     display_name = models.CharField(max_length=254, null=True, blank=True)
+    description = models.TextField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"

@@ -38,7 +38,7 @@ class DepartmentForm(forms.ModelForm):
     """
     class Meta:
         model = Department
-        fields = ["name", "visible_to_customers"]
+        fields = ["name", "description", "visible_to_customers"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,7 +54,7 @@ class CategoryForm(forms.ModelForm):
     """
     class Meta:
         model = Category
-        fields = ["name", "display_name", "department"]
+        fields = ["name", "display_name", "description", "department"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -71,7 +71,7 @@ class PurgeStaleCartsForm(forms.Form):
     purge_stale_carts = forms.BooleanField(
         required=True,
         label="Are you sure you want to purge these carts?"
-            )
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block extra_title %}
-- Purge Stale Carts?
+    - Purge Stale Carts?
 {% endblock extra_title %}
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
@@ -13,15 +13,17 @@
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
+    <div class="container-fluid">
         <h1>Purge Stale Guest Carts?</h1>
         {% if stale_carts_count > 0 %}
-        <p>There are {{ stale_carts_count }} guest carts that haven't been updated in over two weeks stored.</p>
-        <form method="post">
-            {% csrf_token %}
-            {% crispy form %}
-        </form>
+            <p>There are {{ stale_carts_count }} guest carts that haven't been updated in over two weeks stored.</p>
+            <form method="post">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
         {% else %}
-        <p>There aren't any guest carts older than two weeks stored at the moment.</p>
-        <a href="{% url "manage_shop" %}" class="btn btn-sm btn-outline-cc">Back to Manage Shop</a>
+            <p>There aren't any guest carts older than two weeks stored at the moment.</p>
+            <a href="{% url "manage_shop" %}" class="btn btn-sm btn-outline-cc">Back to Manage Shop</a>
         {% endif %}
+    </div>
 {% endblock content %}

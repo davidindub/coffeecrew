@@ -18,38 +18,42 @@
         <li class="breadcrumb-item">
           <a href="{% url 'manage_products_by_department' product.category.first.department.name %}">{{ product.category.first.department.name }}</a>
         </li>
-        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'manage_products_by_category' product.category.first.name %}">{{ product.category.first.display_name }}</a></li>
+        <li class="breadcrumb-item" aria-current="page">
+          <a href="{% url 'manage_products_by_category' product.category.first.name %}">{{ product.category.first.display_name }}</a>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">Update {{ product.name }}</li>
       {% else %}
-      <li class="breadcrumb-item active" aria-current="page">Add New Product</li>
+        <li class="breadcrumb-item active" aria-current="page">Add New Product</li>
       {% endif %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-  {% if product %}
-    <h1>Edit {{ product.name }}</h1>
-  {% elif new_coffee %}
-    <h1>New Coffee</h1>
-  {% else %}
-    <h1>New Product</h1>
-  {% endif %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% crispy form %}
-  </form>
-  {% if product %}
-    <a href="{% url 'product_delete' product.id %}"
-       class="btn btn-sm btn-danger">
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="16"
-           height="16"
-           fill="currentColor"
-           class="bi bi-trash-fill"
-           viewBox="0 0 16 16">
-        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-      </svg>
-      Delete Product
-    </a>
-  {% endif %}
+  <div class="container-fluid">
+    {% if product %}
+      <h1>Edit {{ product.name }}</h1>
+    {% elif new_coffee %}
+      <h1>New Coffee</h1>
+    {% else %}
+      <h1>New Product</h1>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% crispy form %}
+    </form>
+    {% if product %}
+      <a href="{% url 'product_delete' product.id %}"
+         class="btn btn-sm btn-danger">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="16"
+             height="16"
+             fill="currentColor"
+             class="bi bi-trash-fill"
+             viewBox="0 0 16 16">
+          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+        </svg>
+        Delete Product
+      </a>
+    {% endif %}
+  </div>
 {% endblock content %}
