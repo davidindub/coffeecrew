@@ -1,24 +1,24 @@
 {% extends "base.html" %}
-
 {% block extra_title %}
   - Sign Up Closed
 {% endblock extra_title %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="{% url 'account_signup' %}">Sign Up</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Sign Up Closed</li>
-      </ol>
+      <li class="breadcrumb-item">
+        <a href="{% url 'account_signup' %}">Sign Up</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Sign Up Closed</li>
+    </ol>
   </nav>
 {% endblock breadcrumbs %}
 {% load i18n %}
-
-{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
-
+{% block head_title %}
+  {% trans "Sign Up Closed" %}
+{% endblock %}
 {% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
-
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+  <div class="container-fluid">
+    <h1>{% trans "Sign Up Closed" %}</h1>
+    <p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+  </div>
 {% endblock %}

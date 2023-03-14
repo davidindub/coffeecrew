@@ -1,25 +1,24 @@
 {% extends "base.html" %}
-
 {% block extra_title %}
   - Inactive Account
 {% endblock extra_title %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb" class="col d-flex justify-content-start">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="{% url "home" %}">Home</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Account Inactive</li>
-      </ol>
+      <li class="breadcrumb-item">
+        <a href="{% url "home" %}">Home</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Account Inactive</li>
+    </ol>
   </nav>
 {% endblock breadcrumbs %}
-
 {% load i18n %}
-
-{% block head_title %}{% trans "Account Inactive" %}{% endblock %}
-
-{% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
-
-<p>{% trans "This account is inactive." %}</p>
+{% block head_title %}
+  {% trans "Account Inactive" %}
 {% endblock %}
+{% block content %}
+  <div class="container-fluid">
+    <h1>{% trans "Account Inactive" %}</h1>
+    <p>{% trans "This account is inactive." %}</p>
+  </div>
+{% endblock content %}

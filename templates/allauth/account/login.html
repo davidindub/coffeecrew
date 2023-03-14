@@ -16,6 +16,8 @@
   {% trans "Sign In" %}
 {% endblock %}
 {% block content %}
+<div class="container-fluid">
+
   <div class="row">
     <div class="col-12 col-lg-6">
       <h1>{% trans "Sign In" %}</h1>
@@ -52,4 +54,5 @@ of your existing third party accounts.
         <button class="btn btn-cc" type="submit">{% trans "Sign In &raquo;" %}</button>
         <a class="btn btn-outline-cc" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
       </form>
+</div>
     {% endblock %}
