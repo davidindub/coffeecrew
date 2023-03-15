@@ -24,9 +24,9 @@ euCostEl.textContent = `€${EU_COST.toFixed(2)}`;
 
 function calculateGrandTotal(country) {
     if (country == "IE") {
-        return `€${(ORDER_TOTAL + IE_COST).toFixed(2)}`
+        return `€${(ORDER_TOTAL + IE_COST).toFixed(2)}`;
     } else {
-        return `€${(ORDER_TOTAL + EU_COST).toFixed(2)}`
+        return `€${(ORDER_TOTAL + EU_COST).toFixed(2)}`;
     }
 }
 

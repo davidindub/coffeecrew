@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 /*
     GLOW COOKIES
     CREATED BY MANUEL CARRILLO
@@ -8,20 +10,20 @@
 class GlowCookies {
   constructor() {
     // Cookies banner
-    this.banner = undefined
+    this.banner = undefined;
     // Config
-    this.config = undefined
-    this.tracking = undefined
+    this.config = undefined;
+    this.tracking = undefined;
     // DOM ELEMENTS
-    this.PreBanner = undefined
-    this.Cookies = undefined
-    this.DOMbanner = undefined
+    this.PreBanner = undefined;
+    this.Cookies = undefined;
+    this.DOMbanner = undefined;
   }
 
   render() {
-    this.addCss()
-    this.createDOMElements()
-    this.checkStatus()
+    this.addCss();
+    this.createDOMElements();
+    this.checkStatus();
   }
 
   addCss() {
@@ -71,13 +73,13 @@ class GlowCookies {
                                 </div>
                             `;
     document.body.appendChild(this.Cookies);
-    this.DOMbanner = document.getElementById('glowCookies-banner')
+    this.DOMbanner = document.getElementById('glowCookies-banner');
 
 
     // SET EVENT LISTENERS
-    document.getElementById('prebannerBtn').addEventListener('click', () => this.openSelector())
-    document.getElementById('acceptCookies').addEventListener('click', () => this.acceptCookies())
-    document.getElementById('rejectCookies').addEventListener('click', () => this.rejectCookies())
+    document.getElementById('prebannerBtn').addEventListener('click', () => this.openSelector());
+    document.getElementById('acceptCookies').addEventListener('click', () => this.acceptCookies());
+    document.getElementById('rejectCookies').addEventListener('click', () => this.rejectCookies());
   }
 
   checkStatus() {
@@ -96,20 +98,20 @@ class GlowCookies {
   }
 
   openManageCookies() {
-    this.PreBanner.style.display = this.config.hideAfterClick ? "none" : "block"
-    this.DOMbanner.classList.remove('glowCookies__show')
+    this.PreBanner.style.display = this.config.hideAfterClick ? "none" : "block";
+    this.DOMbanner.classList.remove('glowCookies__show');
   }
 
   openSelector() {
     this.PreBanner.style.display = "none";
-    this.DOMbanner.classList.add('glowCookies__show')
+    this.DOMbanner.classList.add('glowCookies__show');
   }
 
   acceptCookies() {
-    localStorage.setItem("GlowCookies", "1")
-    this.openManageCookies()
-    this.activateTracking()
-    this.addCustomScript()
+    localStorage.setItem("GlowCookies", "1");
+    this.openManageCookies();
+    this.activateTracking();
+    this.addCustomScript();
   }
 
   rejectCookies() {
@@ -191,7 +193,7 @@ class GlowCookies {
     }
 
     // Clear cookies - not working 100%
-    this.clearCookies()
+    this.clearCookies();
   }
 
   clearCookies() {
@@ -205,7 +207,7 @@ class GlowCookies {
         while (p.length > 0) {
           document.cookie = cookieBase + p.join('/');
           p.pop();
-        };
+        }
         d.shift();
       }
     }
@@ -213,7 +215,7 @@ class GlowCookies {
 
   addCustomScript() {
     if (this.tracking.customScript !== undefined) {
-      let customScriptTag
+      let customScriptTag;
 
       this.tracking.customScript.forEach(script => {
         if (script.type === 'src') {
@@ -229,27 +231,27 @@ class GlowCookies {
         } else {
           document.body.appendChild(customScriptTag);
         }
-      })
+      });
     }
   }
 
   start(languaje, obj) {
-    if (!obj) obj = {}
-    const lang = new LanguagesGC(languaje)
+    if (!obj) obj = {};
+    const lang = new LanguagesGC(languaje);
 
     this.config = {
       border: obj.border || 'border',
       position: obj.position || 'left',
       hideAfterClick: obj.hideAfterClick || false,
       bannerStyle: obj.style || 2
-    }
+    };
 
     this.tracking = {
       AnalyticsCode: obj.analytics || undefined,
       FacebookPixelCode: obj.facebookPixel || undefined,
       HotjarTrackingCode: obj.hotjar || undefined,
       customScript: obj.customScript || undefined
-    }
+    };
 
     this.banner = {
       description: obj.bannerDescription || lang.bannerDescription,
@@ -273,23 +275,23 @@ class GlowCookies {
         background: obj.manageBackground || '#fff',
         text: obj.manageText || lang.manageText,
       }
-    }
+    };
 
     // Draw banner
-    window.addEventListener('load', () => { this.render() })
+    window.addEventListener('load', () => { this.render(); });
   }
 }
 
 class LanguagesGC {
   constructor(code) {
-    this.init()
-    let lang = this.arrLang[code] || this.arrLang['en']
-    this.bannerHeading = lang['bannerHeading']
-    this.bannerDescription = lang['bannerDescription']
-    this.bannerLinkText = lang['bannerLinkText']
-    this.acceptBtnText = lang['acceptBtnText']
-    this.rejectBtnText = lang['rejectBtnText']
-    this.manageText = lang['manageText']
+    this.init();
+    let lang = this.arrLang[code] || this.arrLang['en'];
+    this.bannerHeading = lang['bannerHeading'];
+    this.bannerDescription = lang['bannerDescription'];
+    this.bannerLinkText = lang['bannerLinkText'];
+    this.acceptBtnText = lang['acceptBtnText'];
+    this.rejectBtnText = lang['rejectBtnText'];
+    this.manageText = lang['manageText'];
   }
 
   init() {
@@ -302,12 +304,12 @@ class LanguagesGC {
         'rejectBtnText': 'Reject',
         'manageText': 'Manage cookies'
       },
-    }
+    };
   }
 
 }
 
-const glowCookies = new GlowCookies()
+const glowCookies = new GlowCookies();
 
 glowCookies.start('en', { 
   hideAfterClick: true,
