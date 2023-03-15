@@ -253,7 +253,7 @@ form {
     display: inline-block;
   }
 
-.btn:not(type=search) {
+.btn:not([type=search]) {
     margin: 1rem 1.5rem;
     --bs-btn-padding-x: 1.5rem;
     font-family: var(--font-display-font);
