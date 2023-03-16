@@ -37,12 +37,12 @@
           <a href="{% url 'product_detail' product.slug %}">
             {% if product.image %}
               <img src="{{ product.imageURL }}"
-                   width="500px"
+                   width="500"
                    class="card-img-top"
                    alt="{{ product.name }}">
             {% else %}
               <img src="{% static 'images/hero-coffee-filter.jpg' %}"
-                   width="500px"
+                   width="500"
                    class="card-img-top"
                    alt="{{ product.name }}">
             {% endif %}

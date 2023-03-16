@@ -14,20 +14,19 @@
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <section class="col-lg-6">
-            <h2>Contact Us</h2>
-            <p>We'd love to hear from you!</p>
-            <form method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-lg-6">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you!</p>
                 {% csrf_token %}
                 {% crispy form %}
-            </form>
-        </section>
-        <div class="col">
-            <img src="{% static 'images/contact-us.jpg' %}"
-                 class="d-none d-lg-inline img-fluid rounded"
-                 alt="A person typing on a laptop with a latte beside it">
+            </section>
+            <div class="col">
+                <img src="{% static 'images/contact-us.jpg' %}"
+                     class="d-none d-lg-inline img-fluid rounded"
+                     alt="A person typing on a laptop with a latte beside it">
+            </div>
         </div>
-</div>
-    {% endblock content %}
+    </div>
+{% endblock content %}

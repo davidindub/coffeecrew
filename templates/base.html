@@ -22,19 +22,17 @@
             crossorigin="use-credentials"
             href="{% static "manifest.json" %}">
       <meta name="theme-color" content="#0f4a3b">
-
       <meta name="title" content="Coffee Crew">
       <meta name="description"
             content="Dublin based specialty coffee roasters. Fresh coffee and premium brewing kit, fast shipping anywhere in Europe.">
-
       <!-- Open Graph / Facebook -->
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://coffee-crew-shop.herokuapp.com/">
       <meta property="og:title" content="Coffee Crew">
       <meta property="og:description"
             content="Dublin based specialty coffee roasters. Fresh coffee and premium brewing kit, fast shipping anywhere in Europe.">
-      <meta property="og:image" content="{% static 'images/metatag-thumbnail.jpg' %}">
-
+      <meta property="og:image"
+            content="{% static 'images/metatag-thumbnail.jpg' %}">
       <!-- Twitter -->
       <meta property="twitter:card" content="summary_large_image">
       <meta property="twitter:url"
@@ -59,7 +57,8 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap"
             rel="stylesheet">
-      <link rel="stylesheet" href="{% static "css/base.css" %}">
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      <link rel="stylesheet" href="{% static 'css/glowCookies.css' %}">
     {% endblock core_css %}
     {% block extra_css %}
     {% endblock extra_css %}
@@ -96,8 +95,8 @@
                   class="btn-close"
                   data-bs-dismiss="alert"
                   aria-label="Close"></button>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     {% endif %}
     <main class="custom-container">
       {% block breadcrumbs %}
@@ -106,8 +105,7 @@
       {% endblock content %}
     </main>
     {% block post_load_js %}
-    <link rel="stylesheet" href="{% static 'css/glowCookies.css' %}" />
-    <script src="{% static 'js/glowCookies.js' %}"></script>
+      <script src="{% static 'js/glowCookies.js' %}"></script>
     {% endblock post_load_js %}
     {% block footer %}
       {% include "includes/footer.html" %}

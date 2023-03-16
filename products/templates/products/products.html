@@ -50,15 +50,15 @@
             <div class="col">
                 {% if department %}
                     <h2>{{ department }}</h2>
-                    {% if department.description %}<p>{{ department.description|linebreaks }}</p>{% endif %}
+                    {% if department.description %}{{ department.description|linebreaks }}{% endif %}
                 {% elif category %}
                     <h2>{{ category.display_name }}</h2>
-                    {% if category.description %}<p>{{ category.description|linebreaks }}</p>{% endif %}
+                    {% if category.description %}{{ category.description|linebreaks }}{% endif %}
                 {% elif wishlist_page %}
                     <h2>My Wishlist</h2>
                 {% elif brand %}
                     <h2>{{ brand.display_name }}</h2>
-                    {% if category.description %}<p>{{ category.description|linebreaks }}</p>{% endif %}
+                    {% if category.description %}{{ category.description|linebreaks }}{% endif %}
                 {% else %}
                     <h2>Products</h2>
                 {% endif %}
@@ -106,12 +106,12 @@
                                     <a href="{% url 'product_detail' product.slug %}">
                                         {% if product.image %}
                                             <img src="{{ product.imageURL }}"
-                                                 width="500px"
+                                                 width="500"
                                                  class="card-img-top"
                                                  alt="{{ product.name }}">
                                         {% else %}
                                             <img src="{% static 'images/hero-coffee-filter.jpg' %}"
-                                                 width="500px"
+                                                 width="500"
                                                  class="card-img-top"
                                                  alt="{{ product.name }}">
                                         {% endif %}
