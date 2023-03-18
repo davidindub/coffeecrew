@@ -746,19 +746,13 @@ The custom CSS was validated using the [W3C CSS Validation Service](https://jigs
 
 ![https://jigsaw.w3.org/css-validator/](https://jigsaw.w3.org/css-validator/images/vcss)
 
-<details>
 
-<summary>W3C CSS Validation</summary>
+File | Result |
+-----|--------|
+`base.css` | [✅ Pass](docs/images/validation/css-validation/base-css.jpg) |
+`checkout.css` | [✅ Pass](docs/images/validation/css-validation/checkout-css.jpg) |
+`glowCookies.css` | [✅ Pass](docs/images/validation/css-validation/glowCookies-css.jpg) |
 
-![](docs/images/validation/css-validation/base-css.jpg)
-![](docs/images/validation/css-validation/checkout-css.jpg)
-![](docs/images/validation/css-validation/glowCookies-css.jpg)
-
-
-✅ Pass
-
-</details>
-       
 
 #### Python Validation
 
