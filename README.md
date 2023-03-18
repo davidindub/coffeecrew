@@ -470,16 +470,14 @@ Warning before deleting a Department that contains categories and products:
 
 ### Products Detail
 
+As a staff member, each product page includes the product's SKU and an edit button. Extra fields are displayed for coffees such as harvest year, weight and processed used.
+
 <details>
 <summary>
 Screenshot of editing a product as staff member
 </summary>
-
 ![](docs/images/screenshots/screenshot-manage-shop-edit-product.png)
-
-
 </details>
-
 
 
 ### Printable Order Sheets
@@ -595,9 +593,7 @@ It is still in its early development stages, although it already has a newslette
 Social media can potentially build a community of users around the business, and boost site visitor numbers,
 especially when using larger platforms such a Facebook.
 
-A newsletter list can be used by the business to send regular messages to site users.
-For example, what items are on special offer, new items in stock,
-updates to business hours, notifications of events, and much more!
+A newsletter list can be used to send regular messages to site users who opt in, such as what items are on special offer, new items in stock. See [Newsletter Marketing](#newsletter-marketing) below.
 
 ## Search Engine Optimization (SEO) & Social Media Marketing
 
@@ -605,10 +601,12 @@ updates to business hours, notifications of events, and much more!
 
 I've identified some appropriate keywords to align with my site, that should help users
 when searching online to find my page easily from a search engine.
-This included a series of the following keyword types
+I made sure to make use of semantic html so these keywords were picked up by search engines.
 
-- Short-tail (head terms) keywords
-- Long-tail keywords
+```html
+<meta name="title" content="Coffee Crew">
+<meta name="description" content="Dublin based specialty coffee roasters. Fresh coffee and premium brewing kit, fast shipping anywhere in Europe.">
+```
 
 ### Metadata
 
@@ -659,7 +657,10 @@ I've created a mockup Facebook business account using the
 [Balsamiq template](https://code-institute-org.github.io/5P-Assessments-Handbook/files/Facebook_Mockups.zip)
 provided by Code Institute.
 
-![screenshot](docs/images/facebook-mockup.png)
+<details>
+<summary>Facebook Page Mockup</summary>
+![](docs/images/facebook-mockup.png)
+</details>
 
 For this business I envision a lot of the social media marketing being very visual, using the current most popular formats like Instagram Reels and TikTok. As these are primarily video based I did not mock any for the purposes of this coding project.
 However, I used royalty free photos in the project from Unsplash which I felt fit the vibe I would portray on social media, using soft focused earthy tone photos.
@@ -706,11 +707,115 @@ I performed extensive manual testing continuously as the project was being devel
 
 #### HTML Validation
 
+Pages were validating using the [W3 HTML Validator](https://validator.w3.org/nu/), and pages with content that varies based on guest/logged in user/admin status were validated in each state.
+
+<details>
+<summary>W3 HTML Validation</summary>
+
+Live links to the validator provided for pages as guests, pages requiring authentication checked by pasting rendered HTML from a logged in user into validator.
+
+| Page                | URL                | Logged In Status | Result                |
+|---------------------|--------------------|------------------|-----------------------|
+| Landing Page        | /                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/) |
+| Landing Page        | /                  | User            | ✅ No errors or warnings |
+| Shopping Cart        | /cart                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/cart/) |
+| Shopping Cart        | /cart                  | User w/cart items            | ❗️ 1 warning due to using different colspans for mobile/desktop, rendered page passes |
+| Department Page        | /shop/d/Equipment/                 | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/d/Equipment/) |
+| Products by Department Page        | /shop/d/Equipment/                  | User            | ✅ No errors or warnings |
+| Products by Category Page        | /shop/c/travel                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/c/travel/) |
+| Products by Brand Page        | /shop/b/kinto                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/b/kinto/) |
+| Sign Up Page        | /accounts/signup/                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/accounts/signup/) |
+| Login Page        | /accounts/login                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/accounts/login/) |
+| Log Out Page        | /accounts/logout                  | User            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/accounts/logout/) |
+| All Products List        | /                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/) |
+| Product Page, sorted        | /shop/?sort=date_added                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/?sort=date_added) |
+| Product Detail Page        | /item/sunrise                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https://coffee-crew-shop.herokuapp.com/shop/item/sunrise) |
+| My Account Page        | /account                  | Staff            | ✅ No errors or warnings |
+| My Orders Page        | /account/orders/                  | User            | ✅ No errors or warnings |
+| My Wishlist Page        | /wishlist                  | Staff            | [✅ No errors or warnings](https://validator.w3.org/nu/?doc=https%3A%2F%2Fcoffee-crew-shop.herokuapp.com%2Fnewsletter) |
+| Manage Shop Page        | /staff                  | Staff            | ✅ No errors or warnings |
+| Manage Products Page        | /staff/products                  | Staff            | ✅ No errors or warnings |
+| Manage Orders Page        | /staff/orders                  | Staff            | ✅ No errors or warnings |
+| Privacy Policy Page        | /privacy                  | Guest            | [✅ No errors or warnings](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fcoffee-crew-shop.herokuapp.com%2Fprivacy#l324c6) |
+
+</details>
+
 #### CSS Validation
+
+The custom CSS was validated using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) as CSS level 3 + SVG. 
+
+![https://jigsaw.w3.org/css-validator/](https://jigsaw.w3.org/css-validator/images/vcss)
+
+<details>
+
+<summary>W3C CSS Validation</summary>
+
+![](docs/images/validation/css-validation/base-css.jpg)
+![](docs/images/validation/css-validation/checkout-css.jpg)
+![](docs/images/validation/css-validation/glowCookies-css.jpg)
+
+
+✅ Pass
+
+</details>
+       
 
 #### Python Validation
 
+All the custom Python files pass PEP8 Validation, which I checked both in the development environment and on [CI Python Linter](https://pep8ci.herokuapp.com/).
+
+`# noqa` was used in `settings.py` where line breaks in strings would have broken Django functionality.
+
+| App                | File | Result |
+|-------------|------------------|--------|
+|         | `settings.py`            | [✅ Pass](docs/images/validation/python-linter-results/coffeecrew-settings-py.jpg) |
+|         | `custom_storages.py`            | [✅ Pass](docs/images/validation/python-linter-results/custom-storages-py.jpg) |
+| Cart        | `adapters.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-adapters-py.jpg) |
+| Cart        | `context-processor.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-context-processor-py.jpg) |
+| cart        | `forms.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-forms-py.jpg) |
+| cart        | `models.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-models-py.jpg) |
+| cart        | `set_cookie.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-set-cookie-py.jpg) |
+| cart        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-urls-py.jpg) |
+| cart        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/cart-views-py.jpg) |
+| checkout        | `admin.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-admin-py.jpg) |
+| checkout        | `emails.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-emails-py.jpg) |
+| checkout        | `forms.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-forms-py.jpg) |
+| checkout        | `models.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-models-py.jpg) |
+| checkout        | `orders_urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-orders-urls-py.jpg) |
+| checkout        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-urls-py.jpg) |
+| checkout        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/checkout-views-py.jpg) |
+| coffeecrew        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/coffeecrew-urls-py.jpg) |
+| coffeecrew        | `StaffMemberRequiredMixin.py`            | [✅ Pass](docs/images/validation/python-linter-results/coffeecrew-StaffMemberRequiredMixin-py.jpg) |
+| home        | `forms.py`            | [✅ Pass](docs/images/validation/python-linter-results/home-forms-py.jpg) |
+| home        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/home-views-py.jpg) |
+| products        | `admin.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-admin-py.jpg) |
+| products        | `context_processors.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-context-processors-py.jpg) |
+| products        | `admin.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-admin-py.jpg) |
+| products        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-views-py.jpg) |
+| products        | `models.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-models.py.jpg) |
+| products        | `signals.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-signals-py.jpg) |
+| products        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/products-urls-py.jpg) |
+| profiles        | `admin.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-admin-py.jpg) |
+| profiles        | `context_processors.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-context-processors-py.jpg) |
+| profiles        | `forms.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-forms-py.jpg) |
+| profiles        | `models.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-models-py.jpg) |
+| profiles        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-urls-py.jpg) |
+| profiles        | `urls_wish_list.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-urls-wish-list-py.jpg) |
+| profiles        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/profiles-views-py.jpg) |
+| staff        | `forms.py`            | [✅ Pass](docs/images/validation/python-linter-results/staff-forms-py.jpg) |
+| staff        | `urls.py`            | [✅ Pass](docs/images/validation/python-linter-results/staff-urls-py.jpg) |
+| staff        | `views.py`            | [✅ Pass](docs/images/validation/python-linter-results/staff-views-py.jpg) |
+
+
 #### JavaScript
+
+File | Result |
+-----|--------|
+`checkout_delivery.js` | [✅ Pass](docs/images/validation/js-hint-results/checkout-delivery-js.jpg) |
+`confirm_delete.js` | [✅ Pass](docs/images/validation/js-hint-results/confirm-delete-js.jpg) |
+`glowCookies.js` | [⚠️ Warnings (library)](docs/images/validation/js-hint-results/glowCookies-js.jpg) |
+`print_btn.js` | [✅ Pass](docs/images/validation/js-hint-results/print-btn-js.jpg) |
+`stripe_elements.js` | [✅ Pass](docs/images/validation/js-hint-results/stripe-elements-js.jpg) |
 
 ---
 
