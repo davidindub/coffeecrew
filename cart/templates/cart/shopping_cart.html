@@ -61,7 +61,7 @@
                       <input type="hidden"
                              name="new_quantity"
                              value="{{ object.quantity|add:-1 }}">
-                      <button class="btn btn-sm btn-primary btn-cc" type="submit">-</button>
+                      <button class="btn btn-sm btn-cc btn-cart" type="submit">-</button>
                     </form>
                     {{ object.quantity }}
                     <form class="cart-form"
@@ -69,7 +69,7 @@
                           method="post">
                       {% csrf_token %}
                       <input type="hidden" name="new_quantity" value="{{ object.quantity|add:1 }}">
-                      <button class="btn btn-sm btn-primary btn-cc" type="submit">+</button>
+                      <button class="btn btn-sm btn-cc btn-cart" type="submit">+</button>
                     </form>
                   </td>
                   <td class="d-none d-md-block">€{{ object.product.price }}</td>
