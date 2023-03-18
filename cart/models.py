@@ -5,10 +5,6 @@ from django.dispatch import receiver
 from products.models import Product, Coffee
 from coffeecrew import settings
 from decimal import Decimal
-from cart.cart_logic import (calculate_delivery_cost,
-                             calculate_total_with_delivery,
-                             get_spend_for_free_delivery,
-                             is_free_delivery)
 
 
 class Cart(models.Model):
@@ -30,22 +26,6 @@ class Cart(models.Model):
             return f"User {self.user.username}'s Cart"
         else:
             return f"Guest Cart ID last updated { self.updated }"
-
-    @property
-    def delivery_total(self):
-        return calculate_delivery_cost(self.total())
-
-    @property
-    def free_delivery(self):
-        return is_free_delivery(self.total())
-
-    @property
-    def spend_for_free_delivery(self):
-        return get_spend_for_free_delivery(self.total())
-
-    @property
-    def total_with_delivery(self):
-        return calculate_total_with_delivery(self.total())
 
     def empty_cart(self):
         """
