@@ -244,7 +244,6 @@ form {
   }
 
 .btn {
-    margin: 1rem 1.5rem;
     --bs-btn-padding-x: 1.5rem;
     font-family: var(--font-display-font);
 }
