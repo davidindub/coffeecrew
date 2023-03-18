@@ -5,6 +5,8 @@
 
 ## Table of Contents
 
+<!-- TODO: Add Table of Content -->
+
 ## Introduction
 
 The project is an E-commerce site for a shop selling specialty coffee and brewing equipment. 
@@ -37,7 +39,13 @@ User Stories can been seen below under [User Story Testing](#user-story-testing)
 
 ![](docs/docs-colour-palette.png)
 
-I used CSS Variables to use my chosen colour palette across the project easily.
+I used a colour scheme I based on a [mockup by Tanim Khan](https://dribbble.com/shots/14147142-Plant-Shop-Landing-Page) on Dribble that I had previously used and like for a previous project - [Plant Cafe](https://github.com/davidindub/plant-cafe).
+
+
+I used [Bootstrap Icons](https://icons.getbootstrap.com/) throughout the project for icons such as the cart, edit buttons etc.
+
+I used CSS Variables to use my chosen colour palette and font across the project easily.
+
 
 ```css
 :root {
@@ -75,15 +83,33 @@ See: [Bootstrap Docs - Root Variables](https://getbootstrap.com/docs/5.3/customi
 
 ### Typography
 
+
 I used the sans-serif font [Rubik](https://fonts.google.com/specimen/Rubik) from Google Fonts. I like its subtle rounded corners and it makes a nice readable display font for the logo and headings.
 
+![](docs/images/rubik-font-preview.png)
+
+For the body text, I let Bootstrap style the font as it used a native font stack for different devices resulting in a nice native looking appearance.
+See: [Bootstrap Docs - Native Font Stack](https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack)
+
+
 ### Wireframes
+
+I drew some wireframes using [Balsamiq](https://balsamiq.com/) of the landing page and products page. I knew I had the elements available in Bootstrap to get this layout up and running fast.
+
+![](docs/images/wireframe-landing-page.png)
+
+![](docs/images/wireframe-products.png)
 
 ## Accessibility
 
 I ensured that every element met AAA level in the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AAA-Conformance) (WCAG).
 
-Buttons featuring icons have appropriate `aria-labels`, and notification messages have `aria-live` tags and are read by screen readers.
+<details>
+<summary>WebAim contrast check</summary>
+![](docs/images/webaim-contast-checker.png)
+</details>
+
+Buttons featuring icons have appropriate `aria-labels` where necessary, and notification messages have `aria-live` tags and are read by screen readers.
 
 I tested navigating the project with VoiceOver on macOS.
 
@@ -110,9 +136,64 @@ I used [Miro](https://miro.com/) to design the models. I created a Profile model
 
 ### Landing Page
 
+The landing page features and eye catching hero image and slogan, with a call to action to lead the user to see products for sale.
+
+Underneath is a quick paragraph introducing the business and quick links to the Coffee and Equipment products.
+
+Below that, the three newest products on the shop are highlighted.
+
+![](docs/images/screenshots/screenshot-landing-page.jpg)
+
+<details>
+<summary>
+Screenshot of the full landing page on desktop and mobile
+</summary>
+
+![](docs/images/screenshots/screenshot-landing-page-full.jpg)
+
+![](docs/images/screenshots/screenshot-mobile-landing-page-full.jpg)
+
+</details>
+
 ### Navbar
 
+The Navbar contains dropdown menus to browse Coffee, Equipment, and Products by Brand.
+
+Guests see links to Register or Login.
+
+Logged in Users will see their username as a dropdown containing:
+- My Account
+- My Orders
+- Wishlist, along with a badge containing the number of items in their wishlist.
+- Log Out
+
+<details>
+<summary>
+Screenshot of dropdown for users
+</summary>
+
+![](docs/images/screenshots/screenshot-navbar-dropdown-for-users.png)
+
+</details>
+
+In addition to these, staff members have access to:
+- Manage Shop
+- Manage Products
+- Manage Orders
+
+<details>
+<summary>
+Screenshot of dropdown for staff members
+</summary>
+
+![](docs/images/screenshots/screenshot-navbar-dropdown-for-staff.png)
+
+</details>
+
+
 ### Shopping Cart
+
+Guests and registered users can add products to their shopping cart, and the total of their cart is displayed clearly in the navbar on medium sized screen sizes and up.
 
 I implemented the cart for guest (non-signed in users) by linking their Session ID to a cart in the database.
 
@@ -120,15 +201,67 @@ See: [Django Docs - Sessions](https://docs.djangoproject.com/en/4.1/topics/http/
 
 I added a way for staff to purge old (not updated in over two weeks) carts from the Database in the Staff Frontend.
 
-If I were to scale the site I would probably opt for a purely cookies based cart for guests without storing it in the backend, but for the sake of this project stuck to using session ID.
+On the cart page, users can select if they would like their coffee beans ground.
+
+<details>
+<summary>
+Screenshots of Shopping Cart on mobile and desktop
+</summary>
+
+![](docs/images/screenshots/screenshot-mobile-cart.png)
+
+![](docs/images/screenshots/screenshot-cart.png)
+
+</details>
 
 ### Products List
+
+
+If you're on the page of a Department, you'll see links to click to get to the subcategories of that department.
+
+A blurb/description accompanies the department or category.
+
+Sorting options are available to sort the list by:
+- Newest First
+- Name (A-Z)
+- Name (Z-A)
+- Price (Low to High)
+- Price (High to Low)
+
+If there are more than 8 products to display, the list is paginated to 8 per page and links to the different pages shown.
+
+<details>
+<summary>
+Screenshots of Product Detail page
+</summary>
+
+Products List with Sort Options:
+
+![](docs/images/screenshots/screenshot-products-list.png)
+
+
+List Pagination:
+![](docs/images/screenshots/screenshot-pagination.png)
+
+</details>
+
 
 ### Product Detail Page
 
 Users can click the product's brand name to find more products from the same brand.
 
 If the product is out of stock, the add to cart button is disabled and replaced with a message.
+
+<details>
+<summary>
+Screenshots of Product Detail page
+</summary>
+
+![](docs/images/screenshots/screenshot-product-detail.png)
+
+![](docs/images/screenshots/screenshot-product-detail-out-of-stock.png)
+
+</details>
 
 **For Staff Only:**
 
@@ -148,14 +281,8 @@ Handy links to popular Email services are included for quick access.
 <summary>
 Screenshot of Verification Email Sent page
 </summary>
-
 ![](docs/images/screenshots/screenshot-verify-email-links.png)
-
 </details>
-
-
-
-Users who have previously registered with Google can easily sign in again with one click.
 
 ### Wishlist
 
@@ -191,6 +318,7 @@ An email is sent to the customer when they make a new order.
 I used Stripe's webhooks to only send the email when the payment is successfully completed.
 
 <details>
+
 <summary>Screenshot of an Order Confirmation Email</summary>
 
 ![](docs/images/screenshots/screenshot-email-confirmed.jpg)
@@ -203,6 +331,7 @@ I used Stripe's webhooks to only send the email when the payment is successfully
 Another email is sent to the customer when their order is dispatched.
 
 <details>
+
 <summary>Screenshot of Customer Dispatch Email</summary>
 
 ![](docs/images/screenshots/screenshot-email-dispatched.jpg)
@@ -218,6 +347,19 @@ The Footer includes:
 - A link to the Privacy Policy
 - A link to the [GitHub repository for the project](https://github.com/davidindub/coffeecrew).
 
+I rearranged the sections on mobile to get the layout I wanted.
+
+<details>
+
+<summary>Screenshot of Footer on mobile and desktop</summary>
+
+![](docs/images/screenshots/screenshot-mobile-footer.png)
+
+![](docs/images/screenshots/screenshot-footer.png)
+
+
+</details>
+
 ### Privacy Policy
 
 As the project can collect data from users, I included a Privacy Policy link in the Footer which explains how data may be used. I used [GDPR.eu](https://gdpr.eu/) for help writing the policy.
@@ -227,6 +369,14 @@ The Privacy Policy is also clearly displayed to users on their first visit in th
 
 See:
 [Writing a GDPR-compliant privacy notice (template included)](https://gdpr.eu/privacy-notice/)
+
+<details>
+<summary>
+Screenshot of Privacy Policy
+</summary>
+![](docs/images/screenshots/screenshot-privacy-policy.png)
+
+</details>
 
 ### Cookie Consent Banner
 
@@ -248,6 +398,13 @@ Screenshot of Cookie Consent banner
 ### Notifications
 
 Django Messages and Bootstrap's Alerts elements were combined to make elegant dismissible notification messages when the user performs actions.
+
+<details>
+<summary>
+Screenshot of Notification alert
+</summary>
+![](docs/images/screenshots/screenshot-message-notifcations.png)
+</details>
 
 ### Favicon
 
@@ -272,13 +429,37 @@ Screenshot of Themed Browser Window
 
 ### Shop Management Dashboard
 
-I wanted to create a front-end for a business owner to manage the store themselves without needing to code or enter the django-admin panel.
+I wanted to create a front-end for a business owner to manage the store themselves without needing to code or enter the django-admin panel. I also protected fields in the django-admin panel that shouldn't be manually edited.
 
-I protected fields in the django-admin panel that shouldn't be manually edited.
+Lists of products in the staff dashboard feature lots of extra sorting options to help with managing the shop:
+- Hidden First
+- On Display First
+- Stock (Low to High)
+- Stock (High to Low)
+- Sales (Low to High)
+- Sales (High to Low)
+- Oldest First
+- Newest First
+- Name (A-Z)
+- Name (Z-A)
+- Price (Low to High)
+- Price (High to Low)
+
 
 <details>
 <summary>
-Screenshots of Printable Order Sheet Feature
+Screenshot of Shop Management Dashboard
+</summary>
+![](docs/images/screenshots/screenshot-manage-shop.png)
+
+Sort options for product list in staff dashboard:
+![](docs/images/screenshots/screenshot-staff-sort-products.png)
+</details>
+
+
+<details>
+<summary>
+More Screenshots of Shop Management
 </summary>
 
 Warning before deleting a Department that contains categories and products:
@@ -288,6 +469,17 @@ Warning before deleting a Department that contains categories and products:
 
 
 ### Products Detail
+
+<details>
+<summary>
+Screenshot of editing a product as staff member
+</summary>
+
+![](docs/images/screenshots/screenshot-manage-shop-edit-product.png)
+
+
+</details>
+
 
 
 ### Printable Order Sheets
@@ -359,7 +551,7 @@ Features I didn't get to implement in this iteration but plan to add in future i
 - Sign in with Google, I had trouble getting this working error-free despite using it on previous projects. I will reinstate it in future.
 - Add a CAPTCHA or some other form of validation to Contact Us form to prevent abuse.
 
-See also: [#wont-fix] Issues on GitHub (https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed+label%3Awontfix)
+See also: [#wont-fix Issues on GitHub](https://github.com/davidindub/coffeecrew/issues?q=is%3Aissue+is%3Aclosed+label%3Awontfix)
 
 ## Technologies Used
 
@@ -426,7 +618,9 @@ I included Metadata to ensure thumbnails and information is presented correctly 
 <summary>
 Screenshot of social cards preview
 </summary>
+
 ![](docs/images/social-card-preview.png)
+
 </details>
 
 ### Sitemap
@@ -668,12 +862,6 @@ Once on the IAM page, follow these steps:
 
 </details>
 
-### django-aullauth Setup
-
-You need to use your own [Google Cloud](https://cloud.google.com/) credentials to set up `django-allauth`.
-
-The [django-allauth documentation](https://django-allauth.readthedocs.io/en/latest/providers.html) provides instructions for how to complete setup in your Google Cloud Console settings.
-
 ### Heroku Deployment
 
 This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
@@ -828,7 +1016,11 @@ You can fork this repository by using the following steps:
 
 - [Bootstrap Icons](https://icons.getbootstrap.com/) were used extensively in the project.
 - Some product images and descriptions edited from [Kinto Europe](https://kinto-europe.com/), [Moccamaster](https://www.moccamaster.eu/), [Hario](https://global.hario.com/).
-- Stock images from [Unsplash](https://unsplash.com/), thanks to photographers [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Nathan Dumlao](https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Gerson Cifuentes](https://unsplash.com/photos/HmZCtvtS6ds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Etty Fidele](https://unsplash.com/photos/oJpkjWcScyg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Taisiia Shestopa](https://unsplash.com/fr/@taisiia_shestopal?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Andrew Welch](https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), and [Goran Ivos](https://unsplash.com/photos/f7MtheMfksk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) for their beautiful photos.
-  
+- Stock images from [Unsplash](https://unsplash.com/), thanks to photographers [Rodrigo Flores](https://unsplash.com/@rodrigoflores_photo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Nathan Dumlao](https://unsplash.com/photos/QLkjP_W4d7c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Gerson Cifuentes](https://unsplash.com/photos/HmZCtvtS6ds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Etty Fidele](https://unsplash.com/photos/oJpkjWcScyg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Taisiia Shestopa](https://unsplash.com/fr/@taisiia_shestopal?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Milo Miloezger](https://unsplash.com/@miloezger?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Andrew Welch](https://unsplash.com/photos/1pZbNwlGzNY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), and [Goran Ivos](https://unsplash.com/photos/f7MtheMfksk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) for their beautiful photos.
 
+  
+  
 ### Acknowledgements
+
+- Thank you to my CI Mentor [Tim Nelson](https://github.com/TravelTimN) for his help and suggestions.
+- Thanks to my partner David for his constant support on my journey to a new career.
