@@ -195,7 +195,7 @@ Screenshot of dropdown for staff members
 
 Guests and registered users can add products to their shopping cart, and the total of their cart is displayed clearly in the navbar on medium sized screen sizes and up.
 
-I implemented the cart for guest (non-signed in users) by linking their Session ID to a cart in the database.
+I implemented the cart for guest (non-signed in users) by linking their Session ID to a cart in the database. If they log in, the guest cart is merged into their profile's cart.
 
 See: [Django Docs - Sessions](https://docs.djangoproject.com/en/4.1/topics/http/sessions/)
 
@@ -281,7 +281,9 @@ Handy links to popular Email services are included for quick access.
 <summary>
 Screenshot of Verification Email Sent page
 </summary>
+
 ![](docs/images/screenshots/screenshot-verify-email-links.png)
+
 </details>
 
 ### Wishlist
@@ -695,6 +697,8 @@ Screenshots of Mailchimp Campaign
 
 I performed extensive manual testing continuously as the project was being developed, and filed [bug reports on GitHub](https://github.com/davidindub/designland/issues?q=is%3Aissue+is%3Aclosed+label%3Abug) as issues were discovered to keep track of bugs. I kept track of how to recreate bugs, expected behaviour, screenshots of the issue and how it was resolved to help myself in future.
 
+I also asked friends to test registering accounts / making purchases / editing their profiles and report back to try and catch any potential issues.
+
 ### Browser Compatibility
 
 I tested the website on four different operating systems on four different types of hardware and didn't find any rendering bugs or unexpected behaviour between the browsers tested.
@@ -746,6 +750,337 @@ No errors were detected using the [WAVE Web Accessibility Evaluation Tool](https
 
 
 ### User Story Testing
+
+<details>
+<summary>Easily login or log out</summary>
+As a **Site user** I should be able to **Easily login or log out** so that I can **Access my personal account information**
+
+### Acceptance Criteria
+
+- I can log into the site when not logged in
+- I can log out of the site from any page
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>View a list of products</summary>
+As a **shopper** I should be able to **view a list of products** so that I can **select some to purchase**
+
+### Acceptance Criteria
+
+- I can browse a list of products on the site
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>View individual products</summary>
+The user story should have a reason to exist: what do I need as the user described in the summary?
+This part details any detail that could not be passed by the summary.
+
+As a **Shopper** I should be able to **view individual products** so that I can **see the price, description, ratings, and images**
+
+### Acceptance Criteria
+
+- If I click an individual item I can see the price, description, ratings, and images of the item
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Total of basket</summary>
+The user story should have a reason to exist: what do I need as the user described in the summary?
+This part details any detail that could not be passed by the summary.
+
+As a **Shopper** I should be able to **Easily view the total of my basket at any time** so that I can **Keep track of what I spend**
+
+### Acceptance Criteria
+
+- I can quickly see the total of the items in my basket
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Easily register for an account</summary>
+As a **Site User** I should be able to **Easily register for an account** so that I can **Have an account with my details saved to save re-entering them**
+
+### Acceptance Criteria
+
+- I can register for an account with the site
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Personal User Profile</summary>
+As a **Registered User** I should be able to **have a personalised user profile page** so that I can **View my personal order history and save my payment information**
+
+### Acceptance Criteria
+
+- I can see my order history
+- [ ] I can save my payment information
+- I can update my account information
+- I can update my saved addresses 
+
+Payment information was offloaded to Stripe not to store any payment info in the database.
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Sort Product List</summary>
+
+As a **Site User** I should be able to **Sort the list of available products** so that I can **Easily identify the best rated, best price and categorically sorted products**
+
+### Acceptance Criteria
+
+- I can sort product list by categories such as price, or name
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>View Cart</summary>
+As a **Shopper** I should be able to **view the items in my cart** so that I can **Identify the total cost of my purchase and all the items I will receive**
+
+### Acceptance Criteria
+
+- I can see all the items in my cart and the total cost
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Adjust Quantity of Items in Cart</summary>
+As a **Shopper** I should be able to **Adjust the quantity of individual items in my bag** so that I can **Easily make changes to my purchase before checkout**
+
+### Acceptance Criteria
+
+- I can adjust the quantity of items in my cart
+- The total price updates
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Order Confirmation via Email</summary>
+As a **Shopper** I should be able to **Receive an email confirmation after checking out** so that I can **Keep the confirmation of what I've purchased for my records**
+
+### Acceptance Criteria
+
+- If I place an order successfully, I should receive an email confirmation
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Add a product</summary>
+As a **Store Owner** I should be able to **Add a product** so that I can **sell new items on my store**
+
+### Acceptance Criteria
+
+- I can add new items to the site (without using the Django Admin Panel)
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Add a Product</summary>
+As a **Store Owner** I should be able to **Add a product** so that I can **sell new items on my store**
+
+### Acceptance Criteria
+
+- I can add new items to the site (without using the Django Admin Panel)
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Edit Products</summary>
+As a **Store Owner** I should be able to **Edit/Update a product** so that I can **Change product prices, descriptions, images and other product criteria**
+
+### Acceptance Criteria
+
+- I can edit items on the site (without using the Django Admin Panel)
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Delete Products</summary>
+As a **Store Owner** I should be able to **delete a product** so that I can **remove items no longer on sale**
+
+### Acceptance Criteria
+
+- I can edit items on the site (without using the Django Admin Panel)
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Search Products</summary>
+
+As a **Shopper** I should be able to **Search for a product by name or description** so that I can **Find a specific product I'd like to purchase**
+
+### Acceptance Criteria
+
+- I can search for items available for purchase
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Wishlist / Favourite Items</summary>
+As a **Shopper** I should be able to **Save products to a wish list** so that I can **find them in future to purchase**
+
+### Acceptance Criteria
+
+- I can click a save/heart icon on an product page
+- I can see a list of all the products I have saved
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Select Grind for Coffee purchases</summary>
+As a **Customer** I should be able to **choose if or how I want my coffee ground** so that I can **receive the right coffee for brewing at home**
+
+### Acceptance Criteria
+
+- I can select a grind type while purchasing coffee
+- I can update the grind size in the cart
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Add to Cart as a Guest</summary>
+As a **Shopper without a registered account** I should be able to **add items to my cart** so that I can **decide if I want to buy them later**
+
+### Acceptance Criteria
+
+- Without being logged in, I can add items to my cart.
+- I click 'Add to cart' and the item is added to my cart
+- I can see a total of all my items in the nav bar
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Printable Order Docket</summary>
+As **the business owner** I should be able to **print a print-friendly order docket** so that I can **include it when dispatching orders by post**
+
+### Acceptance Criteria
+
+- If print the order page in the browser, I get a print-friendly page suitable to include for customers
+- It should include details about the customer's order and their address
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>USTORY</summary>
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Complete Order with Payment</summary>
+As a *Customer I should be able to **pay for my order with a card or Apple/Google Pay** so that I can **receive products from the business.**
+
+### Acceptance Criteria
+
+- If I enter my payment details correctly
+- My order is completed
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Email Customer when Order Dispatched</summary>
+As a **Shopper** I should be able to **Receive an email confirmation when my order is dispatched** so that I can **know when to expect my order*
+
+### Acceptance Criteria
+
+- I should receive an email when the shop has dispatched my order
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Password Recovery</summary>
+The user story should have a reason to exist: what do I need as the user described in the summary?
+This part details any detail that could not be passed by the summary.
+
+As a **Registered User** I should be able to **Easily recover my password in case I forget it** so that I can **Regain access to my account**
+
+### Acceptance Criteria
+
+- I can click 'Forgot Password' on the Login Page
+- I am able to reset my password and regain access to my account
+
+Tested 19/03/2022
+
+**Result:** ✅ Pass
+</details>
+
+<details>
+<summary>Guest cart items move to user cart on login</summary>
+As a **new registered used** I should be able to **see my cart items in my new profile**  so that I can **continue with placing an order**
+
+### Acceptance Criteria
+
+- I have items in my cart as a guest, and I register or log in
+- The items should still be in my cart (with any previous ones)
+
+**Result:** ✅ Pass
+</details>
 
 ### Challenges Faced
 
