@@ -88,12 +88,9 @@ class Order(models.Model):
                     super().save(*args, **kwargs)
                     break
                 except IntegrityError:
-                    print(f"Duplicate order number")
                     # Catch potential duplicate order numbers and
                     #  generate new order number
                     self.order_number = self.generate_order_number()
-                except ValueError:
-                    print("Can't update totals until order created")
         else:
             super().save(*args, **kwargs)
 

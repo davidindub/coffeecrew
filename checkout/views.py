@@ -71,16 +71,7 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
         )
         cart = get_object_or_404(Cart, user=self.request.user)
 
-        if created:
-            print("NEW ORDER CREATED")
-        else:
-            print(f"UPDATING EXISTING ORDER {order.order_number}")
-
         address = form.cleaned_data
-
-        print(address)
-        print("UPDATING ADDRESS:")
-        print(address["full_name"])
 
         order.full_name = address["full_name"]
         order.address_line_1 = address["address_line_1"]
@@ -94,14 +85,10 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
 
         order.save()
 
-        print(f"full name in order: {order.full_name}")
-
         if not created:
-            print("Deleting existing Order line items")
             order.order_items.all().delete()
 
         for item in cart.cart_item.all():
-            print("adding new order line items")
             OrderLineItem.objects.create(
                 order=order,
                 product=item.product,
@@ -112,17 +99,11 @@ class CheckOutShippingView(LoginRequiredMixin, FormView):
             )
         order.save()
 
-        if created:
-            print(f"New order {order.order_number} created")
-        else:
-            print(f"Order {order.order_number} updated.")
-
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        # context["cart"] = Cart.objects.get(user=user)
         context["checkout_step"] = "delivery"
 
         context["order_total"] = user.cart.total
@@ -159,7 +140,6 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
         order = get_object_or_404(Order, user=self.request.user,
                                   completed=False)
         stripe_total = round(order.grand_total * 100)
-        print(f"stripe total is {stripe_total}")
 
         if not order.stripe_pid:
             intent = stripe.PaymentIntent.create(
@@ -169,7 +149,6 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
                     'enabled': True,
                 },
             )
-            print(f"Intent created {intent.id}")
             # Save created payment intent to order
             order.stripe_pid = intent.id
             order.save()
@@ -177,7 +156,6 @@ class CheckoutPaymentView(LoginRequiredMixin, TemplateView):
             # Update the intent on stripe
             intent = stripe.PaymentIntent.modify(
                 order.stripe_pid, amount=stripe_total)
-            print(f"Intent updated on stripe {intent.id}")
 
         context["user"] = self.request.user
         context["full_name"] = self.request.user.get_full_name
@@ -205,14 +183,9 @@ class SuccessView(View):
         cart = get_object_or_404(Cart, user=request.user)
         order = get_object_or_404(Order, user=request.user, completed=False)
 
-        print(f"order no: {order}")
-        print(f"order stripe pid: {order.stripe_pid}")
-
         client_secret = request.GET.get("payment_intent_client_secret")
-        print(f"client_secret status: {client_secret}")
 
         payment_status = stripe.PaymentIntent.retrieve(order.stripe_pid).status
-        print(f"payment status: {payment_status}")
 
         if payment_status == "succeeded":
             context = {}
@@ -220,20 +193,14 @@ class SuccessView(View):
             context["success"] = True
             context["checkout_step"] = "complete"
             context["order"] = order
-            print("PAYMENT SUCCESSFUL")
 
             cart.reset_cart_after_sale()
-            print("CART RESET")
 
             order.complete_order()
-            print("SETTING ORDER AS COMPLETE")
-
-            # TODO: Send customer email
 
             return render(request, self.template_name, context)
 
         else:
-            print("Payment NOT successful")
             return redirect("payment_failure")
 
 
@@ -243,7 +210,6 @@ class PaymentFailedView(View):
     def get(self, request, *args, **kwargs):
         context = {}
         context["success"] = False
-        print("Payment NOT successful")
         return render(request, self.template_name, context)
 
 
@@ -271,7 +237,6 @@ def my_webhook_view(request):
     # Handle the event
     if event.type == "payment_intent.succeeded":
         payment_intent = event.data.object  # contains a stripe.PaymentIntent
-        print("PaymentIntent was successful!")
 
         # TODO: Send out the confirmation email
         order = get_object_or_404(Order, stripe_pid=payment_intent.id)
@@ -279,9 +244,5 @@ def my_webhook_view(request):
 
     elif event.type == "payment_method.attached":
         payment_method = event.data.object  # contains a stripe.PaymentMethod
-        print("PaymentMethod was attached to a Customer!")
-    # ... handle other event types
-    else:
-        print("Unhandled event type {}".format(event.type))
 
     return HttpResponse(status=200)

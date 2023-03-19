@@ -9,9 +9,6 @@ def cart_total(request):
     cart = None
     try:
         cart = get_cart_for_guest_or_user(request)
-    except KeyError as e:
-        # Guest cart not yet created, let cart() create cookie and cart first
-        print(e)
     finally:
         return {"cart_total": cart.total() if cart else 0.00}
 
