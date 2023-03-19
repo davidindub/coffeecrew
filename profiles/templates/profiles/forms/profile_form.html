@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block extra_title %}
     - Update Account
 {% endblock extra_title %}
@@ -10,29 +9,25 @@
                 <a href="{% url 'account_dashboard' %}">Your Account</a>
             </li>
             {% if address %}
-            <li class="breadcrumb-item active" aria-current="page">
-                Update Your Address
-            </li>
+                <li class="breadcrumb-item active" aria-current="page">Update Your Address</li>
             {% else %}
-            <li class="breadcrumb-item active" aria-current="page">
-                Update Your Details
-            </li>
+                <li class="breadcrumb-item active" aria-current="page">Update Your Details</li>
             {% endif %}
         </ol>
     </nav>
 {% endblock breadcrumbs %}
 {% block content %}
-{% if address %}
-<h1>Update {{ address|capfirst }} Address</h1>
-{% else %}
-  <h1>Update Profile</h1>
-  {% endif %}
-
-  <form method="post">
-    {% csrf_token %}
-    {{ user_form|crispy }}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-cc">Save</button>
-
-</form>
+    <div class="container-fluid">
+        {% if address %}
+            <h1>Update {{ address|capfirst }} Address</h1>
+        {% else %}
+            <h1>Update Profile</h1>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-cc">Save</button>
+        </form>
+    </div>
 {% endblock content %}

@@ -18,7 +18,8 @@
                 <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                 <p>Joined: {{ user.date_joined|date:"d M Y" }}</p>
                 <p>Phone Number: {{ profile.default_phone_number }}</p>
-                <a href="{% url 'update_account' %}" class="btn btn-cc">Update Details</a>
+                <a href="{% url 'update_account' %}" class="btn btn-sm btn-outline-cc">Update Details</a>
+                <a href="{% url 'update_email' %}" class="btn btn-sm btn-outline-cc">Update Email</a>
             </div>
             <div class="col-xs-12 col-md-6">
                 <h2>My Addresses</h2>

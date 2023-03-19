@@ -7,4 +7,5 @@ urlpatterns = [
     path("orders/", views.OrderListView.as_view(), name="account_orders"),
     path("address/<str:type>/update",
          views.AddressUpdateView.as_view(), name="update_address"),
+    path('update/email', views.UpdateEmailView.as_view(), name="update_email")
 ]

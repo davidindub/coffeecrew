@@ -1,13 +1,14 @@
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.views.generic import TemplateView, ListView, UpdateView
+from django.views.generic import TemplateView, ListView, UpdateView, FormView
 from products.models import Product
 from .models import WishList, Profile, Address
 from checkout.models import Order
-from .forms import ProfileForm, UserForm
+from .forms import ProfileForm, UserForm, UpdateEmailForm
 from django.contrib import messages
 from django.urls import reverse_lazy
+from allauth.account.models import EmailAddress
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -60,6 +61,8 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         user_form = UserForm(self.request.POST, instance=self.request.user)
         if user_form.is_valid():
             user_form.save()
+        else:
+            form = UserForm(instance=request.user)
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -68,6 +71,30 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         response = super().form_invalid(form)
         response.status_code = 400
         return response
+
+
+class UpdateEmailView(LoginRequiredMixin, FormView):
+    template_name = "profiles/forms/profile_form.html"
+    form_class = UpdateEmailForm
+    success_url = reverse_lazy("account_dashboard")
+
+    def form_valid(self, form):
+        new_email = form.cleaned_data["email"]
+
+        if self.request.user.email == new_email:
+            messages.warning(
+                self.request, "The new email address is the" +
+                " same as the current email address.")
+        else:
+            email_address = self.request.user.emailaddress_set.get(
+                primary=True)
+            email_address.change(self.request, new_email, confirm=True)
+            messages.success(self.request,
+                             ("A confirmation email has been sent to your" +
+                              " new email address." +
+                              " Please confirm the email change."))
+
+        return super().form_valid(form)
 
 
 class OrderListView(LoginRequiredMixin, ListView):
