@@ -446,6 +446,10 @@ Lists of products in the staff dashboard feature lots of extra sorting options t
 - Price (High to Low)
 
 
+Staff members can also easily see stats about the shop such as number of orders, orders yet to dispatch, number of registered users, and more.
+
+Old unused guest carts can be purged from the database here to save on resources.
+
 <details>
 <summary>
 Screenshot of Shop Management Dashboard
@@ -463,7 +467,12 @@ More Screenshots of Shop Management
 </summary>
 
 Warning before deleting a Department that contains categories and products:
+
 ![](docs/images/screenshots/screenshot-staff-delete-dept-warning.png)
+
+Stats, badge alerting to dispatch new orders:
+
+![](docs/images/screenshots/screenshot-shop-management-stats.png)
 
 </details>
 
@@ -503,12 +512,8 @@ The Order page also includes a button for staff members to mark an order as disp
 
 <details>
 <summary>Screenshot of Dispatching a Customer Order</summary>
-
 ![](docs/images/screenshots/screenshot-order-dispatch-button.jpg)
-
 ![](docs/images/screenshots/screenshot-order-dispatched.jpg)
-
-
 </details>
 
 
@@ -520,6 +525,7 @@ This updates the order in the database and sends the customer a dispatch notific
 
 ![](docs/images/screenshots/screenshot-email-dispatched.jpg)
 
+![](docs/images/screenshots/screenshot-mobile-order-dispatch-email.jpeg)
 </details>
 
 
@@ -691,11 +697,53 @@ I performed extensive manual testing continuously as the project was being devel
 
 ### Browser Compatibility
 
+I tested the website on four different operating systems on four different types of hardware and didn't find any rendering bugs or unexpected behaviour between the browsers tested.
+
+| Operating System | Chrome | Firefox | Edge | Safari |
+|------------------|--------|---------|------|--------|
+| macOS 13.2       | ✅      | ✅       | ✅    | ✅   |
+| Windows 11       | ✅      | ✅       | ✅    | N/A   |
+| Android 10       | ✅      | ✅       | ✅    | ✅   |
+| iOS & iPadOS 16.3  | N/A   | N/A       | N/A   | ✅   |
+
 ### Responsiveness
+
+I tested for responsiveness on many different sized viewports from 320px wide up to Ultrawide resolutions, and using different hardware (Monitors, Laptops, Phones).
+
+I used [Polypane](https://polypane.app/) during development to test many different viewport sizes at once.
 
 ### Performance Testing
 
+Performance testing was done in Google Chrome on macOS.
+
+| Page 	| Performance 	| Accessibility 	| Best Practices 	| SEO 	|
+|---	|---	|---	|---	|---	|
+| [Landing Page (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-index.png) 	| 96 	| 98 	| 92 	| 100 	|
+| [Landing Page (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-index.png) 	| 98 	| 100 	| 92 	| 100 	|
+| [Products List (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-products.png) 	| 94 	| 98 	| 92 	| 100 	|
+| [Products List (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-products.png) 	| 98 	| 99 	| 92 	| 100 	|
+| [Product Detail (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-product-detail.png) 	| 84 	| 100 	| 92 	| 100 	|
+| [Product Detail (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-product-detail.png) 	| 97 	| 100 	| 92 	| 100 	|
+| [Privacy Policy (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-privacy.png) 	| 96 	| 98 	| 92 	| 100 	|
+| [Privacy Policy (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-privacy.png) 	| 99 	| 98 	| 92 	| 100 	|
+| [Manage Products (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-manage-products.png) 	| 90 	| 100 	| 83 	| 100 	|
+| [Manage Products (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-manage-products.png) 	| 98 	| 100 	| 92 	| 100 	|
+| [Manage Shop (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-manage-shop.png) 	| 99 	| 100 	| 92 	| 95 	|
+| [Manage Shop (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-manage-shop.png) 	| 94 	| 100 	| 92 	| 100 	|
+| [Contact (Mobile)](docs/images/validation/lighthouse-testing/lighthouse-mobile-contact.png) 	| 96 	| 100 	| 92 	| 100 	|
+| [Contact (Desktop)](docs/images/validation/lighthouse-testing/lighthouse-desktop-contact.png) 	| 98 	| 100 	| 92 	| 100 	|
+
 ### Accessibility Testing
+
+No errors were detected using the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/report#/https://coffee-crew-shop.herokuapp.com/).
+
+<details>
+<summary>WAVE Web Accessibility Evaluation Tool Results</summary>
+
+![](docs/images/validation/wave-accessibility-report.png)
+
+</details>
+
 
 ### User Story Testing
 
